@@ -1,0 +1,80 @@
+// Please submit with C++14! It's best to use C++20 or higher version.
+constexpr bool __MTCS__ = 0;  // Spectre (admin@rbtree.app)
+#ifndef LOCAL                 // By rbtree (https://rbtree.app)
+#pragma region HEAD           // DO OR DIE
+#endif
+#include <algorithm>
+#include <array>
+#include <bitset>
+#include <cmath>
+#include <cstring>
+#include <functional>
+#include <iostream>
+#include <list>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <random>
+#include <set>
+#include <unordered_map>
+#include <utility>
+#include <vector>
+#ifdef ___RB_DEBUG___
+#include "rb_debug.h"
+#else
+#define dbg(...)
+#endif
+#define ra (scanf("%lld", &la), la)
+#define se(exp) begin(exp), end(exp)
+#define LIKELY(exp) __builtin_expect(bool(exp), 1)
+#define UNLIKELY(exp) __builtin_expect(bool(exp), 0)
+#define qmx(exp1, exp2, exp3) exp1 = exp3(exp1, exp2)
+
+typedef long long tp;
+using namespace std;
+void __Cored__(tp);
+tp la;
+
+signed main(/* >_< */) {
+  for (static tp __TCS__ = __MTCS__ ? ra : 1, __NOW__ = 0; __NOW__ < __TCS__;
+       __Cored__(++__NOW__)) {
+  }
+  return 0;
+}
+
+#ifndef LOCAL
+#pragma endregion HEAD
+#endif
+
+////////////////////////////////////////////////////////////////////////////////
+
+constexpr tp Hat_H = 5003;
+
+tp f[Hat_H];
+
+void __Cored__([[maybe_unused]] tp __TID__) {
+  tp p1 = ra, t1 = ra, p2 = ra, t2 = ra, h = ra, s = ra;
+  memset(f, 0x3f, sizeof f);
+  f[0] = 0;
+  for (tp i = 0; i < h; ++i) {
+    qmx(f[min(i + p1 - s, h)], f[i] + t1, min);
+    qmx(f[min(i + p2 - s, h)], f[i] + t2, min);
+    for (tp j = 1; j <= h; ++j) {
+      if (j * t1 >= t2) {
+        qmx(f[min(i + (j - 1) * (p1 - s) + (j * t1 - t2) / t2 * (p2 - s) + p1 +
+                      p2 - s,
+                  h)],
+            f[i] + j * t1, min);
+      }
+      if (j * t2 >= t1) {
+        qmx(f[min(i + (j - 1) * (p2 - s) + (j * t2 - t1) / t1 * (p1 - s) + p2 +
+                      p1 - s,
+                  h)],
+            f[i] + j * t2, min);
+      }
+    }
+  }
+  printf("%lld\n", f[h]);
+}
+
+//*/

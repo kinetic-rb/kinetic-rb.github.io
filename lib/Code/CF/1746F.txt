@@ -1,0 +1,107 @@
+// Please submit with C++14! It's best to use C++20 or higher version.
+constexpr bool __MTCS__ = 0;  // Spectre (admin@rbtree.app)
+#ifndef LOCAL                 // By rbtree (https://rbtree.app)
+#pragma region HEAD           // DO OR DIE
+#endif
+#include <algorithm>
+#include <array>
+#include <bitset>
+#include <cmath>
+#include <cstring>
+#include <functional>
+#include <iostream>
+#include <list>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <random>
+#include <set>
+#include <unordered_map>
+#include <utility>
+#include <vector>
+#ifdef ___RB_DEBUG___
+#include "rb_debug.h"
+#else
+#define dbg(...)
+#endif
+#define ra (scanf("%lld", &la), la)
+#define se(exp) exp.begin(), exp.end()
+#define LIKELY(exp) __builtin_expect(bool(exp), 1)
+#define UNLIKELY(exp) __builtin_expect(bool(exp), 0)
+
+typedef long long tp;
+using namespace std;
+void __Cored__(tp);
+tp la;
+
+signed main(/* >_< */) {
+  for (static tp __TCS__ = __MTCS__ ? ra : 1, __NOW__ = 0; __NOW__ < __TCS__;
+       __Cored__(++__NOW__)) {
+  }
+  return 0;
+}
+
+#ifndef LOCAL
+#pragma endregion HEAD
+#endif
+
+////////////////////////////////////////////////////////////////////////////////
+
+constexpr tp c_P = 33, c_N = 3e5 + 3, c_LIM = 1e9 + 7;
+
+tp a[c_N];
+unordered_map<tp, tp> xid;
+tp t[c_P][c_N];
+tp c[c_P][c_N * 2];
+
+void modify(tp x, tp y, tp k) {
+  while (y < c_N) {
+    t[x][y] += k;
+    y += y & -y;
+  }
+}
+
+tp query(tp x, tp y) {
+  tp tar = 0;
+  while (y) {
+    tar += t[x][y];
+    y -= y & -y;
+  }
+  return tar;
+}
+
+void __Cored__([[maybe_unused]] tp __TID__) {
+  tp n = ra, m = ra;
+  mt19937 rnd(__builtin_ia32_rdtsc() % c_LIM);
+  for (tp i = 1; i <= n; ++i) {
+    a[i] = ra;
+    if (!xid[la]) {
+      xid[la] = xid.size() + 1;
+      for (tp j = 0; j < c_P; ++j) c[j][xid[la]] = rnd();
+    }
+    for (tp j = 0; j < c_P; ++j) modify(j, i, c[j][xid[la]]);
+  }
+  while (m--) {
+    if (ra == 1) {
+      tp i = ra, x = ra;
+      if (!xid[x]) {
+        xid[x] = xid.size() + 1;
+        for (tp j = 0; j < c_P; ++j) c[j][xid[x]] = rnd();
+      }
+      for (tp j = 0; j < c_P; ++j) modify(j, i, c[j][xid[x]] - c[j][xid[a[i]]]);
+      a[i] = x;
+    } else {
+      bool f = 1;
+      tp l = ra - 1, r = ra, k = ra;
+      for (tp j = 0; j < c_P; ++j) {
+        if ((query(j, r) - query(j, l)) % k) {
+          f = 0;
+          break;
+        }
+      }
+      puts(f ? "YES" : "NO");
+    }
+  }
+}
+
+//*/

@@ -1,0 +1,158 @@
+// Please submit with C++14! It's best to use C++20 or higher version.
+#ifndef LOCAL        // Spectre
+#pragma region HEAD  // By rbtree (https://rbtree.dev)
+#endif
+#include <algorithm>
+#include <array>
+#include <bitset>
+#include <cmath>
+#include <cstring>
+#include <functional>
+#include <iostream>
+#include <list>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <random>
+#include <set>
+#include <unordered_map>
+#include <utility>
+#include <vector>
+#ifdef ___RB_DEBUG___
+#include "rb_debug.h"
+#else
+#define dbg(...)
+#endif
+#define ra (scanf("%lld", &la), la)
+#define se(exp) exp.begin(), exp.end()
+#define fe(arr, exp) for_each(se(arr), exp)
+#define LIKELY(exp) __builtin_expect(bool(exp), 1)
+#define UNLIKELY(exp) __builtin_expect(bool(exp), 0)
+
+typedef long long tp;
+tp la;
+using namespace std;
+#ifndef LOCAL
+#pragma endregion HEAD
+#endif
+
+constexpr bool __MTCS__ = 0;
+
+////////////////////////////////////////////////////////////////////////////////
+
+template <typename _Type, typename _Comparator = less<typename _Type>>
+class rbtree {
+  using tp = _Type;
+  _Comparator comp;
+
+  /*
+    1. Each node is either RED or BLACK
+    2. Root is BLACK
+    3. NULL node is BLACK
+    4. A RED node can't have a RED son
+    5. For each node, the simple path from that node to all its descendant leaf
+    nodes contains the same number of BLACK nodes
+  */
+
+  /*
+    Node
+    1. color : RED node or BLACK node
+    2. key   : key value
+    3. left  : left son
+    4. right : right son
+    5. p     : father
+  */
+
+  enum COLOR { RED, BLACK };
+
+  struct TNode;
+
+  using iterator = TNode*;
+
+  struct TNode {
+    COLOR color;
+    tp key;
+    iterator left, right, p;
+  };
+
+  iterator Null, Root;
+
+  rbtree() {
+    Null->color = BLACK;
+    Null->left = Null->right = Null->p = nullptr;
+    Root = Null;
+  }
+
+  /*
+    Rotate
+
+        y     Left-Rotate      x
+       / \   <------------    / \
+      x   c                  a   y
+     / \     ------------>      / \
+    a   b     Right-Rotate     b   c
+
+    Left-Rotate:
+      y = x.right
+      x.right = y.left
+      if y.left != Null
+        y.left.p = x
+      y.p = x.p
+      if x.p == Null
+        Root = y
+      else if x == x.p.left
+        x.p.left = y
+      else
+        x.p.right = y
+      y.left = x
+      x.p = y
+  */
+
+  void _Left_Rotate(iterator x) {
+    iterator y = x->right;
+    x->right = y->left;
+    if (y->left != Null) {
+      y->left->p = x;
+    }
+    y.p = x.p;
+    if (x.p == Null) {
+      Root = y;
+    } else if (x == x->p->left) {
+      x->p->left = y;
+    } else {
+      x->p->right = y;
+    }
+    y->left = x;
+    x->p = y;
+  }
+
+  void _Right_Rotate(iterator x) {
+    iterator y = x->left;
+    x->left = y->right;
+    if (y->right != Null) {
+      y->right->p = x;
+    }
+    y.p = x.p;
+    if (x.p == Null) {
+      Root = y;
+    } else if (x == x->p->right) {
+      x->p->right = y;
+    } else {
+      x->p->left = y;
+    }
+    y->right = x;
+    x->p = y;
+  }
+};
+
+void __Cored__([[maybe_unused]] tp __TID__) {}
+
+////////////////////////////////////////////////////////////////////////////////
+
+signed main() {
+  static tp __TCS__ = __MTCS__ ? ra : 1, __NOW__ = 0;
+  while (__NOW__ < __TCS__) {
+    __Cored__(++__NOW__);
+  }
+  return 0;
+}

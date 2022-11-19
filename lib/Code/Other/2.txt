@@ -1,0 +1,42 @@
+// Please submit with C++14!
+#pragma region HEAD   // Spectre
+#include <algorithm>  // By rbtree (https://rbtree.archi)
+#include <array>
+#include <bitset>
+#include <cmath>
+#include <complex>
+#include <functional>
+#include <iostream>
+#include <list>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <random>
+#include <set>
+#include <unordered_map>
+#include <utility>
+#include <vector>
+#ifdef ___RB_DEBUG___
+#include "rb_debug.h"
+#else
+#define dbg(...)
+#endif
+#define ra (scanf("%lld", &__TEMP_READ_VALUE), __TEMP_READ_VALUE)
+#define LIKELY(exp) __builtin_expect(bool(exp), 1)
+#define UNLIKELY(exp) __builtin_expect(bool(exp), 0)
+
+typedef long long tp;
+tp __TEMP_READ_VALUE;
+using namespace std;
+#pragma endregion HEAD
+
+////////////////////////////////////////////////////////////////////////////////
+
+signed main() {
+  puts("2");
+  fflush(stdout);
+  puts("1");
+  return 0;
+}
+
+////////////////////////////////////////////////////////////////////////////////
