@@ -5,14 +5,14 @@ using namespace std;
 int cnt[10];
 
 int main() {
-\tint n, m;
-\tfor (cin >> n >> m; n <= m; n++) {
-\t\tfor (int temp = n; temp; temp /= 10)
-\t\t\tcnt[temp % 10]++;
-\t}
-\tfor (auto& i : cnt)
-\t\tcout << i << ' ';
-\treturn 0;
+  int n, m;
+  for (cin >> n >> m; n <= m; n++) {
+    for (int temp = n; temp; temp /= 10)
+      cnt[temp % 10]++;
+  }
+  for (auto& i : cnt)
+    cout << i << ' ';
+  return 0;
 }
 
 /*
@@ -22,5 +22,5 @@ int main() {
  \ \  \  __\ \  \      \ \    ___   \
   \ \  \|\__\_\  \      \ \   \  \   \
    \ \____________\      \ \___\  \___\
-\t\|____________|       \|___|  |___|
+  \|____________|       \|___|  |___|
 */

@@ -6,10 +6,10 @@
 using namespace std;
 
 struct AC{
-\tdouble x, y, z;
-\tbool operator < (const AC & i) const {
-\t\treturn z < i.z;
-\t}
+  double x, y, z;
+  bool operator < (const AC & i) const {
+    return z < i.z;
+  }
 }ac[50050];
 
 int main() {

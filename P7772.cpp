@@ -3,13 +3,13 @@
 using namespace std;
 
 int main() {
-\tint a, x;
-\tcin >> a >> x;
-\tfor (int i = 1; i < 0x7ffffff; i++) {
-\t\tif ((i + a - 1) * 1.0 / a >= x) {
-\t\t\tcout << i;
-\t\t\treturn 0;
-\t\t}
-\t}
-\treturn 0;
+  int a, x;
+  cin >> a >> x;
+  for (int i = 1; i < 0x7ffffff; i++) {
+    if ((i + a - 1) * 1.0 / a >= x) {
+      cout << i;
+      return 0;
+    }
+  }
+  return 0;
 }

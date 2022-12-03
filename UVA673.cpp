@@ -5,38 +5,38 @@
 using namespace std;
 
 inline bool check(string s) {
-\tstack<char> p;
-\tp.push('#');
-\tfor (int i = 0; i < s.size(); i++) {
-\t\tchar c = s[i];
-\t\tif (c == ')') {
-\t\t\tif (p.top() != '(')
-\t\t\t\treturn false;
-\t\t\tp.pop();
-\t\t} else if (c == ']') {
-\t\t\tif (p.top() != '[')
-\t\t\t\treturn false;
-\t\t\tp.pop();
-\t\t} else {
-\t\t\tp.push(c);
-\t\t}
-\t}
-\treturn (p.size() == 1);
+  stack<char> p;
+  p.push('#');
+  for (int i = 0; i < s.size(); i++) {
+    char c = s[i];
+    if (c == ')') {
+      if (p.top() != '(')
+        return false;
+      p.pop();
+    } else if (c == ']') {
+      if (p.top() != '[')
+        return false;
+      p.pop();
+    } else {
+      p.push(c);
+    }
+  }
+  return (p.size() == 1);
 }
 
 int main() {
-\tint T;
-\tcin >> T;
-\tfor (getchar(); T--; ) {
-\t\tstring str, s;
-\t\tgetline(cin, str);
-\t\tfor (int i = 0; i < str.size(); i++) {
-\t\t\tif (str[i] == '(' || str[i] == ')' || str[i] == '[' || str[i] == ']')
-\t\t\t\ts.push_back(str[i]);
-\t\t}
-\t\t(check(s)) ? cout << "Yes
+  int T;
+  cin >> T;
+  for (getchar(); T--; ) {
+    string str, s;
+    getline(cin, str);
+    for (int i = 0; i < str.size(); i++) {
+      if (str[i] == '(' || str[i] == ')' || str[i] == '[' || str[i] == ']')
+        s.push_back(str[i]);
+    }
+    (check(s)) ? cout << "Yes
 " : cout << "No
 ";
-\t}
-\treturn 0;
+  }
+  return 0;
 }

@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 int main() {
-\tregister int h, m, s;
-\tcin >> h >> m >> s;
-\tcout << h * 3600 + m * 60 + s;
+  register int h, m, s;
+  cin >> h >> m >> s;
+  cout << h * 3600 + m * 60 + s;
 }

@@ -25,7 +25,7 @@ int main(){
             if(f!=' ') break;}
         for (k='A';k<='Z';k++){
         if(maxn<=list[k-65]) cout<<"* ";
-        else cout<<"  ";
+        else cout<<"	";
         }
         cout<<endl;
     }

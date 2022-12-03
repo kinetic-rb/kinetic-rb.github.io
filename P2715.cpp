@@ -9,91 +9,91 @@ int a, b;
 char c, ch;
 
 int main() {
-\tc = getchar();
-\twhile (c == ' ')
-\t\tc = getchar();
-\tif (c == '?') {
-\t\tc = getchar();
-\t\twhile (c == ' ')
-\t\t\tc = getchar();
-\t\tcin >> a >> ch >> b;
-\t\tif (c == '+') {
-\t\t\tprintf("%.2lf
+  c = getchar();
+  while (c == ' ')
+    c = getchar();
+  if (c == '?') {
+    c = getchar();
+    while (c == ' ')
+      c = getchar();
+    cin >> a >> ch >> b;
+    if (c == '+') {
+      printf("%.2lf
 ", double(b) - double(a));
-\t\t\treturn 0;
-\t\t}
-\t\tif (c == '-') {
-\t\t\tprintf("%.2lf
+      return 0;
+    }
+    if (c == '-') {
+      printf("%.2lf
 ", double(b) + double(a));
-\t\t\treturn 0;
-\t\t}
-\t\tif (c == '*') {
-\t\t\tprintf("%.2lf
+      return 0;
+    }
+    if (c == '*') {
+      printf("%.2lf
 ", double(b) / double(a));
-\t\t\treturn 0;
-\t\t}
-\t\tif (c == '/') {
-\t\t\tprintf("%.2lf
+      return 0;
+    }
+    if (c == '/') {
+      printf("%.2lf
 ", double(b) * double(a));
-\t\t\treturn 0;
-\t\t}
-\t}
-\telse {
-\t\twhile (c >= '0' && c <= '9')
-\t\t\ta = a * 10 + c - '0', c = getchar();
-\t\twhile (c == ' ')
-\t\t\tc = getchar();
-\t\tch = c;
-\t\tc = getchar();
-\t\twhile (c == ' ')
-\t\t\tc = getchar();
-\t\tif (c == '?') {
-\t\t\tcin >> c >> b;
-\t\t\tif (ch == '+') {
-\t\t\t\tprintf("%.2lf
+      return 0;
+    }
+  }
+  else {
+    while (c >= '0' && c <= '9')
+      a = a * 10 + c - '0', c = getchar();
+    while (c == ' ')
+      c = getchar();
+    ch = c;
+    c = getchar();
+    while (c == ' ')
+      c = getchar();
+    if (c == '?') {
+      cin >> c >> b;
+      if (ch == '+') {
+        printf("%.2lf
 ", double(b) - double(a));
-\t\t\t\treturn 0;
-\t\t\t}
-\t\t\tif (ch == '-') {
-\t\t\t\tprintf("%.2lf
+        return 0;
+      }
+      if (ch == '-') {
+        printf("%.2lf
 ", double(a) - double(b));
-\t\t\t\treturn 0;
-\t\t\t}
-\t\t\tif (ch == '*') {
-\t\t\t\tprintf("%.2lf
+        return 0;
+      }
+      if (ch == '*') {
+        printf("%.2lf
 ", double(b) / double(a));
-\t\t\t\treturn 0;
-\t\t\t}
-\t\t\tif (ch == '/') {
-\t\t\t\tprintf("%.2lf
+        return 0;
+      }
+      if (ch == '/') {
+        printf("%.2lf
 ", double(a) / double(b));
-\t\t\t\treturn 0;
-\t\t\t}
-\t\t}
-\t\telse {
-\t\t\twhile (c <= '9' && c >= '0')
-\t\t\t\tb = b * 10 + c - '0', c = getchar();
-\t\t\tif (ch == '+') {
-\t\t\t\tprintf("%.2lf
+        return 0;
+      }
+    }
+    else {
+      while (c <= '9' && c >= '0')
+        b = b * 10 + c - '0', c = getchar();
+      if (ch == '+') {
+        printf("%.2lf
 ", double(a) + double(b));
-\t\t\t\treturn 0;
-\t\t\t}
-\t\t\tif (ch == '-') {
-\t\t\t\tprintf("%.2lf
+        return 0;
+      }
+      if (ch == '-') {
+        printf("%.2lf
 ", double(a) - double(b));
-\t\t\t\treturn 0;
-\t\t\t}
-\t\t\tif (ch == '*') {
-\t\t\t\tprintf("%.2lf
+        return 0;
+      }
+      if (ch == '*') {
+        printf("%.2lf
 ", double(a) * double(b));
-\t\t\t\treturn 0;
-\t\t\t}
-\t\t\tif (ch == '/') {
-\t\t\t\tprintf("%.2lf
+        return 0;
+      }
+      if (ch == '/') {
+        printf("%.2lf
 ", double(a) / double(b));
-\t\t\t\treturn 0;
-\t\t\t}
-\t\t}
-\t}
-\treturn 0;
+        return 0;
+      }
+    }
+  }
+  return 0;
 }

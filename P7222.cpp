@@ -3,8 +3,8 @@
 using namespace std;
 
 int main() {
-\tlong x;
-\tcin >> x;
-\tcout << 90 - x;
-\treturn 0;
+  long x;
+  cin >> x;
+  cout << 90 - x;
+  return 0;
 }

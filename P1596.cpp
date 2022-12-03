@@ -6,29 +6,29 @@ const int dr[][2] = { -1, -1, -1, 0, -1, 1, 0, -1, 0, 1, 1, -1, 1, 0, 1, 1 };
 bool mz[1001][1001];
 
 inline void dfs(int x, int y) {
-\tmz[x][y] = false;
-\tfor (auto& i : dr) {
-\t\tint dx = x + i[0], dy = i[1] + y;
-\t\tif (mz[dx][dy])
-\t\t\tdfs(dx, dy);
-\t}
+  mz[x][y] = false;
+  for (auto& i : dr) {
+    int dx = x + i[0], dy = i[1] + y;
+    if (mz[dx][dy])
+      dfs(dx, dy);
+  }
 }
 
 int main() {
-\tint n, m, cnt = 0;
-\tcin >> n >> m;
-\tfor (int i = 0; i < n; i++)
-\t\tfor (int j = 0; j < m; j++) {
-\t\t\tchar c;
-\t\t\tcin >> c;
-\t\t\tmz[i][j] = c == 'W';
-\t\t}
-\tfor (int i = 0; i < n; i++)
-\t\tfor (int j = 0; j < m; j++)
-\t\t\tif (mz[i][j]) {
-\t\t\t\tdfs(i, j);
-\t\t\t\tcnt++;
-\t\t\t}
-\tcout << cnt;
+  int n, m, cnt = 0;
+  cin >> n >> m;
+  for (int i = 0; i < n; i++)
+    for (int j = 0; j < m; j++) {
+      char c;
+      cin >> c;
+      mz[i][j] = c == 'W';
+    }
+  for (int i = 0; i < n; i++)
+    for (int j = 0; j < m; j++)
+      if (mz[i][j]) {
+        dfs(i, j);
+        cnt++;
+      }
+  cout << cnt;
   return 0;
 }

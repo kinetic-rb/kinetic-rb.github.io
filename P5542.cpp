@@ -20,9 +20,9 @@ signed main() {
     }
   }
   for (auto&& i : cnt) {
-  \ttp temp = 0;
+    tp temp = 0;
     for (auto&& j : i) {
-\t\t\ttemp += j;
+      temp += j;
       res += temp == k;
     }
   }

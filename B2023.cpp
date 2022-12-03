@@ -31,7 +31,7 @@ int main()
 {
     char v;
     cin>>v;
-    cout<<"  "<<v<<endl<<" "<<v<<v<<v<<endl<<v<<v<<v<<v<<v;
+    cout<<"	"<<v<<endl<<" "<<v<<v<<v<<endl<<v<<v<<v<<v<<v;
     return 0;
 }
 int main()

@@ -4,27 +4,27 @@
 using namespace std;
 
 struct AC {
-\tint x, y;
+  int x, y;
 } ap[5005];
 
 int main() {
-\tint n, s, h, b, ans = 0;
-\tcin >> n >> s >> h >> b;
-\th += b;
-\tfor (int i = 0; i < n; i++)
-\t\tcin >> ap[i].x >> ap[i].y;
-\tstable_sort(ap, ap + n, [](const AC& x, const AC& y) {
-\t\treturn x.y < y.y;
-\t});
-\tfor (int i = 0; i < n; i++) {
-\t\tif (ap[i].x <= h)
-\t\t\tif (ap[i].y <= s) {
-\t\t\t\tans++;
-\t\t\t\ts -= ap[i].y;
-\t\t\t}
-\t\tif (!s)
-\t\t\tbreak;
-\t}
-\tcout << ans;
-\treturn 0;
+  int n, s, h, b, ans = 0;
+  cin >> n >> s >> h >> b;
+  h += b;
+  for (int i = 0; i < n; i++)
+    cin >> ap[i].x >> ap[i].y;
+  stable_sort(ap, ap + n, [](const AC& x, const AC& y) {
+    return x.y < y.y;
+  });
+  for (int i = 0; i < n; i++) {
+    if (ap[i].x <= h)
+      if (ap[i].y <= s) {
+        ans++;
+        s -= ap[i].y;
+      }
+    if (!s)
+      break;
+  }
+  cout << ans;
+  return 0;
 }

@@ -10,7 +10,7 @@ struct node{
 }v[100010];
 bool cmp(node x,node y){return x.a>y.a;}
 int main()
-{\tscanf("%d",&n);
+{  scanf("%d",&n);
     for(int i=1;i<=n;i++)scanf("%d",&v[i].s); 
     for(int i=1;i<=n;i++)scanf("%d",&v[i].a);
     sort(v+1,v+1+n,cmp);//\u6309\u75b2\u52b3\u6392\u5e8f 

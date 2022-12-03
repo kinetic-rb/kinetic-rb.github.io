@@ -11,8 +11,8 @@ inline void calc() {
   for (int i = 1; i <= k; i++) {
     for (j = 1; num[j] >= num[j + 1] && j <= n; j++);
     if (j > n) {
-    \tputs("-1");
-    \treturn;
+      puts("-1");
+      return;
     } else
       num[j]++;
   }
@@ -21,13 +21,13 @@ inline void calc() {
 }
 
 int main() {
-\tint t;
-\tfor (cin >> t; t--;){
-\t  memset(num, 0, sizeof num);
-\t  cin >> n >> k;
-\t  for (int i = 1; i <= n; i++)
-\t    cin >> num[i];
+  int t;
+  for (cin >> t; t--;){
+    memset(num, 0, sizeof num);
+    cin >> n >> k;
+    for (int i = 1; i <= n; i++)
+      cin >> num[i];
     calc();
   }
-\treturn 0;
+  return 0;
 }

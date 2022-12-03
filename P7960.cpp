@@ -177,30 +177,30 @@ class Reader {
   }
 } ir;
 int main() {
-\tint n,mmx = 0;
-\tir>>n;
-\tfor(int i = 1;i <= n;++ i) {
-\t\tir>>x[i];
-\t\tif (x[i] > mmx)
-\t    \tmmx = x[i];
-\t}
-\tmmx += 100; 
-\tfor(int i = 1;i <= mmx;++ i) {
-\t\tif(vis[i])\tcontinue; 
-\t\tfor(int j = i;j;j /= 10) {
-\t\t\tif(j % 10 == 7) {
-\t\t\t\tfor(int k = i;k <= mmx;k += i) {
-\t\t\t\t\tvis[k] = 1;
-\t\t\t\t}
-\t\t\t\tbreak;
-\t\t\t}
-\t\t}
-\t\tif(!vis[i])\ta[l ++] = i;
-\t}
-\tint* xxx = a + l;
-\tfor(int i = 1;i <= n;++ i)
-\t\tif(vis[x[i]])\tputs("-1");
-\t\telse\t\tprintf("%d
+  int n,mmx = 0;
+  ir>>n;
+  for(int i = 1;i <= n;++ i) {
+    ir>>x[i];
+    if (x[i] > mmx)
+        mmx = x[i];
+  }
+  mmx += 100; 
+  for(int i = 1;i <= mmx;++ i) {
+    if(vis[i])  continue; 
+    for(int j = i;j;j /= 10) {
+      if(j % 10 == 7) {
+        for(int k = i;k <= mmx;k += i) {
+          vis[k] = 1;
+        }
+        break;
+      }
+    }
+    if(!vis[i])  a[l ++] = i;
+  }
+  int* xxx = a + l;
+  for(int i = 1;i <= n;++ i)
+    if(vis[x[i]])  puts("-1");
+    else    printf("%d
 ", *upper_bound(a,xxx,x[i]));
-\treturn 0;
+  return 0;
 }

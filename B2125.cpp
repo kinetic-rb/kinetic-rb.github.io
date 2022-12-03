@@ -6,78 +6,78 @@ using namespace std;
 template<typename Typex>
 class barry {
 protected:
-\tint _alocked = 0;
-\tTypex* elespace;
+  int _alocked = 0;
+  Typex* elespace;
 public:
-\tbarry(const int& size = 0) {
-\t\telespace = new Typex[_alocked = size];
-\t}
+  barry(const int& size = 0) {
+    elespace = new Typex[_alocked = size];
+  }
 
-\tbarry(const int& size, const int& val) {
-\t\telespace = new Typex[_alocked = size];
-\t\tfor (int i = 0; i < size; i++) {
-\t\t\telespace[i] = val;
-\t\t}
-\t}
+  barry(const int& size, const int& val) {
+    elespace = new Typex[_alocked = size];
+    for (int i = 0; i < size; i++) {
+      elespace[i] = val;
+    }
+  }
 
-\tinline int size() {
-\t\treturn _alocked;
-\t}
+  inline int size() {
+    return _alocked;
+  }
 
-\tinline void resize(const int& size) {
-\t\tauto tmp = new Typex[_alocked];
-\t\tfor (int i = 0; i < _alocked; i++)
-\t\t\ttmp[i] = elespace[i];
-\t\tdelete[] elespace;
-\t\telespace = new Typex[size];
-\t\tfor (int i = 0; i < _alocked; i++)
-\t\t\telespace[i] = tmp[i];
-\t\t_alocked = size;
-\t}
+  inline void resize(const int& size) {
+    auto tmp = new Typex[_alocked];
+    for (int i = 0; i < _alocked; i++)
+      tmp[i] = elespace[i];
+    delete[] elespace;
+    elespace = new Typex[size];
+    for (int i = 0; i < _alocked; i++)
+      elespace[i] = tmp[i];
+    _alocked = size;
+  }
 
-\tinline Typex& operator [] (const int& x) {
-\t\treturn elespace[x];
-\t}
+  inline Typex& operator [] (const int& x) {
+    return elespace[x];
+  }
 
-\tinline void push(const Typex& val) {
-\t\tresize(_alocked + 1);
-\t\telespace[_alocked - 1] = val;
-\t}
+  inline void push(const Typex& val) {
+    resize(_alocked + 1);
+    elespace[_alocked - 1] = val;
+  }
 
-\tinline void pop() {
-\t\tresize(_alocked - 1);
-\t}
+  inline void pop() {
+    resize(_alocked - 1);
+  }
 
-\tinline Typex* begin() {
-\t\treturn elespace;
-\t}
+  inline Typex* begin() {
+    return elespace;
+  }
 
-\tinline Typex* end() {
-\t\treturn elespace + _alocked;
-\t}
+  inline Typex* end() {
+    return elespace + _alocked;
+  }
 
-\t~barry() {
-\t\tdelete[] elespace;
-\t}
+  ~barry() {
+    delete[] elespace;
+  }
 };
 
 struct cor {
-\tstring name;
-\tint mark;
+  string name;
+  int mark;
 };
 
 int main() {
-\tint n;
-\tcin >> n;
-\tbarry<cor> s;
-\tfor (int i = 0; i < n; i++) {
-\t\tstring name;
-\t\tint mark;
-\t\tcin >> mark >> name;
-\t\ts.push({ name, mark });
-\t}
-\tcout << max_element(s.begin(), s.end(), [](const cor& x, const cor& y) {
-\t\treturn x.mark < y.mark;
-\t})->name;
-\treturn 0;
+  int n;
+  cin >> n;
+  barry<cor> s;
+  for (int i = 0; i < n; i++) {
+    string name;
+    int mark;
+    cin >> mark >> name;
+    s.push({ name, mark });
+  }
+  cout << max_element(s.begin(), s.end(), [](const cor& x, const cor& y) {
+    return x.mark < y.mark;
+  })->name;
+  return 0;
 }

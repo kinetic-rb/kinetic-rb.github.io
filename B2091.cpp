@@ -5,14 +5,14 @@ using namespace std;
 short a[1001], b[1001];
 
 int main() {
-\tint n, v = 0;
-\tcin >> n;
-\tfor (int i = 0; i < n; i++)
-\t\tcin >> a[i];
-\tfor (int i = 0; i < n; i++)
-\t\tcin >> b[i];
-\tfor (int i = 0; i < n; i++)
-\t\tv += a[i] * b[i];
-\tcout << v;
-\treturn 0;
+  int n, v = 0;
+  cin >> n;
+  for (int i = 0; i < n; i++)
+    cin >> a[i];
+  for (int i = 0; i < n; i++)
+    cin >> b[i];
+  for (int i = 0; i < n; i++)
+    v += a[i] * b[i];
+  cout << v;
+  return 0;
 }

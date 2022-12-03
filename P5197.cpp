@@ -8,17 +8,17 @@ constexpr tp Hat_N = 100003;
 tp cnt[Hat_N];
 
 signed main() {
-\ttp n, MAX = 0;
-\tcin >> n;
-\tfor (tp i = 1; i < n; ++i) {
-\t\ttp u, v;
-\t\tcin >> u >> v;
-\t\t++cnt[u];
-\t\t++cnt[v];
-\t}
-\tfor (tp i = 1; i <= n; ++i) {
-\t\tMAX = max(MAX, cnt[i]);
-\t}
-\tcout << MAX + 1;
-\treturn 0;
+  tp n, MAX = 0;
+  cin >> n;
+  for (tp i = 1; i < n; ++i) {
+    tp u, v;
+    cin >> u >> v;
+    ++cnt[u];
+    ++cnt[v];
+  }
+  for (tp i = 1; i <= n; ++i) {
+    MAX = max(MAX, cnt[i]);
+  }
+  cout << MAX + 1;
+  return 0;
 }

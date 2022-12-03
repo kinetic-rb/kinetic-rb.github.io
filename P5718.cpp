@@ -6,10 +6,10 @@ using namespace std;
 int num[101];
 
 int main() {
-\tint n;
-\tcin >> n;
-\tfor (int i = 0; i < n; i++)
-\t\tcin >> num[i];
-\tcout << *min_element(num, num + n);
-\treturn 0;
+  int n;
+  cin >> n;
+  for (int i = 0; i < n; i++)
+    cin >> num[i];
+  cout << *min_element(num, num + n);
+  return 0;
 }

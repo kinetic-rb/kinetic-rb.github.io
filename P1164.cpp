@@ -7,21 +7,21 @@ long n, cnt;
 
 inline long dfs(long c, long k) {
     if (f[c][k])
-    \treturn f[c][k];
-  \tif (v[c] >= k)
-      \treturn (v[c] == k);
+      return f[c][k];
+    if (v[c] >= k)
+        return (v[c] == k);
     for (long i = c + 1; i <= n; i++)
       f[c][k] += dfs(i, k - v[c]);
     return f[c][k];
 }
 
 int main() {
-  \tint m;
-  \tcin >> n >> m;
+    int m;
+    cin >> n >> m;
     for (long i = 0; i < n; i++)
-      \tcin >> v[i];
+        cin >> v[i];
     for (long i = 0; i < n; i++)
       cnt += dfs(i, m);
-  \tcout << cnt;
+    cout << cnt;
     return 0;
 }

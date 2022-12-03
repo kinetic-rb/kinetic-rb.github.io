@@ -5,43 +5,43 @@ using namespace std;
 template<unsigned size>
 class di_set {
 public:
-\tunsigned* b = new unsigned[size];
-\tinline void init(const unsigned& n) {
-\t\tfor (unsigned i = 0; (b[i] = i) < n; i++);
-\t}
+  unsigned* b = new unsigned[size];
+  inline void init(const unsigned& n) {
+    for (unsigned i = 0; (b[i] = i) < n; i++);
+  }
 
-\tinline unsigned find(const unsigned& f) {
-\t\treturn b[f] == f ? f : b[f] = find(b[f]);
-\t}
+  inline unsigned find(const unsigned& f) {
+    return b[f] == f ? f : b[f] = find(b[f]);
+  }
 
-\tinline void merge(const unsigned& u, const unsigned& v) {
-\t\tb[find(v)] = find(u);
-\t}
+  inline void merge(const unsigned& u, const unsigned& v) {
+    b[find(v)] = find(u);
+  }
 };
 
 int c[100000], d[100000], f[100000];
 
 int main() {
-\tint n, m, w;
-\tcin >> n >> m >> w;
-\tdi_set<100000> s;
-\ts.init(100000);
-\tfor (int i = 0; i < n; i++)
-\t\tcin >> c[i] >> d[i];
-\tfor (int i = 0; i < m; i++) {
-\t\tint x, y;
-\t\tcin >> x >> y;
-\t\ts.merge(--x, --y);
-\t}
-\tfor (int i = 0; i < n; i++)
-\t\tif (s.b[i] != i) {
-\t\t\td[s.find(i)] += d[i];
-\t\t\tc[s.find(i)] += c[i];
-\t\t\td[i] = c[i] = 0;
-\t\t}
-\tfor (int i = 0; i < n; i++)
-\t\tfor (int v = w; v >= c[i]; v--)
-\t\t\tf[v] = max(f[v], f[v - c[i]] + d[i]);
-\tcout << f[w];
-\treturn 0;
+  int n, m, w;
+  cin >> n >> m >> w;
+  di_set<100000> s;
+  s.init(100000);
+  for (int i = 0; i < n; i++)
+    cin >> c[i] >> d[i];
+  for (int i = 0; i < m; i++) {
+    int x, y;
+    cin >> x >> y;
+    s.merge(--x, --y);
+  }
+  for (int i = 0; i < n; i++)
+    if (s.b[i] != i) {
+      d[s.find(i)] += d[i];
+      c[s.find(i)] += c[i];
+      d[i] = c[i] = 0;
+    }
+  for (int i = 0; i < n; i++)
+    for (int v = w; v >= c[i]; v--)
+      f[v] = max(f[v], f[v - c[i]] + d[i]);
+  cout << f[w];
+  return 0;
 }

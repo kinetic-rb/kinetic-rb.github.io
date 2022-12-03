@@ -18,7 +18,7 @@ vector<i64> G[200005], bp[200005];
 
 void init(i64 n) {
   for (i64 i = 1; i <= n; i++)
-  \tb[i] = i;
+    b[i] = i;
 }
 
 i64 find(i64 u) {

@@ -18,7 +18,7 @@ int main() {
         (!(y % 400) || (y % 100 && y % 4 == 0))? days[2] = 29 : days[2] = 28;
         for(int m = 1; m < 13; m++)
             for(int d = 1; d <= days[m]; d++)
-            {\tint t = y * 10000 + m * 100 + d;
+            {  int t = y * 10000 + m * 100 + d;
                 if(t < date1 || t > date2)
                     continue;
                 if(isHuiWen(t))

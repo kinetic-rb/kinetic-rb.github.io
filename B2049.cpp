@@ -60,7 +60,7 @@ int main()
 {
     char v;
     cin>>v;
-    cout<<"  "<<v<<endl<<" "<<v<<v<<v<<endl<<v<<v<<v<<v<<v;
+    cout<<"	"<<v<<endl<<" "<<v<<v<<v<<endl<<v<<v<<v<<v<<v;
     return 0;
 }
 
@@ -287,8 +287,8 @@ int main()
 {
     char v;
     cin>>v;
-    cout<<"  "<<v<<endl<<" "<<v<<v<<v<<endl<<v<<v<<v<<v<<v<<endl;
-    cout<<" "<<v<<v<<v<<endl<<"  "<<v;
+    cout<<"	"<<v<<endl<<" "<<v<<v<<v<<endl<<v<<v<<v<<v<<v<<endl;
+    cout<<" "<<v<<v<<v<<endl<<"	"<<v;
     return 0;
 }
 
@@ -342,10 +342,10 @@ int main()
 //1034//
 int main()
 {
-\tdouble x1,x2,x3,y1,y2,y3;
-\tcin>>x1>>y1>>x2>>y2>>x3>>y3;
-\tcout<<fixed<<setprecision(2)<<sqrt((sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))+sqrt((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1))+sqrt((x2-x3)*(x2-x3)+(y2-y3)*(y2-y3)))/2.0*((sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))+sqrt((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1))+sqrt((x2-x3)*(x2-x3)+(y2-y3)*(y2-y3)))/2.0-sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1)))*((sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))+sqrt((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1))+sqrt((x2-x3)*(x2-x3)+(y2-y3)*(y2-y3)))/2.0-sqrt((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1)))*((sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))+sqrt((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1))+sqrt((x2-x3)*(x2-x3)+(y2-y3)*(y2-y3)))/2.0-sqrt((x2-x3)*(x2-x3)+(y2-y3)*(y2-y3))));
-\treturn 0;
+  double x1,x2,x3,y1,y2,y3;
+  cin>>x1>>y1>>x2>>y2>>x3>>y3;
+  cout<<fixed<<setprecision(2)<<sqrt((sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))+sqrt((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1))+sqrt((x2-x3)*(x2-x3)+(y2-y3)*(y2-y3)))/2.0*((sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))+sqrt((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1))+sqrt((x2-x3)*(x2-x3)+(y2-y3)*(y2-y3)))/2.0-sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1)))*((sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))+sqrt((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1))+sqrt((x2-x3)*(x2-x3)+(y2-y3)*(y2-y3)))/2.0-sqrt((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1)))*((sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))+sqrt((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1))+sqrt((x2-x3)*(x2-x3)+(y2-y3)*(y2-y3)))/2.0-sqrt((x2-x3)*(x2-x3)+(y2-y3)*(y2-y3))));
+  return 0;
 }
 
 //1035//
@@ -517,16 +517,16 @@ int main()
 //1050//
 int main()
 {
-\tfloat v;
-\tcin>>v;
-\tif(27+23+v/3.0>v/1.2)
+  float v;
+  cin>>v;
+  if(27+23+v/3.0>v/1.2)
         printf("Walk");
-\t        else
-\t            if(27+23+v/3.0<v/1.2)
-\t                printf("Bike");
-\t                    else
+          else
+              if(27+23+v/3.0<v/1.2)
+                  printf("Bike");
+                      else
                             printf("All");
-\treturn 0;
+  return 0;
 }
 
 //1051//
@@ -548,7 +548,7 @@ int main()
 //1052//
 int main()
 {
-\tint weight,money;
+  int weight,money;
     char c;
     cin>>weight>>c;
     (weight>1000)?money=8+ceil((weight-1000)/500.0)*4:money=8;

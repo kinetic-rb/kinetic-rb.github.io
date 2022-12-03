@@ -6,22 +6,22 @@ using namespace std;
 int a[509][509], b[509], f[509];
 
 int main() {
-\tint n;
-\tcin >> n;
-\tfor (int i = 0; i < n; i++) {
-\t\tfor (int j = i + 1; j < n; j++) {
-\t\t\tcin >> a[i][j];
-\t\t\ta[j][i] = a[i][j];
-\t\t}
-\t}
-\tfor (int i = 0; i < n; i++) {
-\t\tfor (int j = 0; j < n; j++) {
-\t\t\tb[j] = a[i][j];
-\t\t}
-\t\tstable_sort(b, b + n);
-\t\tf[i] = b[n - 2];
-\t}
-\tprintf("1
+  int n;
+  cin >> n;
+  for (int i = 0; i < n; i++) {
+    for (int j = i + 1; j < n; j++) {
+      cin >> a[i][j];
+      a[j][i] = a[i][j];
+    }
+  }
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
+      b[j] = a[i][j];
+    }
+    stable_sort(b, b + n);
+    f[i] = b[n - 2];
+  }
+  printf("1
 %d", *max_element(f, f + n));
-\treturn 0;
+  return 0;
 }

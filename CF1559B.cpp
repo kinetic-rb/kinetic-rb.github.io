@@ -3,33 +3,33 @@
 using namespace std;
 
 int main() {
-\tint t;
-\tcin >> t;
-\twhile (t--) {
-\t\tint n;
-\t\tcin >> n;
-\t\tstring s;
-\t\tcin >> s;
-\t\tint st = n - 1;
-\t\tchar first = 'R';
-\t\tfor (int i = 0; i < n; i++) {
-\t\t\tif (s[i] != '?') {
-\t\t\t\tst = i - 1;
-\t\t\t\tfirst = s[i] == 'R' ? 'B' : 'R';
-\t\t\t\tbreak;
-\t\t\t}
-\t\t}
-\t\tfor (int i = st; i >= 0; i--) {
-\t\t\ts[i] = first;
-\t\t\tfirst = first == 'R' ? 'B' : 'R';
-\t\t}
-\t\tfor (int i = st + 1; i < n; i++) {
-\t\t\tif (s[i] == '?') {
-\t\t\t\ts[i] = s[i - 1] == 'R' ? 'B' : 'R';
-\t\t\t}
-\t\t}
-\t\tcout << s << '\n';
-\t}
+  int t;
+  cin >> t;
+  while (t--) {
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+    int st = n - 1;
+    char first = 'R';
+    for (int i = 0; i < n; i++) {
+      if (s[i] != '?') {
+        st = i - 1;
+        first = s[i] == 'R' ? 'B' : 'R';
+        break;
+      }
+    }
+    for (int i = st; i >= 0; i--) {
+      s[i] = first;
+      first = first == 'R' ? 'B' : 'R';
+    }
+    for (int i = st + 1; i < n; i++) {
+      if (s[i] == '?') {
+        s[i] = s[i - 1] == 'R' ? 'B' : 'R';
+      }
+    }
+    cout << s << '\n';
+  }
 }
 
 /*

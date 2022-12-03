@@ -2,6 +2,6 @@
 using namespace std;
 int main()
 {
-\tprintf("Hello,World!");
-\treturn 0;
+  printf("Hello,World!");
+  return 0;
 }

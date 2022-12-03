@@ -6,34 +6,34 @@ using namespace std;
 template<unsigned size>
 class di_set {
 public:
-\tint b[size];
-\tinline void init(const int& n) {
-\t\tfor (int i = 1; (b[i] = i) <= n; i++);
-\t}
+  int b[size];
+  inline void init(const int& n) {
+    for (int i = 1; (b[i] = i) <= n; i++);
+  }
 
-\tinline int find(const int& f) {
-\t\treturn b[f] == f ? f : b[f] = find(b[f]);
-\t}
+  inline int find(const int& f) {
+    return b[f] == f ? f : b[f] = find(b[f]);
+  }
 
-\tinline void merge(const int& u, const int& v) {
-\t\tb[find(v)] = find(u);
-\t}
+  inline void merge(const int& u, const int& v) {
+    b[find(v)] = find(u);
+  }
 };
 
 signed main() {
-\tint n, m;
-\tcin >> n >> m;
-\tdi_set<10100> s;
-\ts.init(n + 5);
-\tfor (int i = 0; i < m; i++) {
-\t\tint op, u, v;
-\t\tcin >> op >> u >> v;
-\t\tif (op == 1)
-\t\t\ts.merge(u, v);
-\t\telse
-\t\t\tcout << (s.find(u) == s.find(v) ? "Y
+  int n, m;
+  cin >> n >> m;
+  di_set<10100> s;
+  s.init(n + 5);
+  for (int i = 0; i < m; i++) {
+    int op, u, v;
+    cin >> op >> u >> v;
+    if (op == 1)
+      s.merge(u, v);
+    else
+      cout << (s.find(u) == s.find(v) ? "Y
 " : "N
 ");
-\t}
-\treturn 0;
+  }
+  return 0;
 }

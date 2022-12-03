@@ -9,52 +9,52 @@ bool vis[MAXTX][MAXTX];
 string s[MAXN];
 
 void shuchu(int xx, int yy, int j){
-\tcout << xx << ' ' << yy << endl;
-\tfor(int i = 1; i <= n - j; i++){
-\t\tcout << "NO
+  cout << xx << ' ' << yy << endl;
+  for(int i = 1; i <= n - j; i++){
+    cout << "NO
 ";
-\t}
+  }
 }
 
 bool moni(int &xx, int &yy, int i){
-\tint js = 1;
-\twhile(xx >= 0 && yy >= 0 && xx <= tx && yy <= ty && js <= m){
-\t\tif(vis[xx][yy] || xx <= 0 || yy <= 0 || xx > tx || yy > ty){
-\t\t\treturn 0;
-\t\t}
-\t\tvis[xx][yy] = 1;
-\t\tswitch(s[i][js - 1]){
-\t\t\tcase 'U': yy--; break;
-\t\t\tcase 'L': xx--; break;
-\t\t\tcase 'R': xx++; break;
-\t\t\tcase 'D': yy++; break;
-\t\t}\t\t
-\t\tjs++;
-\t}
-\tif(vis[xx][yy] || xx <= 0 || yy <= 0 || xx > tx || yy > ty){
-\t\treturn 0;
-\t}
-\treturn 1;
+  int js = 1;
+  while(xx >= 0 && yy >= 0 && xx <= tx && yy <= ty && js <= m){
+    if(vis[xx][yy] || xx <= 0 || yy <= 0 || xx > tx || yy > ty){
+      return 0;
+    }
+    vis[xx][yy] = 1;
+    switch(s[i][js - 1]){
+      case 'U': yy--; break;
+      case 'L': xx--; break;
+      case 'R': xx++; break;
+      case 'D': yy++; break;
+    }    
+    js++;
+  }
+  if(vis[xx][yy] || xx <= 0 || yy <= 0 || xx > tx || yy > ty){
+    return 0;
+  }
+  return 1;
 }
 
 int main(){
-// \tfreopen("10.in", "r", stdin);
-// \tfreopen("10.out", "w", stdout);
-\tcin >> n >> m >> x >> y >> tx >> ty;
-\tfor(int i = 1; i <= n; i++){
-\t\tcin >> s[i];
-\t}
-\tfor(int i = 1; i <= n; i++){
-\t\tint xx = x, yy = y;
-\t\tif(!moni(xx, yy, i)){
-\t\t\tcout << "NO
+//   freopen("10.in", "r", stdin);
+//   freopen("10.out", "w", stdout);
+  cin >> n >> m >> x >> y >> tx >> ty;
+  for(int i = 1; i <= n; i++){
+    cin >> s[i];
+  }
+  for(int i = 1; i <= n; i++){
+    int xx = x, yy = y;
+    if(!moni(xx, yy, i)){
+      cout << "NO
 ";
-\t\t}
-\t\telse{
-\t\t\tshuchu(xx, yy, i);
-\t\t\treturn 0;
-\t\t}
-\t\tmemset(vis, 0, sizeof(vis));
-\t}
-\treturn 0;
+    }
+    else{
+      shuchu(xx, yy, i);
+      return 0;
+    }
+    memset(vis, 0, sizeof(vis));
+  }
+  return 0;
 }

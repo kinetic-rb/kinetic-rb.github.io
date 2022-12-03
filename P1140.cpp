@@ -7,30 +7,30 @@ int f[105][105];
 string s1, s2;
 
 inline int to(const char& c) {
-\tenum {A = 0, C = 1, G = 2, T = 3};
-\tswitch (c) {
-\t\tcase 'A' : return A;
-\t\tcase 'C' : return C;
-\t\tcase 'G' : return G;
-\t\tcase 'T' : return T;
-\t}
+  enum {A = 0, C = 1, G = 2, T = 3};
+  switch (c) {
+    case 'A' : return A;
+    case 'C' : return C;
+    case 'G' : return G;
+    case 'T' : return T;
+  }
 }
 
 int main() {
-\tcin >> s1 >> s1 >> s2 >> s2;
-\tfor (int i = 1; i <= s1.size(); i++)
-\t\tfor (int j = 1; j <= s2.size(); j++)
-\t\t\tf[i][j] = -0x7fffffff;
-\tfor (int i = 1; i <= s1.size(); i++)
-\t\tf[i][0] = f[i - 1][0] + tab[to(s1[i - 1])][4];
-\tfor (int j = 1; j <= s2.size(); j++)
-\t\tf[0][j] = f[0][j - 1] + tab[4][to(s2[j - 1])];
-\tfor (int i = 1; i <= s1.size(); i++)
-\t\tfor (int j = 1; j <= s2.size(); j++) {
-\t\t\tf[i][j] = max(f[i][j], f[i - 1][j] + tab[to(s1[i - 1])][4]);
-\t\t\tf[i][j] = max(f[i][j], f[i][j - 1] + tab[4][to(s2[j - 1])]);
-\t\t\tf[i][j] = max(f[i][j], f[i - 1][j - 1] + tab[to(s1[i - 1])][to(s2[j - 1])]);
-\t\t}
-\tcout << f[s1.size()][s2.size()];
-\treturn 0;
+  cin >> s1 >> s1 >> s2 >> s2;
+  for (int i = 1; i <= s1.size(); i++)
+    for (int j = 1; j <= s2.size(); j++)
+      f[i][j] = -0x7fffffff;
+  for (int i = 1; i <= s1.size(); i++)
+    f[i][0] = f[i - 1][0] + tab[to(s1[i - 1])][4];
+  for (int j = 1; j <= s2.size(); j++)
+    f[0][j] = f[0][j - 1] + tab[4][to(s2[j - 1])];
+  for (int i = 1; i <= s1.size(); i++)
+    for (int j = 1; j <= s2.size(); j++) {
+      f[i][j] = max(f[i][j], f[i - 1][j] + tab[to(s1[i - 1])][4]);
+      f[i][j] = max(f[i][j], f[i][j - 1] + tab[4][to(s2[j - 1])]);
+      f[i][j] = max(f[i][j], f[i - 1][j - 1] + tab[to(s1[i - 1])][to(s2[j - 1])]);
+    }
+  cout << f[s1.size()][s2.size()];
+  return 0;
 }

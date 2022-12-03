@@ -5,7 +5,7 @@ int main()
     int m,s,t,dp[300001];
     scanf("%d%d%d",&m,&s,&t);
     for(int i=1;i<=t;i++)
-    \tif(m>=10)
+      if(m>=10)
             dp[i]=dp[i-1]+60, m-=10;
                 else
                     dp[i]=dp[i-1],m+=4;

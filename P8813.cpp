@@ -5,31 +5,31 @@ using namespace std;
 using tp = long long;
 
 tp __Read_int() {
-\ttp x;
-\tscanf("%lld", &x);
-\treturn x;
+  tp x;
+  scanf("%lld", &x);
+  return x;
 }
 
 constexpr tp c_Limit = 1000000000;
 
 signed main() {
-\ttp a = ra, b = ra, tar = 1;
-\twhile (b) {
-\t\tif (b & 1) {
-\t\t\tif (tar * a > c_Limit) {
-\t\t\t\tputs("-1");
-\t\t\t\treturn 0;
-\t\t\t}
-\t\t\ttar *= a;
-\t\t}
-\t\ta *= a;
-\t\tb >>= 1;
-\t\tif (a > c_Limit && b) {
-\t\t\tputs("-1");
-\t\t\treturn 0;
-\t\t}
-\t}
-\tprintf("%lld
+  tp a = ra, b = ra, tar = 1;
+  while (b) {
+    if (b & 1) {
+      if (tar * a > c_Limit) {
+        puts("-1");
+        return 0;
+      }
+      tar *= a;
+    }
+    a *= a;
+    b >>= 1;
+    if (a > c_Limit && b) {
+      puts("-1");
+      return 0;
+    }
+  }
+  printf("%lld
 ", tar);
-\treturn 0;
+  return 0;
 }

@@ -3,12 +3,12 @@
 using namespace std;
 
 int main() {
-\tunsigned long long au = 1;
-\tshort n;
-\tcin >> n;
-\tfor (short i = 2; i <= n; i++) {
-\t\tau *= i;
-\t}
-\tcout << au;
-\treturn 0;
+  unsigned long long au = 1;
+  short n;
+  cin >> n;
+  for (short i = 2; i <= n; i++) {
+    au *= i;
+  }
+  cout << au;
+  return 0;
 }

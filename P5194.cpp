@@ -7,25 +7,25 @@ long long sum[1005], a[1005];
 long long MAX, n, c;
 
 inline void dfs(int n, long long x) {
-\tif (x > c)
-\t\treturn;
-\tif (sum[n - 1] + x <= c) {
-\t\tMAX = max(MAX, sum[n - 1] + x);
-\t\treturn;
-\t}
-\tMAX = max(MAX, x);
-\tfor (int i = 0; i < n; i++)
-\t\tdfs(i, x + a[i]);
-\treturn;
+  if (x > c)
+    return;
+  if (sum[n - 1] + x <= c) {
+    MAX = max(MAX, sum[n - 1] + x);
+    return;
+  }
+  MAX = max(MAX, x);
+  for (int i = 0; i < n; i++)
+    dfs(i, x + a[i]);
+  return;
 }
 
 int main() {
-\tcin >> n >> c;
-\tfor (int i = 0; i < n; i++) {
-\t\tcin >> a[i];
-\t\tsum[i] = sum[i - 1] + a[i];
-\t}
-\tdfs(n, 0);
-\tcout << MAX;
-\treturn 0;
+  cin >> n >> c;
+  for (int i = 0; i < n; i++) {
+    cin >> a[i];
+    sum[i] = sum[i - 1] + a[i];
+  }
+  dfs(n, 0);
+  cout << MAX;
+  return 0;
 }

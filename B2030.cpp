@@ -53,7 +53,7 @@ int main()
 {
     char v;
     cin>>v;
-    cout<<"  "<<v<<endl<<" "<<v<<v<<v<<endl<<v<<v<<v<<v<<v;
+    cout<<"	"<<v<<endl<<" "<<v<<v<<v<<endl<<v<<v<<v<<v<<v;
     return 0;
 }
 
@@ -280,8 +280,8 @@ int main()
 {
     char v;
     cin>>v;
-    cout<<"  "<<v<<endl<<" "<<v<<v<<v<<endl<<v<<v<<v<<v<<v<<endl;
-    cout<<" "<<v<<v<<v<<endl<<"  "<<v;
+    cout<<"	"<<v<<endl<<" "<<v<<v<<v<<endl<<v<<v<<v<<v<<v<<endl;
+    cout<<" "<<v<<v<<v<<endl<<"	"<<v;
     return 0;
 }
 

@@ -7,34 +7,34 @@ char use[20];
 int length, n;
 
 inline static int match(string str1, string str2) {
-\tfor (int i = 1; i < min(str1.size(), str2.size()); i++) {
-\t\tbool flag = true;
-\t\tfor (int j = 0; j < i; j++)
-\t\t\tif (str1[str1.size() - i + j] != str2[j])
-\t\t\t\tflag = false;
-\t\tif (flag)
-\t\t\treturn i;
-\t}
-\treturn 0;
+  for (int i = 1; i < min(str1.size(), str2.size()); i++) {
+    bool flag = true;
+    for (int j = 0; j < i; j++)
+      if (str1[str1.size() - i + j] != str2[j])
+        flag = false;
+    if (flag)
+      return i;
+  }
+  return 0;
 }
 
 inline void solve(string strnow, int lengthnow) {
-\tlength = max(lengthnow, length);
-\tfor (int i = 0; i < n; i++) {
-\t\tif (use[i] > 1)
-\t\t\tcontinue;
-\t\tif (match(strnow, str[i])) {
-\t\t\tuse[i]++;
-\t\t\tsolve(str[i], lengthnow + str[i].size() - match(strnow, str[i]));
-\t\t\tuse[i]--;
-\t\t}
-\t}
+  length = max(lengthnow, length);
+  for (int i = 0; i < n; i++) {
+    if (use[i] > 1)
+      continue;
+    if (match(strnow, str[i])) {
+      use[i]++;
+      solve(str[i], lengthnow + str[i].size() - match(strnow, str[i]));
+      use[i]--;
+    }
+  }
 }
 int main() {
-\tcin >> n;
-\tfor (int i = 0; i <= n; i++)
-\t\tcin >> str[i];
-\tsolve(' ' + str[n], 1);
-\tcout << length;
-\treturn 0;
+  cin >> n;
+  for (int i = 0; i <= n; i++)
+    cin >> str[i];
+  solve(' ' + str[n], 1);
+  cout << length;
+  return 0;
 }

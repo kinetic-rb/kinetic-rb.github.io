@@ -4,97 +4,97 @@ using namespace std;
 
 template<typename Typex>
 class memory {
-\tunsigned _alocked;
-\tTypex* elespace;
+  unsigned _alocked;
+  Typex* elespace;
 public:
-\tusing iterator = Typex*;
-\tmemory(const unsigned& size = 0) {
-\t\telespace = new Typex[_alocked = size];
-\t}
+  using iterator = Typex*;
+  memory(const unsigned& size = 0) {
+    elespace = new Typex[_alocked = size];
+  }
 
-\tmemory(const unsigned& size, const Typex& val) {
-\t\telespace = new Typex[_alocked = size];
-\t\tfor (unsigned i = 0; i < size; i++) {
-\t\t\telespace[i] = val;
-\t\t}
-\t}
+  memory(const unsigned& size, const Typex& val) {
+    elespace = new Typex[_alocked = size];
+    for (unsigned i = 0; i < size; i++) {
+      elespace[i] = val;
+    }
+  }
 
-\tinline unsigned size() {
-\t\treturn _alocked;
-\t}
+  inline unsigned size() {
+    return _alocked;
+  }
 
-\tinline void resize(const unsigned& size) {
-\t\tauto tmp = new Typex[_alocked];
-\t\tfor (unsigned i = 0; i < _alocked; i++)
-\t\t\ttmp[i] = elespace[i];
-\t\tdelete[] elespace;
-\t\telespace = new Typex[size];
-\t\tfor (unsigned i = 0; i < _alocked; i++)
-\t\t\telespace[i] = tmp[i];
-\t\t_alocked = size;
-\t}
+  inline void resize(const unsigned& size) {
+    auto tmp = new Typex[_alocked];
+    for (unsigned i = 0; i < _alocked; i++)
+      tmp[i] = elespace[i];
+    delete[] elespace;
+    elespace = new Typex[size];
+    for (unsigned i = 0; i < _alocked; i++)
+      elespace[i] = tmp[i];
+    _alocked = size;
+  }
 
-\tinline void operator () (const unsigned& size = 0) {
-\t\tdelete[] elespace;
-\t\telespace = new Typex[_alocked = size];
-\t}
+  inline void operator () (const unsigned& size = 0) {
+    delete[] elespace;
+    elespace = new Typex[_alocked = size];
+  }
 
-\tinline void operator () (const unsigned& size, const Typex& val) {
-\t\tdelete[] elespace;
-\t\telespace = new Typex[_alocked = size];
-\t\tfor (unsigned i = 0; i < size; i++) {
-\t\t\telespace[i] = val;
-\t\t}
-\t}
+  inline void operator () (const unsigned& size, const Typex& val) {
+    delete[] elespace;
+    elespace = new Typex[_alocked = size];
+    for (unsigned i = 0; i < size; i++) {
+      elespace[i] = val;
+    }
+  }
 
-\tinline Typex& operator [] (const unsigned& x) {
-\t\tif (x >= _alocked)
-\t\t\tresize(x + 1);
-\t\treturn elespace[x];
-\t}
+  inline Typex& operator [] (const unsigned& x) {
+    if (x >= _alocked)
+      resize(x + 1);
+    return elespace[x];
+  }
 
-\tinline void push(const Typex& val) {
-\t\tresize(_alocked + 1);
-\t\telespace[_alocked - 1] = val;
-\t}
+  inline void push(const Typex& val) {
+    resize(_alocked + 1);
+    elespace[_alocked - 1] = val;
+  }
 
-\tinline void pop() {
-\t\tresize(_alocked - 1);
-\t}
+  inline void pop() {
+    resize(_alocked - 1);
+  }
 
-\tinline Typex* begin() {
-\t\treturn elespace;
-\t}
+  inline Typex* begin() {
+    return elespace;
+  }
 
-\tinline Typex* end() {
-\t\treturn elespace + _alocked;
-\t}
+  inline Typex* end() {
+    return elespace + _alocked;
+  }
 
-\tinline bool empty() {
-\t\treturn _alocked;
-\t}
+  inline bool empty() {
+    return _alocked;
+  }
 
-\t~memory() {
-\t\tdelete[] elespace;
-\t}
+  ~memory() {
+    delete[] elespace;
+  }
 };
 
 using namespace std;
 
 signed main() {
-\tint m, n, sum = 0;
-\tcin >> n >> m;
-\tmemory<int> w(n, 0), c(n, 0), f(n, 0);
-\tfor (int i = 0; i < n; i++) {
-\t\tint x;
-\t\tcin >> x;
-\t\tsum += x;
-\t\tcin >> c[i] >> w[i];
-\t\tc[i] -= x;
-\t}
-\tfor (int i = 0; i < n; i++)
-\t\tfor (int v = m; v >= w[i]; v--)
-\t\t\tf[v] = max(f[v], f[v - w[i]] + c[i]);
-\tcout << (f[m] + sum) * 5ull;
-\treturn 0;
+  int m, n, sum = 0;
+  cin >> n >> m;
+  memory<int> w(n, 0), c(n, 0), f(n, 0);
+  for (int i = 0; i < n; i++) {
+    int x;
+    cin >> x;
+    sum += x;
+    cin >> c[i] >> w[i];
+    c[i] -= x;
+  }
+  for (int i = 0; i < n; i++)
+    for (int v = m; v >= w[i]; v--)
+      f[v] = max(f[v], f[v - w[i]] + c[i]);
+  cout << (f[m] + sum) * 5ull;
+  return 0;
 }

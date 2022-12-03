@@ -3,15 +3,15 @@
 using namespace std;
 
 int main() {
-\tdouble a, b, c, d;
-\tcin >> a >> b >> c >> d;
-\tfor (double i = -100; i <= 100; i += 0.001) {
-\t\tdouble j = i + 0.001;
-\t\tdouble x = a * i * i * i + b * i * i + c * i + d;
-\t\tdouble y = a * j * j * j + b * j * j + c * j + d;
-\t\tif (x >= 0 && y <= 0 || x <= 0 && y >= 0) {
-\t\t\tprintf("%.2lf ", (i + j) / 2);
-\t\t}
-\t}
-\treturn 0;
+  double a, b, c, d;
+  cin >> a >> b >> c >> d;
+  for (double i = -100; i <= 100; i += 0.001) {
+    double j = i + 0.001;
+    double x = a * i * i * i + b * i * i + c * i + d;
+    double y = a * j * j * j + b * j * j + c * j + d;
+    if (x >= 0 && y <= 0 || x <= 0 && y >= 0) {
+      printf("%.2lf ", (i + j) / 2);
+    }
+  }
+  return 0;
 }

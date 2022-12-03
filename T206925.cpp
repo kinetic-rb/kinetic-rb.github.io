@@ -8,28 +8,28 @@ int n, xx, yy, ans;
 bool a[MAXN][MAXN], vis[MAXN][MAXN];
 
 void dfs(int x, int y){
-\tif(x < 0 || x > 101 || y < 0 || y > 101 || vis[x][y]){
-\t\treturn;
-\t}
-\tif(a[x][y]){
-\t\tans++;
-\t\treturn;
-\t}
-\tvis[x][y] = 1;
-\tfor(int i = 0; i < 4; i++){
-\t\tdfs(x + dx[i], y + dy[i]);
-\t}
+  if(x < 0 || x > 101 || y < 0 || y > 101 || vis[x][y]){
+    return;
+  }
+  if(a[x][y]){
+    ans++;
+    return;
+  }
+  vis[x][y] = 1;
+  for(int i = 0; i < 4; i++){
+    dfs(x + dx[i], y + dy[i]);
+  }
 }
 
 int main(){
-//\tfreopen("perimeter.in", "r", stdin);
-//\tfreopen("perimeter.out", "w", stdout);
-\tcin >> n;
-\tfor(int i = 1; i <= n; i++){
-\t\tcin >> xx >> yy;
-\t\ta[xx][yy] = 1;
-\t}
-\tdfs(0, 0);
-\tcout << ans;
-\treturn 0;
+//  freopen("perimeter.in", "r", stdin);
+//  freopen("perimeter.out", "w", stdout);
+  cin >> n;
+  for(int i = 1; i <= n; i++){
+    cin >> xx >> yy;
+    a[xx][yy] = 1;
+  }
+  dfs(0, 0);
+  cout << ans;
+  return 0;
 }

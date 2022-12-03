@@ -4,8 +4,8 @@
 using namespace std;
 
 int main() {
-\tlong long n, m, a;
-\tcin >> n >> m >> a;
-\tcout <<   (long long)(ceil(double(n) / double(a)) * ceil(double(m) / double(a)));
-\treturn 0;
+  long long n, m, a;
+  cin >> n >> m >> a;
+  cout <<   (long long)(ceil(double(n) / double(a)) * ceil(double(m) / double(a)));
+  return 0;
 }

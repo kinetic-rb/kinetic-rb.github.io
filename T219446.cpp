@@ -2,14 +2,14 @@
 using namespace std;
 int main()
 {
-\tint s, d, h, m;
-\tcin >> s;
-\td = s / 86400;
-\ts %= 86400;
-\th = s / 3600;
-\ts %= 3600;
-\tm = s / 60;
-\ts %= 60;
-\tcout << d << " " << h << " "<< m << " " << s;
-\treturn 0;
+  int s, d, h, m;
+  cin >> s;
+  d = s / 86400;
+  s %= 86400;
+  h = s / 3600;
+  s %= 3600;
+  m = s / 60;
+  s %= 60;
+  cout << d << " " << h << " "<< m << " " << s;
+  return 0;
 }

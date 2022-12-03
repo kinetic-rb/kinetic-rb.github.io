@@ -12,20 +12,20 @@ int main(){
       int x;
       cin >> x;
       if (x >= 10 * d) {
-      \tputs("yEs");
+        puts("yEs");
         continue;
       } else
         while (x >= 0) {
           x -= d;
           if (!(x % 10)) {
-      \t\t\tputs("YeS");
-          \tf = false;
-          \tbreak;
+            puts("YeS");
+            f = false;
+            break;
           }
         }
       if (f)
-      \tputs("nO");
-  \t}
+        puts("nO");
+    }
   }
   return 0;
 }

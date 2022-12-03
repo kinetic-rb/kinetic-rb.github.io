@@ -15,48 +15,48 @@ int len = 0;
 char x;
 
 inline void DFS(int cur) {
-\tint key = cur;
-\tfor (int i = 0; i < map[key].size(); i++) {
-\t\tif (!book[map[key][i]]) {
-\t\t\tbook[map[key][i]] = true;
-\t\t\ts++;
-\t\t\tDFS(map[key][i]);
-\t\t}
-\t}
+  int key = cur;
+  for (int i = 0; i < map[key].size(); i++) {
+    if (!book[map[key][i]]) {
+      book[map[key][i]] = true;
+      s++;
+      DFS(map[key][i]);
+    }
+  }
 }
 
 int main() {
-\tint k, p = 0;
-\twhile ((x = getchar()) && x != ' ') {
-\t\tnum[len++] = x - '0';
-\t}
-\tcin >> k;
-\tint key, value;
-\tfor (int i = 0; i < k; i++) {
-\t\tcin >> key >> value;
-\t\tmap[key].push_back(value);
-\t}
-\tfor (int i = 0; i < len; i++) {
-\t\ts = 1;
-\t\tbook[num[i]] = true;
-\t\tDFS(num[i]);
-\t\tmemset(book, false, 10);
-\t\tans[i] = s;
-\t}
-\tvector<int> res;
-\tres.push_back(ans[0]);
-\tfor (int i = 1; i < len; i++) {
-\t\tfor (int j = 0; j < res.size(); j++) {
-\t\t\tint t = ans[i] * res[j] + p;
-\t\t\tres[j] = t % 10;
-\t\t\tp = t / 10;
-\t\t}
-\t\twhile (p) {
-\t\t\tres.push_back(p % 10);
-\t\t\tp /= 10;
-\t\t}
-\t}
-\tfor (int i = res.size() - 1; i >= 0; i--)
-\t\tcout << res[i];
-\treturn 0;
+  int k, p = 0;
+  while ((x = getchar()) && x != ' ') {
+    num[len++] = x - '0';
+  }
+  cin >> k;
+  int key, value;
+  for (int i = 0; i < k; i++) {
+    cin >> key >> value;
+    map[key].push_back(value);
+  }
+  for (int i = 0; i < len; i++) {
+    s = 1;
+    book[num[i]] = true;
+    DFS(num[i]);
+    memset(book, false, 10);
+    ans[i] = s;
+  }
+  vector<int> res;
+  res.push_back(ans[0]);
+  for (int i = 1; i < len; i++) {
+    for (int j = 0; j < res.size(); j++) {
+      int t = ans[i] * res[j] + p;
+      res[j] = t % 10;
+      p = t / 10;
+    }
+    while (p) {
+      res.push_back(p % 10);
+      p /= 10;
+    }
+  }
+  for (int i = res.size() - 1; i >= 0; i--)
+    cout << res[i];
+  return 0;
 }

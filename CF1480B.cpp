@@ -25,7 +25,7 @@ signed main() {
         break;
       }
     if (!f)
-    \tputs("No");
+      puts("No");
   }
   return 0;
 }

@@ -4,19 +4,19 @@
 using namespace std;
 
 int main() {
-\tint x;
-\tdouble a, b;
-\tcin >> x;
-\ta = x / 3.0 + 50;
-\tb = x / 1.2;
-\tif(a > b) {
-\t    cout << "Walk";
-\t    exit(0);
-\t}
-\tif(a<b) {
-\t    cout << "Bike";
-\t    exit(0);
-\t}
-\tcout << "All";
-\texit(0);
+  int x;
+  double a, b;
+  cin >> x;
+  a = x / 3.0 + 50;
+  b = x / 1.2;
+  if(a > b) {
+      cout << "Walk";
+      exit(0);
+  }
+  if(a<b) {
+      cout << "Bike";
+      exit(0);
+  }
+  cout << "All";
+  exit(0);
 }

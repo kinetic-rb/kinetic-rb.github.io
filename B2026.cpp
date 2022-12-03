@@ -9,9 +9,9 @@ using namespace std;
 double a,b,r;
 int k;
 int main(){
-\tcin>>a>>b;
-\tk=a/b;
-\tr=a-k*b;
-\tcout<<r;
-\treturn 0;
+  cin>>a>>b;
+  k=a/b;
+  r=a-k*b;
+  cout<<r;
+  return 0;
 }

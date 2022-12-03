@@ -11,31 +11,31 @@
 package main
 
 import (
-\t"fmt"
+  "fmt"
 )
 
 const Hat_N = 4e5 + 3
 
 func main() {
-\tvar n, cnt, tar int;
-\tvar v [Hat_N]int
-\tcnt, tar = 0, 0
-\tfmt.Scan(&n);
-\tfor i := 1; i <= n; i++ {
-\t\tfmt.Scan(&v[i])
-\t\tv[n + i] = v[i]
-\t}
-\tfor i := 1; i <= (n << 1); i++ {
-\t\tif (v[i] != 0) {
-\t\t\tcnt++
-\t\t} else {
-\t\t\tif (cnt > tar) {
-\t\t\t\ttar = cnt;
-\t\t\t}
-\t\t\tcnt = 0
-\t\t}
-\t}
-\tfmt.Println(tar)
+  var n, cnt, tar int;
+  var v [Hat_N]int
+  cnt, tar = 0, 0
+  fmt.Scan(&n);
+  for i := 1; i <= n; i++ {
+    fmt.Scan(&v[i])
+    v[n + i] = v[i]
+  }
+  for i := 1; i <= (n << 1); i++ {
+    if (v[i] != 0) {
+      cnt++
+    } else {
+      if (cnt > tar) {
+        tar = cnt;
+      }
+      cnt = 0
+    }
+  }
+  fmt.Println(tar)
 }
 
 /*#################################################################

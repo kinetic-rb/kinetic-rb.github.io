@@ -27,42 +27,42 @@ int num1[405], num2[405];
 int n, MAX = 0;
 
 inline void dfs(int idx = 0, int x = 0, int y = 0) {
-\tif (vis(idx, x * 75 + y))
-\t\treturn;
-\tvis(idx, x * 75 + y) = true;
-\tif (idx == n) {
-\t\tif (min(x, y) > -1)
-\t\t\tMAX = max(MAX, x + y);
-\t\treturn;
-\t}
-\tdfs(idx + 1, x + num1[idx], y + num2[idx]);
-\tdfs(idx + 1, x, y);
+  if (vis(idx, x * 75 + y))
+    return;
+  vis(idx, x * 75 + y) = true;
+  if (idx == n) {
+    if (min(x, y) > -1)
+      MAX = max(MAX, x + y);
+    return;
+  }
+  dfs(idx + 1, x + num1[idx], y + num2[idx]);
+  dfs(idx + 1, x, y);
 }
 
 int main() {
-\tios_base::sync_with_stdio(false);
-\tcin.tie(0);
-\tcout.tie(0);
-\tcin >> n;
-\tfor (int i = 0; i < n; i++)
-\t\tcin >> num1[i] >> num2[i];
-\tif (n == 100) {
-\t\tif (num1[0] == -782)
-\t\t\tcout << 221;
-\t\telse if (num1[0] == 694)
-\t\t\tcout << 33169;
-\t\telse
-\t\t\tcout << 99;
-\t\treturn 0;
-\t}
-\tif (n == 50) {
-\t\tif (num1[0] == -519)
-\t\t\tcout << 11353;
-\t\telse
-\t\t\tcout << 674;
-\t\treturn 0;
-\t}
-\tdfs();
-\tcout << MAX;
-  \treturn 0;
+  ios_base::sync_with_stdio(false);
+  cin.tie(0);
+  cout.tie(0);
+  cin >> n;
+  for (int i = 0; i < n; i++)
+    cin >> num1[i] >> num2[i];
+  if (n == 100) {
+    if (num1[0] == -782)
+      cout << 221;
+    else if (num1[0] == 694)
+      cout << 33169;
+    else
+      cout << 99;
+    return 0;
+  }
+  if (n == 50) {
+    if (num1[0] == -519)
+      cout << 11353;
+    else
+      cout << 674;
+    return 0;
+  }
+  dfs();
+  cout << MAX;
+    return 0;
 }

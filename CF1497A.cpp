@@ -6,12 +6,12 @@ using namespace std;
 int num[101];
 
 int main() {
-\tint t;
+  int t;
   for (cin >> t; t--; memset(num, 0, sizeof num)) {
-  \tint n;
+    int n;
     cin >> n;
     for (int i = 0; i < n; i++){
-    \tint q;
+      int q;
       cin >> q;
       num[q]++;
     }
@@ -26,6 +26,6 @@ int main() {
         num[i]--;
       }
     putchar('\n');
-\t}
+  }
   return 0;
 }

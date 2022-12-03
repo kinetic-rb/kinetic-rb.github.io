@@ -3,15 +3,15 @@
 using namespace std;
 
 int main() {
-\tint t;
-\tfor (cin >> t; t--;) {
-\t\tint n, k, c, sum;
-\t\tcin >> n >> k;
-\t\tc = n / k;
-\t\tif (n % k)
-\t\t\tc++;
-\t\tsum = k * c;
-\t\tcout << sum / n + bool(sum % n) << '\n';
-\t}
-\treturn 0;
+  int t;
+  for (cin >> t; t--;) {
+    int n, k, c, sum;
+    cin >> n >> k;
+    c = n / k;
+    if (n % k)
+      c++;
+    sum = k * c;
+    cout << sum / n + bool(sum % n) << '\n';
+  }
+  return 0;
 }

@@ -3,20 +3,20 @@
 using namespace std;
 
 inline void en(string postorder, string inorder) {
-\tif (postorder.empty())
-\t\treturn;
-\tchar Root = *postorder.begin();
-\tint k = inorder.find(Root);
-\tpostorder.erase(postorder.begin());
-\ten(postorder.substr(0, k), inorder.substr(0, k));
-\ten(postorder.substr(k), inorder.substr(k + 1));
-\tcout << Root;
+  if (postorder.empty())
+    return;
+  char Root = *postorder.begin();
+  int k = inorder.find(Root);
+  postorder.erase(postorder.begin());
+  en(postorder.substr(0, k), inorder.substr(0, k));
+  en(postorder.substr(k), inorder.substr(k + 1));
+  cout << Root;
 
 }
 
 int main() {
-\tstring post, in;
-\tcin >> in >> post;
-\ten(post, in);
-\treturn 0;
+  string post, in;
+  cin >> in >> post;
+  en(post, in);
+  return 0;
 }

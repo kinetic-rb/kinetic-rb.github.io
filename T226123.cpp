@@ -6,8 +6,8 @@ using tp = intmax_t;
 
 template <typename Typex>
 class RHeap {
-\tTypex* ele;
-\tunsigned long long size, Msize;
+  Typex* ele;
+  unsigned long long size, Msize;
 
  public:
   RHeap() : size(0), Msize(2) { ele = new Typex[500005]; }
@@ -66,5 +66,5 @@ signed main() {
       h.pop();
     }
   }
-\treturn 0;
+  return 0;
 }

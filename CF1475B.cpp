@@ -3,11 +3,11 @@
 using namespace std;
 
 int main() {
-\tint t;
-\tfor (cin >> t; t--;) {
-\t\tint x;
-\t\tcin >> x;
-\t\tputs(x % 2020 > x / 2020 ? "nO" : "yEs");
-\t}
-\treturn 0;
+  int t;
+  for (cin >> t; t--;) {
+    int x;
+    cin >> x;
+    puts(x % 2020 > x / 2020 ? "nO" : "yEs");
+  }
+  return 0;
 }

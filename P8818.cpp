@@ -3,214 +3,214 @@ using namespace std;
 int a[100005];
 int b[100005];
 struct node{
-\tint l,r,mini,maxn,miniz,maxnf;
-\tbool b,bb,bbb;
+  int l,r,mini,maxn,miniz,maxnf;
+  bool b,bb,bbb;
 }aa[400005],bb[400005];
 void build(int x,int l,int r){
-\taa[x].l=l,aa[x].r= r;
-\taa[x].mini=2e9,aa[x].maxn = -2e9;
-\taa[x].miniz=2e9,aa[x].maxnf = -2e9;
-\tif(l==r){
-\t\taa[x].mini=a[l];
-\t\taa[x].maxn=a[l];
-\t\tif(a[l]==0){
-\t\t\taa[x].bbb=1;
-\t\t}else if(a[l]>0){
-\t\t\taa[x].b=1;\t
-\t\t\taa[x].miniz=a[l];
-\t\t}else{
-\t\t\taa[x].bb=1;
-\t\t\taa[x].maxnf = a[l];
-\t\t}
-\t\treturn;
-\t}
-\tint mid = (l+r)/2;
-\tbuild(x*2,l,mid);
-\tbuild(x*2+1,mid+1,r);
-\taa[x].mini=min(aa[x*2].mini,aa[x*2+1].mini);
-\taa[x].maxn=max(aa[x*2].maxn,aa[x*2+1].maxn);
-\taa[x].miniz=min(aa[x*2].miniz,aa[x*2+1].miniz);
-\taa[x].maxnf=max(aa[x*2].maxnf,aa[x*2+1].maxnf);
-\tif(aa[x*2].b==1||aa[x*2+1].b==1){
-\t\taa[x].b = 1;
-\t}
-\tif(aa[x*2].bb==1||aa[x*2+1].bb==1){
-\t\taa[x].bb = 1;
-\t}
-\tif(aa[x*2].bbb==1||aa[x*2+1].bbb==1){
-\t\taa[x].bbb = 1;
-\t}
-\treturn;
+  aa[x].l=l,aa[x].r= r;
+  aa[x].mini=2e9,aa[x].maxn = -2e9;
+  aa[x].miniz=2e9,aa[x].maxnf = -2e9;
+  if(l==r){
+    aa[x].mini=a[l];
+    aa[x].maxn=a[l];
+    if(a[l]==0){
+      aa[x].bbb=1;
+    }else if(a[l]>0){
+      aa[x].b=1;  
+      aa[x].miniz=a[l];
+    }else{
+      aa[x].bb=1;
+      aa[x].maxnf = a[l];
+    }
+    return;
+  }
+  int mid = (l+r)/2;
+  build(x*2,l,mid);
+  build(x*2+1,mid+1,r);
+  aa[x].mini=min(aa[x*2].mini,aa[x*2+1].mini);
+  aa[x].maxn=max(aa[x*2].maxn,aa[x*2+1].maxn);
+  aa[x].miniz=min(aa[x*2].miniz,aa[x*2+1].miniz);
+  aa[x].maxnf=max(aa[x*2].maxnf,aa[x*2+1].maxnf);
+  if(aa[x*2].b==1||aa[x*2+1].b==1){
+    aa[x].b = 1;
+  }
+  if(aa[x*2].bb==1||aa[x*2+1].bb==1){
+    aa[x].bb = 1;
+  }
+  if(aa[x*2].bbb==1||aa[x*2+1].bbb==1){
+    aa[x].bbb = 1;
+  }
+  return;
 }
 void Build(int x,int l,int r){
-\tbb[x].l=l,bb[x].r= r;
-\tbb[x].mini=2e9,bb[x].maxn = -2e9;
-\tbb[x].miniz=2e9,bb[x].maxnf = -2e9;
-\tif(l==r){
-\t\tbb[x].mini=b[l];
-\t\tbb[x].maxn=b[l];
-\t\tif(b[l]==0){
-\t\t\tbb[x].bbb=1;
-\t\t}else if(b[l]>0){
-\t\t\tbb[x].b=1;\t
-\t\t\tbb[x].miniz=b[l];
-\t\t}else{
-\t\t\tbb[x].bb=1;
-\t\t\tbb[x].maxnf = b[l];
-\t\t}
-\t\treturn;
-\t}
-\tint mid = (l+r)/2;
-\tBuild(x*2,l,mid);
-\tBuild(x*2+1,mid+1,r);
-\tbb[x].mini=min(bb[x*2].mini,bb[x*2+1].mini);
-\tbb[x].maxn=max(bb[x*2].maxn,bb[x*2+1].maxn);
-\tbb[x].miniz=min(bb[x*2].miniz,bb[x*2+1].miniz);
-\tbb[x].maxnf=max(bb[x*2].maxnf,bb[x*2+1].maxnf);
-\tif(bb[x*2].b==1||bb[x*2+1].b==1){
-\t\tbb[x].b = 1;
-\t}
-\tif(bb[x*2].bb==1||bb[x*2+1].bb==1){
-\t\tbb[x].bb = 1;
-\t}
-\tif(bb[x*2].bbb==1||bb[x*2+1].bbb==1){
-\t\tbb[x].bbb = 1;
-\t}
-\treturn;
+  bb[x].l=l,bb[x].r= r;
+  bb[x].mini=2e9,bb[x].maxn = -2e9;
+  bb[x].miniz=2e9,bb[x].maxnf = -2e9;
+  if(l==r){
+    bb[x].mini=b[l];
+    bb[x].maxn=b[l];
+    if(b[l]==0){
+      bb[x].bbb=1;
+    }else if(b[l]>0){
+      bb[x].b=1;  
+      bb[x].miniz=b[l];
+    }else{
+      bb[x].bb=1;
+      bb[x].maxnf = b[l];
+    }
+    return;
+  }
+  int mid = (l+r)/2;
+  Build(x*2,l,mid);
+  Build(x*2+1,mid+1,r);
+  bb[x].mini=min(bb[x*2].mini,bb[x*2+1].mini);
+  bb[x].maxn=max(bb[x*2].maxn,bb[x*2+1].maxn);
+  bb[x].miniz=min(bb[x*2].miniz,bb[x*2+1].miniz);
+  bb[x].maxnf=max(bb[x*2].maxnf,bb[x*2+1].maxnf);
+  if(bb[x*2].b==1||bb[x*2+1].b==1){
+    bb[x].b = 1;
+  }
+  if(bb[x*2].bb==1||bb[x*2+1].bb==1){
+    bb[x].bb = 1;
+  }
+  if(bb[x*2].bbb==1||bb[x*2+1].bbb==1){
+    bb[x].bbb = 1;
+  }
+  return;
 }
 node query(int x,int l,int r){
-\tif(l<=aa[x].l&&r>=aa[x].r){
-\t\treturn aa[x];
-\t}
-\tint mid = (aa[x].l+aa[x].r)/2;
-\tnode u,s;
-\tu.mini = 2e9,u.maxn = -2e9;
-\tu.miniz = 2e9,u.maxnf = -2e9;
-\tu.b = u.bb = u.bbb = 0;
-\tif(mid>=l){
-\t\ts = query(x*2,l,r);
-\t\tif(s.b==1){
-\t\t\tu.b=1;
-\t\t}
-\t\tif(s.bb == 1){
-\t\t\tu.bb=1;
-\t\t}
-\t\tif(s.bbb == 1){
-\t\t\tu.bbb=1;
-\t\t}
-\t\tu.mini=min(u.mini,s.mini);
-\t\tu.maxn=max(u.maxn,s.maxn);
-\t\tu.miniz=min(u.miniz,s.miniz);
-\t\tu.maxnf=max(u.maxnf,s.maxnf);
-\t}
-\tif(mid+1<=r){
-\t\ts = query(x*2+1,l,r);
-\t\tif(s.b==1){
-\t\t\tu.b=1;
-\t\t}
-\t\tif(s.bb == 1){
-\t\t\tu.bb=1;
-\t\t}
-\t\tif(s.bbb == 1){
-\t\t\tu.bbb=1;
-\t\t}
-\t\tu.mini=min(u.mini,s.mini);
-\t\tu.maxn=max(u.maxn,s.maxn);
-\t\tu.miniz=min(u.miniz,s.miniz);
-\t\tu.maxnf=max(u.maxnf,s.maxnf);
-\t}
-\t//cout << x<< " "<< aa[x].l<< " "<< aa[x].r << " "<< l<< " "<< r<<" " << u.b <<" "<<u.bb <<" "<<u.bbb <<endl;
-\treturn u;
+  if(l<=aa[x].l&&r>=aa[x].r){
+    return aa[x];
+  }
+  int mid = (aa[x].l+aa[x].r)/2;
+  node u,s;
+  u.mini = 2e9,u.maxn = -2e9;
+  u.miniz = 2e9,u.maxnf = -2e9;
+  u.b = u.bb = u.bbb = 0;
+  if(mid>=l){
+    s = query(x*2,l,r);
+    if(s.b==1){
+      u.b=1;
+    }
+    if(s.bb == 1){
+      u.bb=1;
+    }
+    if(s.bbb == 1){
+      u.bbb=1;
+    }
+    u.mini=min(u.mini,s.mini);
+    u.maxn=max(u.maxn,s.maxn);
+    u.miniz=min(u.miniz,s.miniz);
+    u.maxnf=max(u.maxnf,s.maxnf);
+  }
+  if(mid+1<=r){
+    s = query(x*2+1,l,r);
+    if(s.b==1){
+      u.b=1;
+    }
+    if(s.bb == 1){
+      u.bb=1;
+    }
+    if(s.bbb == 1){
+      u.bbb=1;
+    }
+    u.mini=min(u.mini,s.mini);
+    u.maxn=max(u.maxn,s.maxn);
+    u.miniz=min(u.miniz,s.miniz);
+    u.maxnf=max(u.maxnf,s.maxnf);
+  }
+  //cout << x<< " "<< aa[x].l<< " "<< aa[x].r << " "<< l<< " "<< r<<" " << u.b <<" "<<u.bb <<" "<<u.bbb <<endl;
+  return u;
 }
 node Query(int x,int l,int r){
-\tif(l<=bb[x].l&&r>=bb[x].r){
-\t\treturn bb[x];
-\t}
-\tint mid = (bb[x].l+bb[x].r)/2;
-\tnode u,s;
-\tu.mini = 2e9,u.maxn = -2e9;
-\tu.miniz = 2e9,u.maxnf = -2e9;
-\tu.b = u.bb = u.bbb = 0;
-\tif(mid>=l){
-\t\ts = Query(x*2,l,r);
-\t\tif(s.b==1){
-\t\t\tu.b=1;
-\t\t}
-\t\tif(s.bb == 1){
-\t\t\tu.bb=1;
-\t\t}
-\t\tif(s.bbb == 1){
-\t\t\tu.bbb=1;
-\t\t}
-\t\tu.mini=min(u.mini,s.mini);
-\t\tu.maxn=max(u.maxn,s.maxn);
-\t\tu.miniz=min(u.miniz,s.miniz);
-\t\tu.maxnf=max(u.maxnf,s.maxnf);
-\t}
-\tif(mid+1<=r){
-\t\ts = Query(x*2+1,l,r);
-\t\tif(s.b==1){
-\t\t\tu.b=1;
-\t\t}
-\t\tif(s.bb == 1){
-\t\t\tu.bb=1;
-\t\t}
-\t\tif(s.bbb == 1){
-\t\t\tu.bbb=1;
-\t\t}
-\t\tu.mini=min(u.mini,s.mini);
-\t\tu.maxn=max(u.maxn,s.maxn);
-\t\tu.miniz=min(u.miniz,s.miniz);
-\t\tu.maxnf=max(u.maxnf,s.maxnf);
-\t}
-\t//cout << x<< " "<< bb[x].l<< " "<< bb[x].r << " "<< l<< " "<< r<<" " << u.b <<" "<<u.bb <<" "<<u.bbb <<endl;
-\treturn u;
+  if(l<=bb[x].l&&r>=bb[x].r){
+    return bb[x];
+  }
+  int mid = (bb[x].l+bb[x].r)/2;
+  node u,s;
+  u.mini = 2e9,u.maxn = -2e9;
+  u.miniz = 2e9,u.maxnf = -2e9;
+  u.b = u.bb = u.bbb = 0;
+  if(mid>=l){
+    s = Query(x*2,l,r);
+    if(s.b==1){
+      u.b=1;
+    }
+    if(s.bb == 1){
+      u.bb=1;
+    }
+    if(s.bbb == 1){
+      u.bbb=1;
+    }
+    u.mini=min(u.mini,s.mini);
+    u.maxn=max(u.maxn,s.maxn);
+    u.miniz=min(u.miniz,s.miniz);
+    u.maxnf=max(u.maxnf,s.maxnf);
+  }
+  if(mid+1<=r){
+    s = Query(x*2+1,l,r);
+    if(s.b==1){
+      u.b=1;
+    }
+    if(s.bb == 1){
+      u.bb=1;
+    }
+    if(s.bbb == 1){
+      u.bbb=1;
+    }
+    u.mini=min(u.mini,s.mini);
+    u.maxn=max(u.maxn,s.maxn);
+    u.miniz=min(u.miniz,s.miniz);
+    u.maxnf=max(u.maxnf,s.maxnf);
+  }
+  //cout << x<< " "<< bb[x].l<< " "<< bb[x].r << " "<< l<< " "<< r<<" " << u.b <<" "<<u.bb <<" "<<u.bbb <<endl;
+  return u;
 }
 int main(){
-\tios::sync_with_stdio(0);
-\tcin.tie(0),cout.tie(0);
-\tint n,m,t;
-\tcin>> n >> m >> t;
-\tfor(int i = 1;i <= n;i++){
-\t\tcin >>a[i];
-\t} 
-\tfor (int j = 1; j <= m;j++){
-\t\tcin >> b[j];
-\t}
-\tbuild(1,1,n);
-\tBuild(1,1,m);
-\twhile(t--){
-\t\tint x,y,xx,yy;
-\t\tcin >> x >> y >> xx >> yy;
-\t\tnode i = query(1,x,y),j=Query(1,xx,yy);
-\t\t//cout << i.mini <<" "<<i.maxn <<" "<<i.b<< " "<< i.bb << " "<<i.bbb << " "<< i.miniz<< " "<<i.maxnf<< endl;
-\t\t//cout << j.mini <<" "<<j.maxn <<" "<<j.b<< " "<< j.bb << " "<<j.bbb << " "<< j.miniz<< " "<<j.maxnf<< endl;
-\t\tlong long maxn = -2e18;
-\t\tif(i.b==1){
-\t\t\tif(j.bb == 0){
-\t\t\t\tlong long e = i.maxn,u = j.mini;
-\t\t\t\t//cout << e <<" "<< u << endl;
-\t\t\t\tmaxn = max(maxn,e*u);
-\t\t\t}else{
-\t\t\t\tlong long e = i.miniz,u = j.mini;
-\t\t\t\t//cout << e <<" "<< u << endl;
-\t\t\t\tmaxn = max(maxn,e*u);
-\t\t\t}
-\t\t}
-\t\tif(i.bb==1){
-\t\t\tif(j.b == 0){
-\t\t\t\tlong long e = i.mini,u = j.maxn;
-\t\t\t\tmaxn = max(maxn,e*u);
-\t\t\t\t//cout << e <<" "<< u << endl;
-\t\t\t}else{
-\t\t\t\tlong long e = i.maxnf,u = j.maxn;
-\t\t\t\t//cout << e <<" "<< u << endl;
-\t\t\t\tmaxn = max(maxn,e*u);
-\t\t\t}
-\t\t}
-\t\tif(i.bbb==1){
-\t\t\tmaxn=max(maxn,(long long)0);
-\t\t}
-\t\tcout << maxn << endl;
-\t}
+  ios::sync_with_stdio(0);
+  cin.tie(0),cout.tie(0);
+  int n,m,t;
+  cin>> n >> m >> t;
+  for(int i = 1;i <= n;i++){
+    cin >>a[i];
+  } 
+  for (int j = 1; j <= m;j++){
+    cin >> b[j];
+  }
+  build(1,1,n);
+  Build(1,1,m);
+  while(t--){
+    int x,y,xx,yy;
+    cin >> x >> y >> xx >> yy;
+    node i = query(1,x,y),j=Query(1,xx,yy);
+    //cout << i.mini <<" "<<i.maxn <<" "<<i.b<< " "<< i.bb << " "<<i.bbb << " "<< i.miniz<< " "<<i.maxnf<< endl;
+    //cout << j.mini <<" "<<j.maxn <<" "<<j.b<< " "<< j.bb << " "<<j.bbb << " "<< j.miniz<< " "<<j.maxnf<< endl;
+    long long maxn = -2e18;
+    if(i.b==1){
+      if(j.bb == 0){
+        long long e = i.maxn,u = j.mini;
+        //cout << e <<" "<< u << endl;
+        maxn = max(maxn,e*u);
+      }else{
+        long long e = i.miniz,u = j.mini;
+        //cout << e <<" "<< u << endl;
+        maxn = max(maxn,e*u);
+      }
+    }
+    if(i.bb==1){
+      if(j.b == 0){
+        long long e = i.mini,u = j.maxn;
+        maxn = max(maxn,e*u);
+        //cout << e <<" "<< u << endl;
+      }else{
+        long long e = i.maxnf,u = j.maxn;
+        //cout << e <<" "<< u << endl;
+        maxn = max(maxn,e*u);
+      }
+    }
+    if(i.bbb==1){
+      maxn=max(maxn,(long long)0);
+    }
+    cout << maxn << endl;
+  }
 } 

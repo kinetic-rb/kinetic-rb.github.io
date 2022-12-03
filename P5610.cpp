@@ -75,32 +75,32 @@ bool cmp(nodee aa,nodee bb)
 }
 void sortt(int l,int r)
 {
-\tif(l>r) return;
-\tint len=r-l+1;
-\tif(len*int(log2(len))<=2*len+2*n)//\u6309\u7167\u5faa\u73af\u6b21\u6570\u6392\u7684\uff0c\u548c\u590d\u6742\u5ea6\u6bd4\u8f83\u65e0\u592a\u5927\u533a\u522b
-\t{
-\t\tsort(inde+l,inde+r+1);
-\t}
-\telse
-\t{
-\t\tfor(int i=1;i<=n;i++) t[i]=0;
-\t\tfor(int i=l;i<=r;i++)
-\t\t{
-\t\t\tt[inde[i]]++;
-\t\t}
-\t\tint cntt=l;
-\t\tfor(int i=1;i<=n;i++)
-\t\t{
-\t\t\tif(t[i]>0)
-\t\t\t{
-\t\t\t\tfor(int j=1;j<=t[i];j++) inde[cntt]=i,cntt++;
-\t\t\t}
-\t\t}
-\t}
+  if(l>r) return;
+  int len=r-l+1;
+  if(len*int(log2(len))<=2*len+2*n)//\u6309\u7167\u5faa\u73af\u6b21\u6570\u6392\u7684\uff0c\u548c\u590d\u6742\u5ea6\u6bd4\u8f83\u65e0\u592a\u5927\u533a\u522b
+  {
+    sort(inde+l,inde+r+1);
+  }
+  else
+  {
+    for(int i=1;i<=n;i++) t[i]=0;
+    for(int i=l;i<=r;i++)
+    {
+      t[inde[i]]++;
+    }
+    int cntt=l;
+    for(int i=1;i<=n;i++)
+    {
+      if(t[i]>0)
+      {
+        for(int j=1;j<=t[i];j++) inde[cntt]=i,cntt++;
+      }
+    }
+  }
 }
 int main()
 {
-\tmemset(flag,true,sizeof(flag));
+  memset(flag,true,sizeof(flag));
     IO>>n>>m;
     for(register int i=1;i<=n;i++)
     {

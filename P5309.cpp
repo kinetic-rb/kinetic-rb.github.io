@@ -59,7 +59,7 @@ int len, s;
 ll a[N], sum[M], pre[M][M];
 
 int bl (int x) {
-\treturn (x - 1) / len + 1;
+  return (x - 1) / len + 1;
 }
 
 int main () {

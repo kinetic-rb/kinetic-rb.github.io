@@ -3,10 +3,10 @@
 using namespace std;
 
 int main() {
-\tint n, sum = 0;
-\tcin >> n;
-\tfor (int i = 1; i < n; i++)
-\t\tsum += i;
-\tcout << sum + n;
-\treturn 0;
+  int n, sum = 0;
+  cin >> n;
+  for (int i = 1; i < n; i++)
+    sum += i;
+  cout << sum + n;
+  return 0;
 }

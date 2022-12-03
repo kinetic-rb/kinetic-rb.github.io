@@ -10,32 +10,32 @@ ll js, ans, js1, f, wz;
 string s;
 
 int main(){
-//\tfreopen("cowfind.in", "r", stdin);
-//\tfreopen("cowfind.out", "w", stdout);
-\tcin >> s;
-\tfor(int i = 0; i < s.size(); i++){
-\t\tif(s[i] == '('){
-\t\t\twz = i;
-\t\t\tbreak;
-\t\t}
-\t}
-\tfor(int i = 0; i < s.size(); i++){
-\t\tif(s[i] == '('){
-\t\t\tif(i == wz){
-\t\t\t\tjs++;
-\t\t\t}
-\t\t\tif(s[i + 1] == '('){
-\t\t\t\tjs++; 
-\t\t\t}
-\t\t\tjs1 = 0;
-\t\t}
-\t\telse{
-\t\t\tjs1++;
-\t\t\tif(js >= 2 && js1 >= 2){
-\t\t\t\tans += (js - 1);
-\t\t\t}
-\t\t}
-\t}
-\tcout << ans;
-\treturn 0;
+//  freopen("cowfind.in", "r", stdin);
+//  freopen("cowfind.out", "w", stdout);
+  cin >> s;
+  for(int i = 0; i < s.size(); i++){
+    if(s[i] == '('){
+      wz = i;
+      break;
+    }
+  }
+  for(int i = 0; i < s.size(); i++){
+    if(s[i] == '('){
+      if(i == wz){
+        js++;
+      }
+      if(s[i + 1] == '('){
+        js++; 
+      }
+      js1 = 0;
+    }
+    else{
+      js1++;
+      if(js >= 2 && js1 >= 2){
+        ans += (js - 1);
+      }
+    }
+  }
+  cout << ans;
+  return 0;
 }

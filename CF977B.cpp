@@ -16,7 +16,7 @@ i32 main() {
 ", &n);
   s.reserve(n);
   for (i64 i = 0; i < n; ++i) {
-  \tchar ch;
+    char ch;
     scanf("%c", &ch);
     s.push_back(ch);
   }

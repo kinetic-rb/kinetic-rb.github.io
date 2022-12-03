@@ -12,61 +12,61 @@ tp dir[4][2] = {1, 0, 0, 1, -1, 0, 0, -1};
 tp n;
 
 tp dfs(tp x, tp y) {
-\tvis[x][y] = 1;
-\ttp sum = 1;
-\tfor (auto&& i : dir) {
-\t\ttp dx = x + 0[i], dy = y + 1[i];
-\t\tif (dx < 1 || dy < 1 || dx > n || dy > n) {
-\t\t\tcontinue;
-\t\t}
-\t\tif (mz[dx][dy] == '#' && !vis[dx][dy]) {
-\t\t\tsum += dfs(dx, dy);
-\t\t}
-\t}
-\treturn sum;
+  vis[x][y] = 1;
+  tp sum = 1;
+  for (auto&& i : dir) {
+    tp dx = x + 0[i], dy = y + 1[i];
+    if (dx < 1 || dy < 1 || dx > n || dy > n) {
+      continue;
+    }
+    if (mz[dx][dy] == '#' && !vis[dx][dy]) {
+      sum += dfs(dx, dy);
+    }
+  }
+  return sum;
 }
 
 tp Get(tp x, tp y) {
-\tGeted[x][y] = 1;
-\ttp sum = 4;
-\tfor (auto&& i : dir) {
-\t\ttp dx = x + 0[i], dy = y + 1[i];
-\t\tif (dx < 1 || dy < 1 || dx > n || dy > n) {
-\t\t\tcontinue;
-\t\t}
-\t\tif (mz[dx][dy] == '#') {
-\t\t\t--sum;
-\t\t\tif (!Geted[dx][dy]) {
-\t\t\t\tsum += Get(dx, dy);
-\t\t\t}
-\t\t}
-\t}
-\treturn sum;
+  Geted[x][y] = 1;
+  tp sum = 4;
+  for (auto&& i : dir) {
+    tp dx = x + 0[i], dy = y + 1[i];
+    if (dx < 1 || dy < 1 || dx > n || dy > n) {
+      continue;
+    }
+    if (mz[dx][dy] == '#') {
+      --sum;
+      if (!Geted[dx][dy]) {
+        sum += Get(dx, dy);
+      }
+    }
+  }
+  return sum;
 }
 
 signed main() {
-\ttp MAX = 0, RES = 1145141919810;
-\tcin >> n;
-\tfor (tp i = 1; i <= n; ++i) {
-\t\tfor (tp j = 1; j <= n; ++j) {
-\t\t\tcin >> mz[i][j];
-\t\t}
-\t}
-\tfor (tp i = 1; i <= n; ++i) {
-\t\tfor (tp j = 1; j <= n; ++j) {
-\t\t\tif (mz[i][j] == '#' && !vis[i][j]) {
-\t\t\t\tMAX = max(MAX, dfs(i, j));
-\t\t\t}
-\t\t}
-\t}
-\tmemset(vis, 0, sizeof vis);
-\tfor (tp i = 1; i <= n; ++i) {
-\t\tfor (tp j = 1; j <= n; ++j) {
-\t\t\tif (mz[i][j] == '#' && !vis[i][j] && dfs(i, j) == MAX) {
-\t\t\t\tRES = min(RES, Get(i, j));
-\t\t\t}
-\t\t}
-\t}
-\tcout << MAX << ' ' << RES;
-\treturn 0;
+  tp MAX = 0, RES = 1145141919810;
+  cin >> n;
+  for (tp i = 1; i <= n; ++i) {
+    for (tp j = 1; j <= n; ++j) {
+      cin >> mz[i][j];
+    }
+  }
+  for (tp i = 1; i <= n; ++i) {
+    for (tp j = 1; j <= n; ++j) {
+      if (mz[i][j] == '#' && !vis[i][j]) {
+        MAX = max(MAX, dfs(i, j));
+      }
+    }
+  }
+  memset(vis, 0, sizeof vis);
+  for (tp i = 1; i <= n; ++i) {
+    for (tp j = 1; j <= n; ++j) {
+      if (mz[i][j] == '#' && !vis[i][j] && dfs(i, j) == MAX) {
+        RES = min(RES, Get(i, j));
+      }
+    }
+  }
+  cout << MAX << ' ' << RES;
+  return 0;
 }

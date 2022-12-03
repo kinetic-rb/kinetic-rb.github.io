@@ -3,11 +3,11 @@
 using namespace std;
 
 int main(){
-\tint t;
+  int t;
   for (cin >> t; t--;){
-\t\tlong long n;
-  \tcin >> n;
-  \tputs(n - (n & (-n)) ? "Yes" : "No");
+    long long n;
+    cin >> n;
+    puts(n - (n & (-n)) ? "Yes" : "No");
   }
   return 0;
 }

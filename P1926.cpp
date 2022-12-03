@@ -21,7 +21,7 @@ inline void dfs(int idx, int time, int mark, int donum) {
 }
 
 int main() {
-\tcin >> n >> m >> k >> r;
+  cin >> n >> m >> k >> r;
     for(int x = 1; x <= n + m; ++x)
         cin >> num[x][0];
     for(int x = n + 1; x <= n + m; ++x)

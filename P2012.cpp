@@ -33,7 +33,7 @@ int main(){
     reg ll n;
     reg int x;
     while(cin>>n){
-    \tif(n==0) break;
+      if(n==0) break;
         x = n>=phi?n%phi+phi:n;
         printf("%d
 ",x<8?table[x]:solve(x-4));

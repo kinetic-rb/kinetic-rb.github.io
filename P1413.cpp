@@ -5,24 +5,24 @@
 using namespace std;
 
 struct AC {
-\tint p, t;
+  int p, t;
 } z[2010];
 
 int main()
 {
-\tint a[7], ans = 0, n;
-\tcin >> n;
-\tmemset(a, -60, sizeof(a));
-\tfor (int i = 0; i < n; i++)
-\t\tcin >> z[i].p >> z[i].t;
-\tstable_sort(z, z + n, [](const AC& x, const AC& y) {
-\t\treturn x.t < y.t;
-\t});
-\tfor (int i = 0; i < n; i++)
-\t\tif (!(a[z[i].p] < z[i].t && a[z[i].p] + 60 >= z[i].t)) {
-\t\t\tans++;
-\t\t\ta[z[i].p] = z[i].t - 1;
-\t\t}
-\tcout << ans;
-\treturn 0;
+  int a[7], ans = 0, n;
+  cin >> n;
+  memset(a, -60, sizeof(a));
+  for (int i = 0; i < n; i++)
+    cin >> z[i].p >> z[i].t;
+  stable_sort(z, z + n, [](const AC& x, const AC& y) {
+    return x.t < y.t;
+  });
+  for (int i = 0; i < n; i++)
+    if (!(a[z[i].p] < z[i].t && a[z[i].p] + 60 >= z[i].t)) {
+      ans++;
+      a[z[i].p] = z[i].t - 1;
+    }
+  cout << ans;
+  return 0;
 }

@@ -11,28 +11,28 @@ static char buf[1000000],*p1=buf,*p2=buf;
 #define getchar() p1==p2&&(p2=(p1=buf)+fread(buf,1,1000000,stdin),p1==p2)?EOF:*p1++
 inline int read()
 {
-\tR int x=0;
-\tR char a=getchar();
-\twhile (a<'0'||a>'9')  a=getchar();
-\twhile (a>='0'&&a<='9') x=(x<<1)+(x<<3)+(a^48),a=getchar();
-\treturn x;
+  R int x=0;
+  R char a=getchar();
+  while (a<'0'||a>'9')  a=getchar();
+  while (a>='0'&&a<='9') x=(x<<1)+(x<<3)+(a^48),a=getchar();
+  return x;
 }
 int main()
 {
-\tn=read(); m=read();
-\tfor(int i=1;i<=n;i++) a[i]=read();
-\twhile (m--)
-\t{
-\t\tR int opt,l,r,ans=0;
-\t\topt=read(); l=read(); r=read(); x=read();
-\t\tif (opt==1)
-\t\t\tfor (R int i=l;i<=r;i++) a[i]-=(a[i]>x)?x:0;
-\t\telse
-\t\t{
-\t\t\tfor (R int i=l;i<=r;i++) ans+=!(a[i]-x);
-\t\t\tprintf("%d
+  n=read(); m=read();
+  for(int i=1;i<=n;i++) a[i]=read();
+  while (m--)
+  {
+    R int opt,l,r,ans=0;
+    opt=read(); l=read(); r=read(); x=read();
+    if (opt==1)
+      for (R int i=l;i<=r;i++) a[i]-=(a[i]>x)?x:0;
+    else
+    {
+      for (R int i=l;i<=r;i++) ans+=!(a[i]-x);
+      printf("%d
 ",ans);
-\t\t}
-\t}
-\treturn 0;
+    }
+  }
+  return 0;
 }

@@ -6,7 +6,7 @@ using namespace std;
 struct CE {
   int h, a, c;
   inline bool operator<(const CE& comp) const {
-  \treturn a < comp.a;
+    return a < comp.a;
   }
 } e[405];
 

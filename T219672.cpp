@@ -2,14 +2,14 @@
 using namespace std;
 int main()
 {
-\tint x, a, b, c, t, y, j;
-\tcin >> x >> a >> b >> c;
-\tt = x / a;
-\tx %= a;
-\ty = t / b;
-\tt %= b;
-\tj = y / c;
-\ty %= c;
-\tcout << j << " " << y << " " << t << " " << x;
-\treturn 0;
+  int x, a, b, c, t, y, j;
+  cin >> x >> a >> b >> c;
+  t = x / a;
+  x %= a;
+  y = t / b;
+  t %= b;
+  j = y / c;
+  y %= c;
+  cout << j << " " << y << " " << t << " " << x;
+  return 0;
 }

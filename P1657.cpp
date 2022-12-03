@@ -8,28 +8,28 @@ bool flag[25];
 int x, ans;
 
 inline void dfs(int s){
-\tif (s > x) {
-\t\tans++;
-\t\treturn;
-\t}
-\tif (!flag[a[s][1]]) {
-\t\tflag[a[s][1]] = true;
-\t\tdfs(s + 1);
-\t\tflag[a[s][1]] = false;
-\t}
-\tif (!flag[a[s][2]]) {
-\t\tflag[a[s][2]] = true;
-\t\tdfs(s + 1);
-\t\tflag[a[s][2]] = false;
-\t}
+  if (s > x) {
+    ans++;
+    return;
+  }
+  if (!flag[a[s][1]]) {
+    flag[a[s][1]] = true;
+    dfs(s + 1);
+    flag[a[s][1]] = false;
+  }
+  if (!flag[a[s][2]]) {
+    flag[a[s][2]] = true;
+    dfs(s + 1);
+    flag[a[s][2]] = false;
+  }
 }
 
 int main() {
-\tcin >> x;
-\tfor (int i=1;i<=x;i++)
-\t\tcin >> a[i][1] >> a[i][2];
-\tif (x)
-\t\tdfs(1);
-\tcout<<ans;
-\treturn 0;
+  cin >> x;
+  for (int i=1;i<=x;i++)
+    cin >> a[i][1] >> a[i][2];
+  if (x)
+    dfs(1);
+  cout<<ans;
+  return 0;
 }

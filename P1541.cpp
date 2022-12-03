@@ -13,7 +13,7 @@ int main() {
         int c;
         cin >> c;
         cnt[c]++;
-\t\t}
+    }
     ****f = num[1];
     for (int i = 0; i <= cnt[1]; i++)
         for (int j = 0; j <= cnt[2]; j++)
@@ -28,7 +28,7 @@ int main() {
                         f[i][j][k][p] = max(f[i][j][k - 1][p] + num[l], f[i][j][k][p]);
                     if (p - 1 > -1)
                         f[i][j][k][p] = max(f[i][j][k][p - 1] + num[l], f[i][j][k][p]);
-\t\t\t\t}
+        }
     cout << f[cnt[1]][cnt[2]][cnt[3]][cnt[4]];
     return 0;
 }

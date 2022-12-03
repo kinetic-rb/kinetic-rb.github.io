@@ -69,7 +69,7 @@ void main([[maybe_unused]] size_t __CASE__) {  // :/
         if (i != j && a[i][k] > 0 && a[k][j] > 0) {
           tar = min(tar, f[i][j] + a[i][k] + a[k][j]);
         }
-\t      if (f[i][k] + f[k][j] < f[i][j]) {
+        if (f[i][k] + f[k][j] < f[i][j]) {
             f[i][j] = f[i][k] + f[k][j];
           }
       }

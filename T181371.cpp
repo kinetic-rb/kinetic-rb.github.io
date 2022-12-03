@@ -7,12 +7,12 @@ const int LC = 1e9 + 7;
 long long n, a[100000];
 
 int main(){
-\tcin >> n;
-\ta[1] = 1;
-\ta[2] = 1;
-\tfor(int i = 3;i <= n;i++){
-\t\ta[i] = (a[i - 1] + a[i - 2]) % LC;
-\t}
-\tcout << a[n] << endl;
-\treturn 0;
+  cin >> n;
+  a[1] = 1;
+  a[2] = 1;
+  for(int i = 3;i <= n;i++){
+    a[i] = (a[i - 1] + a[i - 2]) % LC;
+  }
+  cout << a[n] << endl;
+  return 0;
 }

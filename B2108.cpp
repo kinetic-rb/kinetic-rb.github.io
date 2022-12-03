@@ -22,7 +22,7 @@ int main()
             if(i==1||i==n||j==1||j==m)//\u8fb9\u754c\u7070\u5ea6\u4e0d\u53d8
                 b[i][j]=a[i][j];
             else//\u5185\u90e8\u6309\u8981\u6c42\u6c42\u5e73\u5747
-            \tb[i][j]=round((a[i][j]+a[i-1][j]+a[i+1][j]+a[i][j-1]+a[i][j+1])/5.0);//\u6309\u8981\u6c42\u7528round()\u56db\u820d\u4e94\u5165
+              b[i][j]=round((a[i][j]+a[i-1][j]+a[i+1][j]+a[i][j-1]+a[i][j+1])/5.0);//\u6309\u8981\u6c42\u7528round()\u56db\u820d\u4e94\u5165
         }
     }
     
@@ -30,7 +30,7 @@ int main()
     {
         for(j=1;j<=m;j++)
             cout<<b[i][j]<<" ";
-\t\tcout<<endl;
+    cout<<endl;
     }
     return 0;
 }

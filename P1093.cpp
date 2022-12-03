@@ -123,7 +123,7 @@ int main()
 {
     char v;
     cin>>v;
-    cout<<"  "<<v<<endl<<" "<<v<<v<<v<<endl<<v<<v<<v<<v<<v;
+    cout<<"	"<<v<<endl<<" "<<v<<v<<v<<endl<<v<<v<<v<<v<<v;
     return 0;
 }
 
@@ -350,8 +350,8 @@ int main()
 {
     char v;
     cin>>v;
-    cout<<"  "<<v<<endl<<" "<<v<<v<<v<<endl<<v<<v<<v<<v<<v<<endl;
-    cout<<" "<<v<<v<<v<<endl<<"  "<<v;
+    cout<<"	"<<v<<endl<<" "<<v<<v<<v<<endl<<v<<v<<v<<v<<v<<endl;
+    cout<<" "<<v<<v<<v<<endl<<"	"<<v;
     return 0;
 }
 
@@ -405,10 +405,10 @@ int main()
 //1034//
 int main()
 {
-\tdouble x1,x2,x3,y1,y2,y3;
-\tcin>>x1>>y1>>x2>>y2>>x3>>y3;
-\tcout<<fixed<<setprecision(2)<<sqrt((sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))+sqrt((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1))+sqrt((x2-x3)*(x2-x3)+(y2-y3)*(y2-y3)))/2.0*((sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))+sqrt((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1))+sqrt((x2-x3)*(x2-x3)+(y2-y3)*(y2-y3)))/2.0-sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1)))*((sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))+sqrt((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1))+sqrt((x2-x3)*(x2-x3)+(y2-y3)*(y2-y3)))/2.0-sqrt((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1)))*((sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))+sqrt((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1))+sqrt((x2-x3)*(x2-x3)+(y2-y3)*(y2-y3)))/2.0-sqrt((x2-x3)*(x2-x3)+(y2-y3)*(y2-y3))));
-\treturn 0;
+  double x1,x2,x3,y1,y2,y3;
+  cin>>x1>>y1>>x2>>y2>>x3>>y3;
+  cout<<fixed<<setprecision(2)<<sqrt((sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))+sqrt((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1))+sqrt((x2-x3)*(x2-x3)+(y2-y3)*(y2-y3)))/2.0*((sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))+sqrt((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1))+sqrt((x2-x3)*(x2-x3)+(y2-y3)*(y2-y3)))/2.0-sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1)))*((sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))+sqrt((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1))+sqrt((x2-x3)*(x2-x3)+(y2-y3)*(y2-y3)))/2.0-sqrt((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1)))*((sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1))+sqrt((x3-x1)*(x3-x1)+(y3-y1)*(y3-y1))+sqrt((x2-x3)*(x2-x3)+(y2-y3)*(y2-y3)))/2.0-sqrt((x2-x3)*(x2-x3)+(y2-y3)*(y2-y3))));
+  return 0;
 }
 
 //1035//
@@ -580,16 +580,16 @@ int main()
 //1050//
 int main()
 {
-\tfloat v;
-\tcin>>v;
-\tif(27+23+v/3.0>v/1.2)
+  float v;
+  cin>>v;
+  if(27+23+v/3.0>v/1.2)
         printf("Walk");
-\t        else
-\t            if(27+23+v/3.0<v/1.2)
-\t                printf("Bike");
-\t                    else
+          else
+              if(27+23+v/3.0<v/1.2)
+                  printf("Bike");
+                      else
                             printf("All");
-\treturn 0;
+  return 0;
 }
 
 //1051//
@@ -612,7 +612,7 @@ int main()
 int main()
 {
     char c;
-\tint weight,money;
+  int weight,money;
     cin>>weight>>c;
     (weight>1000)?money=8+ceil((weight-1000)/500.0)*4:money=8;
     if(c=='y')
@@ -919,16 +919,16 @@ int main()
 //1082//
 int main()
 {
-\tint a,b,n,d;
-\tcin>>a>>b>>n;
-\ta%=b;
-\tfor(int i=0;i<n;i++)
-\t{
-\t\td=a*10/b;
-\t\ta=a*10%b;
-\t}
-\tcout<<d;
-\treturn 0;
+  int a,b,n,d;
+  cin>>a>>b>>n;
+  a%=b;
+  for(int i=0;i<n;i++)
+  {
+    d=a*10/b;
+    a=a*10%b;
+  }
+  cout<<d;
+  return 0;
 }
 
 //1083//
@@ -956,18 +956,18 @@ int main()
 //1084//
 int main()
 {
-\tlong long a,b,ans;
-\tcin>>a>>b;
-\tans=a;
-\tfor(int i=1;i<b;i++)
-\t\tans=ans*a%1000;
-\tif(ans<=9)
-\t\tcout<<"00"<<ans;
-\telse if(ans<=99)
-\t\tcout<<'0'<<ans;
-\telse
-\t\tcout<<ans;
-\treturn 0;
+  long long a,b,ans;
+  cin>>a>>b;
+  ans=a;
+  for(int i=1;i<b;i++)
+    ans=ans*a%1000;
+  if(ans<=9)
+    cout<<"00"<<ans;
+  else if(ans<=99)
+    cout<<'0'<<ans;
+  else
+    cout<<ans;
+  return 0;
 }
 
 //1092//
@@ -1131,8 +1131,8 @@ int main()
     for(int i=0;i<n;i++)
     {
         cin>>a[i];
-    \t(a[i]==a[i-1])?len++:len=1;
-    \tMAX=max(MAX,len);
+      (a[i]==a[i-1])?len++:len=1;
+      MAX=max(MAX,len);
     }
     cout<<MAX;
     return 0;
@@ -1165,7 +1165,7 @@ int main()
 {
     int n,x,y,a[10001],b[10001],g[10001],k[10001],i;
     scanf("%d",&n);
-\tfor(i=1;i<=n;i++)
+  for(i=1;i<=n;i++)
     {
         scanf("%d%d",&a[i],&b[i]);
         scanf("%d%d",&g[i],&k[i]);
@@ -1711,17 +1711,17 @@ int main()
 //1267//
 int main()
 {
-\tconst int MAXN=210;
-\tint M,N,f[MAXN],w[MAXN],c[MAXN];
-\tmemset(f,0,sizeof(f));
-\tcin>>M>>N;
-\tfor(int i=1;i<=N;i++)
-\t\tcin>>w[i]>>c[i];
-\tfor(int i=1;i<=N;i++)
-\t\tfor(int v=M;v>=w[i];v--)
-\t\t\tf[v]=max(f[v],f[v-w[i]]+c[i]);
-\tcout<<f[M];
-\treturn 0;
+  const int MAXN=210;
+  int M,N,f[MAXN],w[MAXN],c[MAXN];
+  memset(f,0,sizeof(f));
+  cin>>M>>N;
+  for(int i=1;i<=N;i++)
+    cin>>w[i]>>c[i];
+  for(int i=1;i<=N;i++)
+    for(int v=M;v>=w[i];v--)
+      f[v]=max(f[v],f[v-w[i]]+c[i]);
+  cout<<f[M];
+  return 0;
 }
 
 //1314//
@@ -1832,7 +1832,7 @@ int main()
 
 //1332//
 int main()
-{\tint m,w,c,t;
+{  int m,w,c,t;
     tQue qM,qW;
     scanf("%d%d%d",&m,&w,&c);
     qM.head=qM.tail=0;
@@ -1842,7 +1842,7 @@ int main()
     for(int i=1;i<=w;i++)
         push(qW,i);
     for(int i=1;i<=c;i++)
-    {\tprintf("%d %d
+    {  printf("%d %d
 ",qM.a[qM.head],qW.a[qW.head]);
         t=qM.a[qM.head];
         qM.head++;
@@ -1889,23 +1889,23 @@ int main()
 
 //1335//
 int main()
-{\tcin>>ion>>iom;
-\tfor(int i=1;i<=ion;i++)
-\t\tfor(int j=1;j<=iom;j++)
-\t\t    cin>>iotu[i][j];
-\tfor(int i=1;i<=ion;i++)
-\t\tfor(int j=1;j<=iom;j++)
-\t\t{
-\t\t    if(!iotu[i][j])
-\t\t        continue;
-\t\t\tioans++;
-\t\t\tiohead=iotail = 0;
-\t\t\tioq[iotail++]=i;
-\t\t\tioq[iotail++]=j;
-\t\t\tbfs();
-\t\t}
-\tcout<<ioans;
-\treturn 0;
+{  cin>>ion>>iom;
+  for(int i=1;i<=ion;i++)
+    for(int j=1;j<=iom;j++)
+        cin>>iotu[i][j];
+  for(int i=1;i<=ion;i++)
+    for(int j=1;j<=iom;j++)
+    {
+        if(!iotu[i][j])
+            continue;
+      ioans++;
+      iohead=iotail = 0;
+      ioq[iotail++]=i;
+      ioq[iotail++]=j;
+      bfs();
+    }
+  cout<<ioans;
+  return 0;
 }
 
 //1353//
@@ -2331,12 +2331,12 @@ void work(int a,int n)
     cout<<ioQ[n]<<endl;
 }
 void bfs()
-{\twhile(iohead<iotail)
-    {\tint x=ioq[iohead++],y=ioq[iohead++];
+{  while(iohead<iotail)
+    {  int x=ioq[iohead++],y=ioq[iohead++];
         for(int i=0;i<4;i++)
-        {\tint x1=x+iodr[i][0],y1=y+iodr[i][1];
+        {  int x1=x+iodr[i][0],y1=y+iodr[i][1];
             if(x1>=1&&x1<=ion&&y1>=1&&y1<=iom&&iotu[x1][y1])
-            {\tiotu[x1][y1]=0;
+            {  iotu[x1][y1]=0;
                 ioq[iotail++]=x1;
                 ioq[iotail++]=y1;
             }
@@ -2522,17 +2522,17 @@ int main()
 void msort(int b,int e,int a[],int c[],long long ans)
 {
     if(b==e)
-\t\treturn;
+    return;
     int mid=(b+e)/2,i=b,j=mid+1,k=b;
     msort(b,mid,a,c,ans),msort(mid+1,e,a,c,ans);
     while(i<=mid&&j<=e)
-    \t(a[i]<=a[j])?c[k++]=a[i++]:c[k++]=a[j++],ans+=mid-i+1;
+      (a[i]<=a[j])?c[k++]=a[i++]:c[k++]=a[j++],ans+=mid-i+1;
     while(i<=mid)
-    \tc[k++]=a[i++];
+      c[k++]=a[i++];
     while(j<=e)
-    \tc[k++]=a[j++];
+      c[k++]=a[j++];
     for(int l=b;l<=e;l++)
-    \ta[l]=c[l];
+      a[l]=c[l];
 }
 
 //other//

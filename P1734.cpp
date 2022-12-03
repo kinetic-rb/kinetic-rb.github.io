@@ -13,10 +13,10 @@ int find(int x) {
 }
 
 int main() {
-\tint n;
-\tcin >> n;
+  int n;
+  cin >> n;
     for (int i = 1; i <= n; i++)
-    \tnum[i] = find(i);
+      num[i] = find(i);
     for (int i = 1; i <= n; i++)
         for (int j = n; j >= i; j--)
             f[j] = max(f[j], f[j - i] + num[i]); 

@@ -5,21 +5,21 @@ using namespace std;
 int num[1000000];
 
 int main() {
-\tint n, cnt = 0, temp = 2;
-\tcin >> n;
-\tfor (int i = 1; i <= n; i++) {
-\t\tcin >> num[i];
-\t}
-\tfor (int i = 1; i < n; i++) {
-\t\tif (num[i] > num[i - 1]) {
-\t\t\ttemp++;
-\t\t\tcontinue;
-\t\t}
-\t\tcnt = max(cnt, temp);
-\t\ttemp = 1;
-\t}
-\tcout << cnt;
-\treturn 0;
+  int n, cnt = 0, temp = 2;
+  cin >> n;
+  for (int i = 1; i <= n; i++) {
+    cin >> num[i];
+  }
+  for (int i = 1; i < n; i++) {
+    if (num[i] > num[i - 1]) {
+      temp++;
+      continue;
+    }
+    cnt = max(cnt, temp);
+    temp = 1;
+  }
+  cout << cnt;
+  return 0;
 }
 
 /*
@@ -29,5 +29,5 @@ int main() {
  \ \  \  __\ \  \      \ \    ___   \
   \ \  \|\__\_\  \      \ \   \  \   \
    \ \____________\      \ \___\  \___\
-\t\|____________|       \|___|  |___|
+  \|____________|       \|___|  |___|
 */
