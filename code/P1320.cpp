@@ -1,15 +1,26 @@
-#include <cstdio>
+#include <iostream>
+#include <cmath>
 
-signed d[40020], i = 1;
-char c;
+using namespace std;
 
-signed main() {
-    for (; scanf("%c", &c) && c > 0x2F; i += !(i & 1 ^ (c - 0x30)), d[i]++, d[0]++);
-    for (; ~scanf("%c", &c);)
-        if (c > 0x2F) {
-            i += !(i & 1 ^ (c - 0x30));
-            d[i]++;
-        }
-    for (signed j = 0; j <= i; j++)
-        printf("%d ", d[j]);
+int main() {
+  int n;
+  string str = " ", tmp;
+  while (cin >> tmp)
+    str += tmp;
+  n = sqrt(str.size() - 1);
+  cout << n << " ";
+  int cur = 0;
+  char flag = '0';
+  for (int i = 1; i <= n * n; i++) {
+    if (str[i] == flag)
+      cur++;
+    else {
+      cout << cur << " ";
+      flag = str[i];
+      cur = 1;
+    }
+  }
+  cout << cur;
+  return 0;
 }

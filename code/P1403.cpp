@@ -1,15 +1,15 @@
-#include <cstdio>
-#include <cstdlib>
+#include <stdio.h>
 
-int n, ac[10000001], ans;
+int ac[10000001];
+int n, ans;
 
 int main() {
     scanf("%d", &n);
-    for (int i = 1; i <= n; i++) {
+    for (int i = 1; i <= n; ++i) {
         for (int j = i; j <= n; j += i)
-            ac[j]++;
+            ++ac[j];
         ans += ac[i];
     }
     printf("%d", ans);
-    exit(0);
+    return 0;
 }

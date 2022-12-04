@@ -65,7 +65,7 @@ class Removealbe_Heap {
 
   void remove(const Typex& _Val) { removed.push(_Val); }
 
-  void pop() { ele.pop(); }
+  void pop() { remove(top()); }
 };
 
 tp val[500005];

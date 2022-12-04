@@ -5,7 +5,6 @@ using namespace std;
 int w[10001], c[10001], f[10001];
 
 int main() {
-    ios_base::sync_with_stdio(false);
   int  n, v;
   cin >> v >> n;
   for (int i = 0; i < n; i++)

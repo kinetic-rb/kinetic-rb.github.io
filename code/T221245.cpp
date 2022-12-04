@@ -3,26 +3,24 @@
 
 using namespace std;
 
-bool is_prime(int n) {
-    if(n == 1) {
-        return false;
+inline bool ip(int &n) {
+  if (n == 1) {
+    return false;
+  }
+  for (register int i = 2; i * i <= n; i++) {
+    if (!(n % i)) {
+      return false;
     }
-    for(int i = 2; i * i <= n; i++) {// \u679a\u4e3e\u7ea6\u6570
-        if(n % i == 0) {// i \u662f n \u7684\u7ea6\u6570
-            return false;
-        }
-    }
-    return true;
+  }
+  return true;
 }
 
 int main() {
-    int t, n;
-    cin >> t;
-    while(t--) {
-        cin >> n;
-        cout << (is_prime(n) ? "Yes
+    ios::sync_with_stdio(false);
+  register int t, n;
+  for (cin >> t; t--; cout << (ip(n) ? "Yes
 " : "No
-");
-    }
-    return 0;
+"))
+    cin >> n;
+  return 0;
 }

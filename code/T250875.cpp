@@ -162,7 +162,7 @@ class InputDevice {
   InputDevice& operator=(InputDevice const&) = delete;
 
   static inline bool isSpace(char c) {
-    return static_cast<unsigned char>(c - '\t') < 5 || c == ' ';
+    return static_cast<unsigned char>(c - '	') < 5 || c == ' ';
   }
   static inline bool isDigit(char c) {
     return static_cast<unsigned char>(c - '0') < 10;

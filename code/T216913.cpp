@@ -15,19 +15,13 @@ vt gcd(vt x, vt y) {
 }
 
 signed main() {
-  vt n, l, x, y;
-  __int128 sum = 0;
-  string res = "";
+  vt n, l, x, y, sum = 0;
   cin >> n >> l >> x >> y;
   for (vt lx = x, ly = y; --n; lx = x, ly = y) {
     cin >> x >> y;
     sum +=
         (x - lx) * (ly + y) - x + lx - abs(ly - y) + __gcd(x - lx, abs(ly - y));
   }
-  for (sum >>= 1; sum; sum /= 10) {
-    res.push_back((sum % 10) ^ 48);
-  }
-  reverse(res.begin(), res.end());
-  cout << res;
+  cout << (sum >> 1);
   return 0;
 }

@@ -1,32 +1,36 @@
+#include <algorithm>
+#include <iostream>
 
-#include<iostream>  
-#include<cstring>  
-using namespace std;  
-int main()  
-{  
-  string str1,str2;  
-  int a[150000],b[150000],c[300000],len;
-  int i,j;  
-  memset(a,0,sizeof(a));  
-  memset(b,0,sizeof(b));  
-  cin>>str1>>str2;  
-  a[0]=str1.length();  
-  for(i=1;i<=a[0];i++)  
-    a[i]=str1[a[0]-i]-'0';  
-  b[0]=str2.length();  
-  for(i=1;i<=b[0];i++)  
-    b[i]=str2[b[0]-i]-'0';  
-  memset(c,0,sizeof(c));  
-  for(i=1;i<=a[0];i++)  
-    for(j=1;j<=b[0];j++)  
-    {  
-    c[i+j-1]+=a[i]*b[j];  
-    c[i+j]+=c[i+j-1]/10;  
-    c[i+j-1]%=10;     
-    }  
-  len=a[0]+b[0]+1;
-  while((c[len]==0)&&(len>1)) len--;
-  for(i=len;i>=1;i--)  
-    cout<<c[i];  
-  return 0;   
+using namespace std;
+using \u6d1b\u8c37 = long long;
+constexpr \u6d1b\u8c37 HAT_M = 100003;
+
+\u6d1b\u8c37 \u6570[HAT_M];
+
+int main() {
+  bool f = false;
+  string \u5b57\u7b26\u4e32;
+  \u6d1b\u8c37 \u4e58;
+  cin >> \u5b57\u7b26\u4e32 >> \u4e58;
+  reverse(\u5b57\u7b26\u4e32.begin(), \u5b57\u7b26\u4e32.end());
+  for (\u6d1b\u8c37 i = 0; i < \u5b57\u7b26\u4e32.size(); ++i) {
+    \u6570[i] = \u5b57\u7b26\u4e32[i] ^ 48;
+    \u6570[i] *= \u4e58;
+  }
+  for (\u6d1b\u8c37 i = 0; i < \u5b57\u7b26\u4e32.size(); ++i) {
+    \u6570[i + 1] += \u6570[i] / 10;
+    \u6570[i] %= 10;
+  }
+  for (\u6d1b\u8c37 i = HAT_M - 2; ~i; --i) {
+    if (\u6570[i]) {
+      f = true;
+    }
+    if (f) {
+      cout << \u6570[i];
+    }
+  }
+  if (!f) {
+    cout << 0;
+  }
+  return 0;
 }

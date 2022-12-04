@@ -1,14 +1,14 @@
-#include <bits/stdc++.h>
-using namespace std;using i16 = short;
+#include <algorithm>
+#include <fstream>
+#include <iostream>
+#include <vector>
+
+using i16 = short;
 using i32 = int;
 using i64 = long long;
 using ui16 = unsigned short;
 using ui32 = unsigned int;
 using ui64 = unsigned long long;
-const int N = 2e5 + 7;
-const int M = 1e7 + 2007;
-bitset<M> vis;
-int a[M >> 3],l,x[N];
 class Reader {
   char *_Buf, *_Strat_ptr, *_End_ptr;
   std::streambuf* inbuf;
@@ -176,31 +176,54 @@ class Reader {
     return *this;
   }
 } ir;
-int main() {
-  int n,mmx = 0;
-  ir>>n;
-  for(int i = 1;i <= n;++ i) {
-    ir>>x[i];
-    if (x[i] > mmx)
-        mmx = x[i];
-  }
-  mmx += 100; 
-  for(int i = 1;i <= mmx;++ i) {
-    if(vis[i])  continue; 
-    for(int j = i;j;j /= 10) {
-      if(j % 10 == 7) {
-        for(int k = i;k <= mmx;k += i) {
-          vis[k] = 1;
-        }
+using namespace std;
+
+vector<bool> can(10000001);
+vector<i64> res;
+
+i32 main() {
+#ifndef ONLINE_JUDGE
+  ir.rdbuf("#");
+#endif
+  res.reserve(100001);
+  for (i64 i = 1; i < 10000101; ++i) {
+    bool f = false;
+    for (i64 j = i; j; j /= 10)
+      if (j % 10 == 7) {
+        f = true;
         break;
       }
-    }
-    if(!vis[i])  a[l ++] = i;
+    if (f)
+      for (i64 j = 1; i * j < 10000101; ++j)
+        can[i * j] = true;
+    if (!can[i])
+      res.push_back(i);
   }
-  int* xxx = a + l;
-  for(int i = 1;i <= n;++ i)
-    if(vis[x[i]])  puts("-1");
-    else    printf("%d
-", *upper_bound(a,xxx,x[i]));
+  i64 t;
+  for (cin >> t; t--; puts("")) {
+    i64 n;
+    cin >> n;
+    if (can[n]) {
+      printf("-1");
+      continue;
+    }
+    printf("%lld", *upper_bound(res.begin(), res.end(), n));
+  }
+#ifndef ONLINE_JUDGE
+  int T__Time = clock();
+  cout << "
+clock : ";
+  if (T__Time < 200)
+    cout << "\33[32m";
+  else if (T__Time < 300)
+    cout << "\33[34m";
+  else if (T__Time < 500)
+    cout << "\33[33m";
+  else if (T__Time < 1000)
+    cout << "\33[31m";
+  else
+    cout << "\33[41m";
+  cout << T__Time << "\33[0m";
+#endif
   return 0;
 }

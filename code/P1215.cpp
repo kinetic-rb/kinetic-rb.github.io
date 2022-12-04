@@ -9,17 +9,18 @@ struct AC {
 };
 array<AC, 100> milk;
 
-int a, b, c, vnt, cnt;
+int a, b, c, cnt;
 int temp[70];
 
 inline void so(int x, int y, int z) {
+    static int vnt;
     if (x < 0 || y < 0 || z < 0 || x > a || y > b || z > c)
         return;
     AC compare;
     compare.x = x;
     compare.y = y;
     compare.z = z;
-    for (register auto i = 0; i < vnt; i++) {
+    for (auto i = 0; i < vnt; i++) {
         if (milk[i].x == compare.x && milk[i].y == compare.y && milk[i].z == compare.z) {
             return;
         }
@@ -49,7 +50,7 @@ int main() {
     cin >> a >> b >> c;
     so(0, 0, c);
     stable_sort(temp, temp + cnt);
-    for (register int i = 0; i < cnt; i++)
+    for (int i = 0; i < cnt; i++)
         cout << temp[i] << ' ';
     return 0;
 }

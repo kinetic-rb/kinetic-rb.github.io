@@ -1,24 +1,18 @@
-#include<bits/stdc++.h>
+#include <iostream>
 
 using namespace std;
 
-int main()
-{
-    int n, a, b, c, ans = INT_MAX;
+int main() {
+    int n, a, b, c, MIN = 0x7fffffff;
     cin >> n >> a >> b >> c;
-    for(int ag = 0; ag <= n / a; ag++)
-    {
-        for(int bg = 0; bg <= n / b; bg++)
-        {
-            for(int cg = 0; cg <= n / c; cg++)
-            {
-                if(ag * a + bg * b + cg * c == n)
-                {
-                    ans = min(ans, ag + bg + cg);
-                }
+    for (int i = 0; i * a <= n; i++) {
+        for (int j = 0; j * b + i * a <= n; j++) {
+            int k = (n - i * a - j * b) / c;
+            if (i * a + j * b + k * c == n) {
+                MIN = min(MIN, i + j + k);
             }
         }
     }
-    cout << ans;
+    cout << MIN;
     return 0;
 }

@@ -1,14 +1,8 @@
-#include <cstdio>
+#include <iostream>
 #include <cstring>
 #include <cmath>
-#include <iostream>
 
 using namespace std;
-
-#define f(a, b, c) for (int a = b; a <= c; a++)
-#define g(a, b, c) for (int a = b; a >= c; a--)
-
-const int Lim = 100000;
 
 struct Bignum {
     long long Num[110], Len;
@@ -17,23 +11,23 @@ struct Bignum {
         Len = 1;
     }
     inline void output() {
-        g(i, 100, 1) {
-            if (i % 10 == 0)
+        for (int i = 100; i > 0; i--) {
+            if (!(i % 10))
                 putchar('\n');
-            printf("%05d", Num[i-1]);
+            printf("%05d", Num[i - 1]);
         }
     }
-    void operator <<= (const long long &x){
+    inline void operator <<= (const long long& x) {
         long long y = x;
         while (y) {
             long long Tmp = (y < 40) ? y : 40;
-            f(i, 0, Len - 1)
+            for (int i = 0; i < Len; i++)
                 Num[i] <<= Tmp;
-            f(i, 0, Len - 1)
-                Num[i + 1] += Num[i] / Lim, Num[i] %= Lim;
+            for (int i = 0; i < Len; i++)
+                Num[i + 1] += Num[i] / 100000, Num[i] %= 100000;
             while (Num[Len] && Len < 100) {
-                Num[Len + 1] += Num[Len] / Lim;
-                Num[Len] %= Lim;
+                Num[Len + 1] += Num[Len] / 100000;
+                Num[Len] %= 100000;
                 Len++;
             }
             Num[100] = 0;
@@ -41,6 +35,7 @@ struct Bignum {
         }
     }
 } Ans;
+
 int main() {
     Ans.Num[0] = 1;
     int N;

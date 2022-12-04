@@ -1,9 +1,8 @@
-#include <bitset>
 #include <iostream>
 #include <list>
 
 using namespace std;
-using vt = long long;
+using vt = int_fast64_t;
 constexpr vt Hat_N = 500000;
 
 struct Rs {
@@ -13,12 +12,10 @@ struct Rs {
   Rs(vt to, vt cost) : to(to), cost(cost) {}
 };
 
-bitset<Hat_N> vis;
 list<Rs> G[Hat_N];
 vt f[Hat_N], dist[Hat_N];
 
 void dp(vt u, vt fa) {
-  vis[u] = true;
   for (auto&& [v, w] : G[u]) {
     if (v == fa) {
       continue;

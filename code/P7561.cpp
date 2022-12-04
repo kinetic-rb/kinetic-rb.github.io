@@ -1,57 +1,42 @@
 // Please submit with C++14!
-#include <algorithm>
+#pragma region HEAD   // Spectre
+#include <algorithm>  // By rbtree (https://rbtree.archi)
 #include <array>
+#include <bitset>
 #include <cmath>
-#include <cstdint>
+#include <functional>
 #include <iostream>
 #include <list>
 #include <map>
+#include <numeric>
 #include <queue>
+#include <random>
 #include <set>
-#include <tuple>
 #include <unordered_map>
 #include <utility>
 #include <vector>
-#define ra _Read()
 #ifdef ___RB_DEBUG___
-std::map<uint64_t, uint64_t> __vis__;
-#define dbg(...)                                                               \
-  printf(                                                                      \
-      ":>> At line '%llu', function '%s', come here in the %lluth time, '%s' " \
-      "-> '",                                                                  \
-      __LINE__, __FUNCTION__, ++__vis__[__LINE__], #__VA_ARGS__);              \
-  _dbg(__VA_ARGS__)
-#define dputs(...) printf(__VA_ARGS__)
-template <typename _Type>
-void _dbg(const _Type& _cur) {
-  std::cout << _cur << "' <<:
-";
-}
-template <typename _Type, typename... _Other>
-void _dbg(const _Type& _cur, const _Other&... _other) {
-  std::cout << _cur << ", ";
-  _dbg(_other...);
-}
+#include "rb_debug.h"
 #else
 #define dbg(...)
-#define dputs(...)
 #endif
+#define ra (scanf("%lld", &__TEMP_READ_VALUE), __TEMP_READ_VALUE)
+#define LIKELY(exp) __builtin_expect(bool(exp), 1)
+#define UNLIKELY(exp) __builtin_expect(bool(exp), 0)
+#define ai(arr, value) __inia<decltype(arr)::value_type>(value)
 
-using tp = long long;
-tp _Read() {
-  bool __neg = 0;
-  char __c = getchar();
-  tp __val = 0;
-  for (; __c < 48 || __c > 57; __c = getchar()) {
-    __neg = __c == 45;
-  }
-  while (__c > 47 && __c < 58) {
-    __val = __val * 10 + (__c & 15);
-    __c = getchar();
-  }
-  return __neg ? ~__val + 1 : __val;
+template <typename _Tp>
+_Tp __inia(typename _Tp::value_type __Val = _Tp::value_type()) {
+  _Tp __target;
+  return __target.fill(__Val), __target;
 }
+
+typedef long long tp;
+tp __TEMP_READ_VALUE;
 using namespace std;
+#pragma endregion HEAD
+
+////////////////////////////////////////////////////////////////////////////////
 constexpr tp Hat_N = 2.5e5 + 3;
 
 struct Loc {
@@ -165,27 +150,7 @@ signed main() {
   }
   dfs(root = build(1, n));
   khp.print();
-  return EXIT_SUCCESS;
+  return 0;
 }
 
-/*#################################################################
-#.................................................................#
-#............................This.Code.Was.Created.By.RBTree......#
-#.............#......#...............Limiting-Factor..............#
-#............#.#....#.#.................Soul-Code.................#
-#.............########............................................#
-#............#........#..##############################...........#
-#...........#..V....V......#..#........................#..#...#...#
-#............#........#....#..........###..###..........#..#.#.#..#
-#............#..X##X..#..#............#....#.#...........#..#...#.#
-#...........#...N##N...#..#...........###..###..........#.........#
-#.......MOE..#..@.....#....#.#.#.#...................#.#..........#
-#.............########.....#.#.#.##############.#.#..#.#..........#
-#..........................#.#.#.#.............#.#.#.#.#..........#
-#......#########...........#.#.#.#.................#.#.#..........#
-#.....#.........#..........#.#.#.#.................#.#.#..........#
-#.#.#.#G#R#A#S#S#.#.#......#.#.#.#.................#.#.#..........#
-#.###################......#.#.#.#.................#.#.#..........#
-#...........................#.#.#...................#.#...........#
-#.................................................................#
-#################################################################*/
+////////////////////////////////////////////////////////////////////////////////

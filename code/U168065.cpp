@@ -7,7 +7,7 @@
 inline int _(int & _) {
     char ch = getchar();
     bool bol = false;
-    while(ch == ' ' || ch == '\n' || ch == '\t')
+    while(ch == ' ' || ch == '\n' || ch == '	')
         ch = getchar();
     if(ch == '-') {
         bol = true;
@@ -32,7 +32,7 @@ inline char _(char & _) {
 inline long _(long & _) {
     char ch = getchar();
     bool bol = false;
-    while(ch == ' ' || ch == '\n' || ch == '\t')
+    while(ch == ' ' || ch == '\n' || ch == '	')
         ch = getchar();
     if(ch == '-') {
         bol = true;
@@ -47,7 +47,7 @@ inline long _(long & _) {
 inline short _(short & _) {
     char ch = getchar();
     bool bol = false;
-    while(ch == ' ' || ch == '\n' || ch == '\t')
+    while(ch == ' ' || ch == '\n' || ch == '	')
         ch = getchar();
     if(ch == '-') {
         bol = true;
@@ -106,7 +106,7 @@ inline double _(double & _) {
 inline long long _(long long & _) {
     char ch = getchar();
     bool bol = false;
-    while(ch == ' ' || ch == '\n' || ch == '\t')
+    while(ch == ' ' || ch == '\n' || ch == '	')
         ch = getchar();
     if(ch == '-') {
         bol = true;
@@ -152,7 +152,7 @@ inline unsigned long long _(char * _) {
 */
 inline unsigned int _(unsigned int & _) {
     char ch = getchar();
-    while(ch == ' ' || ch == '\n' || ch == '\t')
+    while(ch == ' ' || ch == '\n' || ch == '	')
         ch = getchar();
     for(_ = 0; '0' <= ch && ch <= '9'; ch = getchar())
         _ = _ * 10 + ch - 48;
@@ -163,7 +163,7 @@ inline unsigned char _(unsigned char & _) {
 }
 inline unsigned long _(unsigned long & _) {
     char ch = getchar();
-    while(ch == ' ' || ch == '\n' || ch == '\t')
+    while(ch == ' ' || ch == '\n' || ch == '	')
         ch = getchar();
     for(_ = 0; '0' <= ch && ch <= '9'; ch = getchar())
         _ = _ * 10 + ch - 48;
@@ -171,7 +171,7 @@ inline unsigned long _(unsigned long & _) {
 }
 inline unsigned short _(unsigned short & _) {
     char ch = getchar();
-    while(ch == ' ' || ch == '\n' || ch == '\t')
+    while(ch == ' ' || ch == '\n' || ch == '	')
         ch = getchar();
     for(_ = 0; '0' <= ch && ch <= '9'; ch = getchar())
         _ = _ * 10 + ch - 48;
@@ -179,7 +179,7 @@ inline unsigned short _(unsigned short & _) {
 }
 inline unsigned long long _(unsigned long long & _) {
     char ch = getchar();
-    while(ch == ' ' || ch == '\n' || ch == '\t')
+    while(ch == ' ' || ch == '\n' || ch == '	')
         ch = getchar();
     for(_ = 0; '0' <= ch && ch <= '9'; ch = getchar())
         _ = _ * 10 + ch - 48;

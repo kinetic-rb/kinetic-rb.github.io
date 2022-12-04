@@ -1,16 +1,15 @@
-#include<bits/stdc++.h>
+#include <iostream>
+
 using namespace std;
-int main()
-{
-    int n,t,MAX;
-    cin>>n;
-    cin>>t;
-    MAX=t;
-    for(int i=1;i<n;i++)
-    {
-        cin>>t;
-        MAX=max(MAX,t);
+
+int main() {
+    int n, MAX = -0x7fffffff;
+    cin >> n;
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        MAX = max(MAX, x);
     }
-    cout<<MAX;
+    cout << MAX;
     return 0;
 }

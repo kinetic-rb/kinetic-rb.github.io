@@ -1,10 +1,10 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
-bool num[1001];
-
 int main() {
+    vector<bool> num(1001);
     int n, m, u;
     cin >> n >> u >> m;
     u--;

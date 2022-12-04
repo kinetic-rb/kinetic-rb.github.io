@@ -1,46 +1,27 @@
-#include <iostream>
-#include <string>
-#include <array>
-
+#include<bits/stdc++.h>
 using namespace std;
 
-array <string, 100001> s;
-array <int, 100001> a, b, a2, b2;
-
-inline bool check(int x) {
-    auto t = s[x].size();
-    for (int i = 0; i < t; i++)
-        if (s[x][i] == 'E')
-            return false;
-    return true;
-}
-
-int main() {
-    auto n = 1, t = 1, t2 = 1;
-    for (cin >> s[n]; check(n); cin >> s[n])
-        n++;
-    for (int i = 1; i <= n; i++) {
-        auto sz = s[i].size();
-        for (int j = 0; j < sz; j++) {
-            if (s[i][j] == 'E') {
-                for (i = 1; i <= t; i++)
-                    cout << a[i] << ":" << b[i] << '\n';
-                cout << '\n';
-                for (i = 1; i <= t2; i++)
-                    cout << a2[i] << ":" << b2[i] << '\n';
-                return 0;
-            }
-            if (s[i][j] == 'W')
-                a[t]++, a2[t2]++;
-            else if (s[i][j] == 'L')
-                b[t]++, b2[t2]++;
-            if ((a[t] > 10 || b[t] > 10) && abs(a[t] - b[t]) > 1) {
-                t++;
-            }
-            if ((a2[t2] > 20 || b2[t2] > 20) && abs(a2[t2] - b2[t2]) > 1) {
-                t2++;
+char str[1000000];
+int f[10]={11,21};
+int main(){
+    int cnt=0;
+    char cmp;
+    for(;;cnt++){      //\u8fd9\u6837\u8f93\u5165\u5c31\u65e0\u6cd5\u5411\u6570\u7ec4\u91cc\u9762\u8bfb\u5165\u5b57\u7b26
+        cin>>str[cnt];
+        if(str[cnt]=='E') break;
+    }
+    for(int x=0;x<2;x++){
+        int a=0,b=0;
+        for(int i=0;i<cnt;i++){
+            if(str[i]=='W') a++;
+            if(str[i]=='L') b++;
+            if(max(a,b)>=f[x]&&abs(a-b)>=2){
+                cout<<a<<":"<<b<<endl;
+                a=0,b=0;
             }
         }
+        cout<<a<<":"<<b<<endl;
+        if(x!=1) cout<<endl;
     }
     return 0;
 }

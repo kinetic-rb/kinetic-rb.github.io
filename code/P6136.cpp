@@ -1,116 +1,228 @@
-// Problem: P6136 \u3010\u6a21\u677f\u3011\u666e\u901a\u5e73\u8861\u6811\uff08\u6570\u636e\u52a0\u5f3a\u7248\uff09
-// Contest: Luogu
-// URL: https://www.luogu.com.cn/problem/P6136
-// Memory Limit: 88.88 MB
-// Time Limit: 3000 ms
-// 
-// Powered by CP Editor (https://cpeditor.org)
+#include <emmintrin.h>
+#include <immintrin.h>
+#include <mmintrin.h>
+#include <pmmintrin.h>
+#include <xmmintrin.h>
+#include <cstdint>
+#include <ctime>
+#include <iostream>
+#pragma GCC target( \
+    "mmx,sse,sse2,sse3,ssse3,sse4.1,sse4.2,avx,avx2,avx512f,popcnt,tune=native")
 
-//And in that light,I find deliverance.
-#include<bits/stdc++.h>
 using namespace std;
-inline int read(){
-   int s=0,w=1;
-   char ch=getchar();
-   while(ch<'0'||ch>'9'){if(ch=='-')w=-1;ch=getchar();}
-   while(ch>='0'&&ch<='9') s=s*10+ch-'0',ch=getchar();
-   return s*w;
-}
-mt19937 rnd(114514);
-struct node{int ls,rs,pri,val,sz;}a[3000003];
-int cnt=1;
-inline void update(int x)
-{
-    a[x].sz=a[a[x].ls].sz+a[a[x].rs].sz+1;
-    return ;
-}
-inline void vspilt(int cur,int k,int &x,int &y)
-{
-    if(!cur) {x=0,y=0;return ;}
-    if(a[cur].val<k)
-        x=cur,vspilt(a[cur].rs,k,a[x].rs,y);
-    else
-        y=cur,vspilt(a[cur].ls,k,x,a[y].ls);
-    update(cur);
-    return ;
-}
-inline void rspilt(int cur,int k,int &x,int &y)
-{
-#ifdef local
-    assert(0<=k);
-    assert(k<=a[cur].sz);
-#endif
-    if(!cur) {x=0,y=0;return ;}
-    if(a[a[cur].ls].sz>=k)
-        y=cur,rspilt(a[cur].ls,k,x,a[y].ls);
-    else
-        x=cur,rspilt(a[cur].rs,k-a[a[cur].ls].sz-1,a[x].rs,y);
-    update(cur);
-    return ;
-}
-inline int merge(int x,int y)
-{
-    if(!x||!y) return x+y;
-    if(a[x].pri>a[y].pri) 
-        return a[y].ls=merge(x,a[y].ls),update(y),y;
-    else
-        return a[x].rs=merge(a[x].rs,y),update(x),x;
-}
-inline int rnk(int x,int y)
-{
-    if(!x) return 1;
-    if(a[x].val>=y) return rnk(a[x].ls,y);
-    return a[a[x].ls].sz+1+rnk(a[x].rs,y);
-}
-inline int kth(int x,int y)
-{
-#ifdef local
-    assert(1<=y);
-    assert(y<=a[x].sz);
-#endif
-    if(y<=a[a[x].ls].sz) return kth(a[x].ls,y);
-    if(y==a[a[x].ls].sz+1) return a[x].val;
-    return kth(a[x].rs,y-a[a[x].ls].sz-1);
-}
-// void dfs(int x)
-// {
-    // if(a[x].ls) dfs(a[x].ls);
-    // printf("%d ",a[x].val);
-    // if(a[x].rs) dfs(a[x].rs);
-// }
-signed main()
-{
-    a[1].pri=rnd(),a[1].val=0x7fffffff,a[1].sz=1;
-    int rt=1;
-    int N=read(),M=read(),K=0;
-    for(int v,x,y,z,w;N--;)
-        v=read(),z=++cnt,a[cnt].pri=rnd(),a[cnt].val=v,a[cnt].sz=1,
-        vspilt(rt,v,x,y),rt=merge(x,merge(z,y));
-    for(int op,v,x,y,z,w,lst=0; M--;)
-    {
-        op=read(),v=read()^lst;
-        if(op==1)
-            z=++cnt,a[cnt].pri=rnd(),a[cnt].val=v,a[cnt].sz=1,
-            vspilt(rt,v,x,y),rt=merge(x,merge(z,y));
-        else if(op==2)
-            vspilt(rt,v,x,y),rspilt(y,1,z,w),rt=merge(x,w);
-        else if(op==3)
-            lst=rnk(rt,v),K^=lst;
-        else if(op==4)
-            lst=kth(rt,v),K^=lst;
-        else if(op==5)
-            lst=kth(rt,rnk(rt,v)-1),K^=lst;
-        else if(op==6)
-            lst=kth(rt,rnk(rt,v+1)),K^=lst;
-        //else dfs(rt),puts("");
-        //fflush(stdout);
+using tp = int;
+using igt = __m256i;
+using qgt = __m512i;
+constexpr tp Hat_N = 1e6 + 1e5 + 3, __SEED = 32327;
+
+namespace Anonymous {
+constexpr tp __Buf_Size__ = 32767;
+bool State = 1;
+
+char *__buf = (char*)malloc(__Buf_Size__), *__s = __buf,
+     *__e = __buf + fread(__buf, 1, __Buf_Size__, stdin);
+
+template <typename Typex>
+void re(Typex&&);
+template <typename Typex, typename... Typey>
+void re(Typex&&, Typey&&...);
+}  // namespace Anonymous
+using Anonymous::re;
+
+template <typename Typex, size_t Hat_N, typename Compare = std::less<Typex>>
+struct FHQ_Treap {
+  size_t lson[Hat_N], rson[Hat_N], rnd[Hat_N], size[Hat_N];
+  size_t root, tot;
+  Typex data[Hat_N];
+  FHQ_Treap() = default;
+
+  time_t rd() {
+    static time_t __seed = time(0);
+    return __seed *= __SEED;
+  }
+
+  void pushup(size_t pos) { size[pos] = size[lson[pos]] + size[rson[pos]] + 1; }
+  void split(size_t pos, const Typex& val, size_t& x, size_t& y) {
+    if (!pos) {
+      x = y = 0;
+      return;
     }
-    printf("%d
-",K);
-    return 0;
+    if (data[pos] <= val) {
+      x = pos;
+      split(rson[pos], val, rson[pos], y);
+    } else {
+      y = pos;
+      split(lson[pos], val, x, lson[pos]);
+    }
+    pushup(pos);
+  }
+
+  void _SSplit(size_t pos, const Typex& val, size_t& x, size_t& y) {
+    if (!pos) {
+      x = y = 0;
+      return;
+    }
+    if (data[pos] < val) {
+      x = pos;
+      _SSplit(rson[pos], val, rson[pos], y);
+    } else {
+      y = pos;
+      _SSplit(lson[pos], val, x, lson[pos]);
+    }
+    pushup(pos);
+  }
+
+  size_t merge(size_t x, size_t y) {
+    if (!x || !y) {
+      return x ? x : y;
+    }
+    if (rnd[x] < rnd[y]) {
+      rson[x] = merge(rson[x], y);
+      pushup(x);
+      return x;
+    } else {
+      lson[y] = merge(x, lson[y]);
+      pushup(y);
+      return y;
+    }
+  }
+
+  void insert(const Typex& val) {
+    size_t x, y, pos = ++tot;
+    data[pos] = val;
+    size[pos] = 1;
+    rnd[pos] = rd();
+    split(root, val, x, y);
+    root = merge(merge(x, pos), y);
+  }
+
+  void remove(const Typex& val) {
+    size_t x, y, z;
+    _SSplit(root, val, x, y);
+    split(y, val, y, z);
+    if (y) {
+      y = merge(lson[y], rson[y]);
+      root = merge(x, merge(y, z));
+    }
+  }
+
+  size_t query_rank(size_t val) {
+    size_t x, y, ret;
+    _SSplit(root, val, x, y);
+    ret = size[x] + 1;
+    root = merge(x, y);
+    return ret;
+  }
+
+  const Typex& select(size_t kth) {
+    size_t pos = root;
+    while (kth != size[lson[pos]] + 1) {
+      if (kth <= size[lson[pos]]) {
+        pos = lson[pos];
+      } else {
+        kth -= size[lson[pos]] + 1;
+        pos = rson[pos];
+      }
+    }
+    return data[pos];
+  }
+
+  const Typex& pred(const Typex& val) {
+    size_t pos = root;
+    Typex* ret = nullptr;
+    while (pos) {
+      if (val <= data[pos]) {
+        pos = lson[pos];
+      } else {
+        ret = &data[pos];
+        pos = rson[pos];
+      }
+    }
+    return *ret;
+  }
+
+  const Typex& succ(const Typex& val) {
+    size_t pos = root;
+    Typex* ret = nullptr;
+    while (pos) {
+      if (val >= data[pos]) {
+        pos = rson[pos];
+      } else {
+        ret = &data[pos];
+        pos = lson[pos];
+      }
+    }
+    return *ret;
+  }
+};
+
+signed main() {
+  tp n, m, tar = 0;
+  FHQ_Treap<tp, Hat_N> tr;
+  re(n, m);
+  for (tp x; n--; tr.insert(x)) {
+    re(x);
+  }
+  while (m--) {
+    static tp res = 0;
+    tp op, x;
+    re(op, x);
+    x ^= res;
+    if (op == 1) {
+      tr.insert(x);
+    } else if (op == 2) {
+      tr.remove(x);
+    } else {
+      if (op == 3) {
+        res = tr.query_rank(x);
+      } else if (op == 4) {
+        res = tr.select(x);
+      } else if (op == 5) {
+        res = tr.pred(x);
+      } else {
+        res = tr.succ(x);
+      }
+      tar ^= res;
+    }
+  }
+  cout << tar;
+  return 0;
 }
-/*
-vspilt \u5206\u88c2\u6210 <v \u548c >=v \u7684\u90e8\u5206
-rspilt \u5206\u88c2\u6210 \u524dm\u4e2a \u548c \u540em\u4e2a\u7684\u90e8\u5206
-kth \u548c rnk \u7684\u6392\u540d\u5747\u4e3a 1-indexed
-*/
+
+namespace Anonymous {
+template <typename Typex>
+void re(Typex&& __v) {
+  bool f = 0;
+  char __ch;
+  auto __fetch = [&__ch]() {
+    if (__s == __e) {
+      __s = __buf;
+      __e = __s + fread(__buf, 1, __Buf_Size__, stdin);
+      if (__s == __e) {
+        State = 0;
+        __ch = -1;
+      }
+    }
+    __ch = *__s++;
+  };
+  for (__fetch(); __ch < 48 || __ch > 57; __fetch()) {
+    f |= __ch == 45;
+  }
+  __v = __ch & 15;
+  for (__fetch(); __ch > 47 && __ch < 58; __fetch()) {
+    __v += __v << 2;
+    __v += __v + (__ch & 15);
+  }
+  if (f) {
+    __v = (~__v) + 1;
+  }
+}
+
+template <typename Typex, typename... Typey>
+void re(Typex&& __v, Typey&&... __V) {
+  re(__v);
+  if (State) {
+    re(__V...);
+  }
+}
+}  // namespace Anonymous

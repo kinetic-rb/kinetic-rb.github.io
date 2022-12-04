@@ -1,25 +1,28 @@
-#include<iostream>
-#include<cstdio>
+#include <iostream>
+
 using namespace std;
-int MAP[11][11],F[11][11][11][11];
-int main(void)
-{
-  int N,x,y,t;
-  scanf("%d",&N);
-  while(scanf("%d%d%d",&x,&y,&t))//\u8f93\u5165
-  {
-    if(x==0&&y==0&&t==0) break;
-    MAP[x][y]=t;
-  }
-  for(int i=1; i<=N; ++i)//\u52a8\u6001\u89c4\u5212\u5e38\u7528\u679a\u4e3e\u5927\u6cd5
-    for(int j=1; j<=N; ++j)
-      for(int k=1; k<=N; ++k)
-        for(int l=1; l<=N; ++l)
-        {
-          F[i][j][k][l]=max(max(F[i-1][j][k-1][l],F[i][j-1][k][l-1]),max(F[i-1][j][k][l-1],F[i][j-1][k-1][l]))+MAP[i][j]+MAP[k][l];//\u52a8\u6001\u8f6c\u79fb\u65b9\u7a0b\u5f0f\uff0c\u5206\u6790\u89c1\u4e0b\u6587
-          if(i==k&&j==l) //\u4e00\u4e2a\u70b9\u53ea\u80fd\u53d6\u4e00\u6b21\uff0c\u53d6\u5b8c\u540e\u53d8\u62100\uff0c\u5219\u9700\u51cf\u53bb\u591a\u52a0\u7684MAP[i][j]
-                    F[i][j][k][l]-=MAP[i][j];
-        }
-  printf("%d",F[N][N][N][N]);//\u8f93\u51fa
+
+int num[15][15], f[15][15][15][15];
+
+int main() {
+  int n;
+  cin >> n;
+  for (int x, y, v; cin >> x >> y >> v, x | y | v; num[x][y] = v)
+    ;
+  for (int x = 1; x <= n; x++)
+    for (int y = 1; y <= n; y++)
+      for (int a = 1; a <= n; a++)
+        for (int b = 1; b <= n; b++)
+          if (x + y == a + b) {
+            f[x][y][a][b] =
+                max(f[x][y][a][b], max(f[x - 1][y][a - 1][b],
+                                       max(f[x - 1][y][a][b - 1],
+                                           max(f[x][y - 1][a - 1][b],
+                                               f[x][y - 1][a][b - 1])))) +
+                num[x][y] + num[a][b];
+            if (x == a && y == b)
+              f[x][y][a][b] -= num[x][y];
+          }
+  cout << f[n][n][n][n];
   return 0;
 }

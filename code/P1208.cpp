@@ -20,13 +20,15 @@ int main() {
   stable_sort(mi, mi + m, [](milk x, milk y) {
     return x.p < y.p;
   });
-  for (int i = 0; true; i++) {
-    if (n <= mi[i].a) {
-      ps += mi[i].p * n;
+  for (int i = 0;; ++i) {
+      static auto ptr = mi;
+    if (n <= ptr->a) {
+      ps += ptr->p * n;
       break;
     }
-    n -= mi[i].a;
-    ps += mi[i].p * mi[i].a;
+    n -= ptr->a;
+    ps += ptr->p * ptr->a;
+    ++ptr;
   }
   cout << ps;
   return 0;

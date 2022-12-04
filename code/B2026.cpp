@@ -1,17 +1,12 @@
-#include<iostream>
-#include<cstdio>
-#include<algorithm>
-#include<cstring>
-#include<cmath>
-#include<string>
-#include<cstdlib>
+#include <iostream>
+
 using namespace std;
-double a,b,r;
-int k;
-int main(){
-  cin>>a>>b;
-  k=a/b;
-  r=a-k*b;
-  cout<<r;
+
+int main() {
+  double a, b;
+  int k;
+  cin >> a >> b;
+  k = a / b;
+  cout << a - k * b;
   return 0;
 }

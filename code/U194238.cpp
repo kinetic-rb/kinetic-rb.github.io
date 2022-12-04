@@ -7,36 +7,26 @@
 #endif
 
 using vt = long long;
-using uvt = unsigned long long;
 using namespace std;
 
-vt m[3500003], b[3500003], p[3500003];
-string s;
+string x;
 
-void Calc(uvt i) {
-  m[i] = m[i - 1] * 13331 - s[i] - 96;
-  b[i] = b[i - 1] * 13331 - s[s.size() - i] - 96;
-  p[i] = p[i - 1] * 13331;
-}
-
-vt GetB(vt l, vt r) {
-  return b[r] - b[l - 1] * p[r - l + 1];
-}
-
-bool h(vt l, vt r) {
-  return m[r] - m[l - 1] * p[r - l + 1] == GetB(s.size() - r, s.size() - l);
+bool IH(vt l, vt r) {
+  if (r - l < 1) {
+    return true;
+  }
+  return x[l] == x[r] && IH(l + 1, r - 1);
 }
 
 signed main() {
-  vt t, cnt = 0;
-  cin.putback('\a');
-  cin >> s >> t;
-  *p = 1;
-  for (uvt i = 1; i < s.size(); ++i) {
-    Calc(i);
-  }
-  for (vt l, r; t--; cout << (h(l, r) ? 'Y' : 'N')) {
+  cin.tie(0);
+  vt t;
+  cin.putback('a');
+  cin >> x >> t;
+  while (t--) {
+    vt l, r;
     cin >> l >> r;
+    cout << (IH(l, r) ? 'Y' : 'N');
   }
   return 0;
 }

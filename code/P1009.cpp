@@ -1,47 +1,101 @@
 #include <iostream>
 #include <cstring>
+#define L long
 
 using namespace std;
 
-int a[100000], n, y, xy[100000], s[100000];
+struct Bigint {
+  long size;
+  long num[10000];
+  Bigint() {
+    size = 1;
+    memset(num, 0, sizeof num);
+  }
+};
 
-inline void add() {
-    memset(xy, 0, sizeof(xy));
-    xy[0] = max(s[0], a[0]);
-    for (register int i = 1; i <= xy[0]; xy[i++] %= 10) {
-        xy[i] += s[i] + a[i];
-        xy[i + 1] = xy[i] / 10;
+Bigint operator + (const Bigint& _x, const Bigint& _y) {
+  Bigint _c;
+  _c.size = max(_x.size, _y.size);
+  for (register L i = 0; i < _c.size; i++) {
+    _c.num[i] += _x.num[i] + _y.num[i];
+    _c.num[i + 1] = _c.num[i] / 10;
+    _c.num[i] %= 10;
+  }
+  for (; _c.num[_c.size]; _c.size++) {
+    _c.num[_c.size + 1] = _c.num[_c.size] / 10;
+    _c.num[_c.size] %= 10;
+  }
+  return _c;
+}
+
+inline bool operator < (const Bigint& x, const Bigint& y) {
+  if (x.size != y.size) {
+    return x.size < y.size;
+  }
+  for (register L i = x.size - 1; i > -1; i--) {
+    if (x.num[i] != y.num[i]) {
+      return x.num[i] < y.num[i];
     }
-    for (; xy[xy[0] + 1] > 0; xy[++xy[0]] %= 10) {
-        xy[xy[0] + 2] = xy[xy[0] + 1] / 10;
+  }
+  return false;
+}
+
+inline Bigint operator += (Bigint& x, const Bigint& y) {
+    x = x + y;
+    return x;
+}
+
+inline Bigint operator * (const Bigint& x, const Bigint& y) {
+    Bigint z;
+    z.size = x.size - 1 + y.size;
+    for (register L i = 0; i < x.size; i++) {
+        for (register L j = 0; j < y.size; j++) {
+            z.num[i + j] += x.num[i] * y.num[j];
+            z.num[i + j + 1] += z.num[i + j] / 10;
+            z.num[i + j] %= 10;
+        }
     }
-    s[0] = xy[0];
-    for (register int i = 1; i <= xy[0]; i++)
-        s[i] = xy[i];
+    for (; z.num[z.size]; z.size++) {
+        z.num[z.size + 1] = z.num[z.size] / 10;
+        z.num[z.size] %= 10;
+    }
+    bool allzero = true;
+    for (long i : x.num) {
+        if (i && i != x.num[x.size]) {
+            allzero = false;
+            break;
+        }
+    }
+    return z;
+}
+
+inline Bigint operator *= (Bigint& x, const Bigint& y) {
+    x = x * y;
+    return x;
+}
+
+inline void Cin(Bigint& x) {
+    string X;
+    cin >> X;
+    x.size = X.size();
+    for (register L i = 0; i < X.size(); i++)
+        x.num[i] = X[x.size - i - 1] - '0';
+}
+
+inline void Cout(const Bigint& x) {
+    for (register L i = x.size - 1; i > -1; i--)
+        putchar(x.num[i] + '0');
 }
 
 int main() {
-    scanf("%d", &n);
-    a[0] = a[1] = s[0] = 1;
-    for (y = 1; y <= n; y++) {
-        memset(xy, 0, sizeof(xy));
-        xy[0] = a[0];
-        for (register int i = 1; i <= a[0]; i++) {
-            xy[i] += a[i] * y;
-            xy[i + 1] = xy[i] / 10;
-            xy[i] %= 10;
-        }
-        while (xy[xy[0] + 1] > 0) {
-            xy[xy[0] + 2] = xy[xy[0] + 1] / 10;
-            xy[xy[0] + 1] %= 10;
-            xy[0]++;
-        }
-        for (register int i = 1; i <= xy[0]; i++)
-            a[i] = xy[i];
-        a[0] = xy[0];
-        add();
-    }
-    for (register int i = s[0]; i > 0; i--)
-        printf("%d", s[i]);
-    exit(0);
+  Bigint sum, pew;
+  Bigint n, i, one;
+    one.num[0] = pew.num[0] = 1;
+    Cin(n);
+  for (i.num[0] = 1; i < n; i += one) {
+    pew *= i;
+    sum += pew;
+  }
+  Cout(sum + pew * n);
+  return 0;
 }

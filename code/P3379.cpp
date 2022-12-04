@@ -21,24 +21,24 @@ tp __Read();
 using namespace std;
 constexpr tp Hat_N = 5e5 + 3;
 
-array<tp, Hat_N> hson, dep, top, fa, s;
+array<tp, Hat_N> hson, dep, top, fa;
 array<vector<tp>, Hat_N> tr;
 
-void dfs1(tp x) {
-  tp temp = -1;
-  dep[x] = dep[fa[x]] + 1;
-  s[x] = 1;
+tp dfs1(tp x, tp f) {
+  tp temp = -1, s = 1;
+  dep[x] = dep[f] + 1;
   for (auto&& i : tr[x]) {
-    if (i != fa[x]) {
+    if (i != f) {
+      tp si = dfs1(i, x);
       fa[i] = x;
-      dfs1(i);
-      s[x] += s[i];
-      if (temp < s[i]) {
+      s += si;
+      if (temp < si) {
         hson[x] = i;
-        temp = s[i];
+        temp = si;
       }
     }
   }
+  return s;
 }
 
 void dfs2(tp x, tp h) {
@@ -71,12 +71,11 @@ signed main() {
     tr[u].push_back(v);
     tr[v].push_back(u);
   }
-  dfs1(s);
+  dfs1(s, s);
   dfs2(s, s);
   while (m--) {
-    tp x = ra, y = ra;
     printf("%lld
-", LCA(x, y));
+", LCA(ra, ra));
   }
   return 0;
 }

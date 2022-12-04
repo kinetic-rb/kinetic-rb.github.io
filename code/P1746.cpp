@@ -1,21 +1,22 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <queue>
 
 using namespace std;
 
 char mp[1005][1005];
 bool gone[1005][1005];
-int ans[1005][1005];
-int drct[4][2]={{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
-struct p{
+int ans[1005][1005], drct[4][2] = { {1, 0}, {0, 1}, {-1, 0}, {0, -1} };
+
+struct p {
     int x, y;
     p() {
         x = y = 0;
     }
-}p1, p2, pp;
+} p1, p2, pp;
+
 int main() {
     int n, i, j;
-    scanf("%d
-", &n);
+    cin >> n;
     queue<p> q;
     for (i = 1; i <= n; i++) {
         for (j = 1; j <= n; j++)
@@ -45,4 +46,5 @@ int main() {
             }
         }
     }
+    return 0;
 }

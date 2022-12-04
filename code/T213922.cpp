@@ -1,174 +1,106 @@
-#include <iostream>
-#include <cstring>
-#ifdef WIN64
-#define L long
-#else
-#define L long long
-#endif
+#include <algorithm>
+#include <cctype>
+#include <cstdio>
 
-using namespace std;
+using dt = long long;
 
-struct Bigint {
-    L size;
-    L num[1000000];
-    Bigint() {
-        size = 1;
-        fill(num, num + 1000000, 0);
-    }
-};
+constexpr dt N = 1 << 21, p = 81 << 21 | 1, g = 1167 << 12 | 1,
+             h = 11443 << 12 | 1;
 
-Bigint operator + (const Bigint & _x, const Bigint & _y) {
-    Bigint _c;
-    _c.size = max(_x.size, _y.size);
-    for(register L i = 0; i < _c.size; i++) {
-        _c.num[i] += _x.num[i] + _y.num[i];
-        _c.num[i + 1] = _c.num[i] / 10;
-        _c.num[i] %= 10;
+namespace basic_calc {
+dt qpow(dt x, dt y) {
+  dt pew = 1;
+  for (; y; y >>= 1) {
+    if (y & 1) {
+      pew = pew * x % p;
     }
-    for(; _c.num[_c.size]; _c.size++) {
-        _c.num[_c.size + 1] = _c.num[_c.size] / 10;
-        _c.num[_c.size] %= 10;
-    }
-    return _c;
+    x = x * x % p;
+  }
+  return pew;
 }
 
-inline bool operator < (const Bigint & x, const Bigint & y) {
-    if(x.size != y.size) {
-        return x.size < y.size;
+void NTT(auto a, dt n, dt w) {
+  dt* ntt_sup = new dt[N];
+  auto b = ntt_sup, j = a, _j = a;
+  dt _n = n >> 1, k, _k, _w;
+  for (dt i = 1; i < n; i <<= 1) {
+    for (k = 0, j = a, _j = a + _n, _w = 1; k != n; k += i) {
+      for (_k = k, k += i; _k != k; ++j, ++_j, ++_k) {
+        b[_k] = *j + *_j < 0 ? *j + *_j + p : *j + *_j - p;
+        b[_k + i] = (*j - *_j) * _w % p;
+      }
+      _w = _w * w % p;
     }
-    for(register L i = x.size - 1; i > -1; i--) {
-        if(x.num[i] != y.num[i]) {
-            return x.num[i] < y.num[i];
-        }
+    w = w * w % p;
+    auto temp = a;
+    a = b;
+    b = temp;
+  }
+  if (b != ntt_sup) {
+    std::copy(a, a + n, b);
+  }
+  delete[] ntt_sup;
+}
+}  // namespace basic_calc
+
+dt n_a, n_b;
+void Mul(auto a, auto b) {
+  dt n = 1;
+  for (; n < n_a + n_b; n <<= 1)
+    ;
+  basic_calc::NTT(a, n, basic_calc::qpow(g, (p - 1) / n));
+  basic_calc::NTT(b, n, basic_calc::qpow(g, (p - 1) / n));
+  for (dt i = 0; i < n; ++i) {
+    a[i] = a[i] * b[i] % p;
+  }
+  basic_calc::NTT(a, n, basic_calc::qpow(h, (p - 1) / n));
+  dt inv_n = basic_calc::qpow(n, p - 2);
+  for (dt i = 0; i < n; ++i) {
+    a[i] = a[i] * inv_n % p;
+  }
+  for (dt i = 0; i < n; ++i) {
+    if (a[i] < 0) {
+      a[i] += p;
     }
-    return false;
+  }
 }
 
-inline Bigint operator += (Bigint & x, const Bigint & y) {
-    x = x + y;
-    return x;
-}
+dt a[N], b[N];
 
-Bigint operator - (Bigint x, const Bigint y) {
-    for(register L i = 0; i < x.size; i++) {
-        if(x.num[i] < y.num[i]) {
-            x.num[i + 1]--;
-            x.num[i] += 10;
-        }
-        x.num[i] -= y.num[i];
+signed main() {
+  bool f = true;
+  char char_read;
+  while (!isdigit(char_read = getchar()))
+    ;
+  do a[n_a++] = char_read ^ '0';
+  while (isdigit(char_read = getchar()));
+  while (!isdigit(char_read = getchar()))
+    ;
+  do b[n_b++] = char_read ^ '0';
+  while (isdigit(char_read = getchar()));
+  for (dt i = 0; i < n_a; ++i)
+    if (a[i]) {
+      f = false;
+      break;
     }
-    for(; !x.num[x.size - 1] && x.size > 1; x.size--);
-    return x;
-}
-
-inline Bigint operator -= (Bigint & x, const Bigint & y) {
-    x = x - y;
-    return x;
-}
-
-inline Bigint operator * (const Bigint & x, const Bigint & y) {
-    Bigint z;
-    z.size = x.size - 1 + y.size;
-    for(register L i = 0; i < x.size; i++) {
-        for(register L j = 0; j < y.size; j++) {
-            z.num[i + j] += x.num[i] * y.num[j];
-            z.num[i + j + 1] += z.num[i + j] / 10;
-            z.num[i + j] %= 10;
-        }
+  for (dt i = 0; i < n_b; ++i)
+    if (b[i]) {
+      f = false;
+      break;
     }
-    for(; z.num[z.size]; z.size++) {
-        z.num[z.size + 1] = z.num[z.size] / 10;
-        z.num[z.size] %= 10;
-    }
-    bool allzero = true;
-    for(long i : x.num) {
-        if(i && i != x.num[x.size]) {
-            allzero = false;
-            break;
-        }
-    }
-    return z;
-}
-
-inline Bigint operator *= (Bigint & x, const Bigint & y) {
-    x = x * y;
-    return x;
-}
-
-inline Bigint operator / (Bigint x, const Bigint & y) {
-    Bigint z;
-    z.size = x.size - y.size + 1;
-    for(register L i  = x.size - 1; i > y.size - 2; i--) {
-        x.num[i] += x.num[i + 1] * 10;
-        x.num[i + 1] = 0;
-        if(x.num[i]) {
-            while(true) {
-                bool geq = true;
-                for(register L j = i, k = y.size - 1; k > -1; j--, k--) {
-                    if(x.num[j] > y.num[k]) {
-                        geq = true;
-                        break;
-                    }
-                    if(x.num[j] < y.num[k]) {
-                        geq = false;
-                        break;
-                    }
-                }
-                if(!geq)
-                    break;
-                z.num[i - y.size + 1]++;
-                for(register L j = i - y.size + 1, k = 0; k < y.size; j++, k++) {
-                    if(x.num[j] < y.num[k]) {
-                        x.num[j + 1]--;
-                        x.num[j] += 10;
-                    }
-                    x.num[j] -= y.num[k];
-                }
-            }
-        }
-    }
-    for(; !z.num[z.size - 1] && z.size > 1; z.size--);
-    return z;
-}
-
-inline Bigint operator /= (Bigint & x, const Bigint & y) {
-    x = x / y;
-    return x;
-}
-
-inline bool operator == (const Bigint & x, const Bigint & y) {
-    if(x.size != y.size) {
-        return false;
-    }
-    for(register L i = 0; i < x.size; i++) {
-        if(x.num[i] != y.num[i]) {
-            return false;
-        }
-    }
-    return true;
-}
-
-inline void Cin(Bigint & x) {
-    string X;
-    cin >> X;
-    x.size = X.size();
-    for(register L i = 0; i < X.size(); i++)
-        x.num[i] = X[x.size - i - 1] - '0';
-}
-
-inline void Cout(const Bigint & x) {
-    for(register L i = x.size - 1; i > -1; i--)
-        putchar(x.num[i] + '0');
-}
-
-int main() {
-    Bigint a, b, TAZ;
-    Cin(a);
-    Cin(b);
-    if(a == TAZ || b == TAZ) {
-        cout << 0;
-        exit(0);
-    }
-    Cout(a * b);
+  if (n_a == 1 && !*a) {
+    printf("0");
     return 0;
+  }
+  if (n_b == 1 && !*b) {
+    printf("0");
+    return 0;
+  }
+  Mul(a, b);
+  for (dt i = n_a + n_b - 2; i; --i) {
+    a[i - 1] += a[i] / 10;
+    a[i] %= 10;
+  }
+  for (dt i = 0; i < n_a + n_b - 1; ++i) printf("%lld", a[i]);
+  return 0;
 }

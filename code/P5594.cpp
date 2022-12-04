@@ -9,7 +9,7 @@
 inline auto _(int & _) {
     char ch = getchar();
     bool bol = false;
-    while(ch == ' ' || ch == '\n' || ch == '\t')
+    while(ch == ' ' || ch == '\n' || ch == '	')
         ch = getchar();
     if(ch == '-') {
         bol = true;
@@ -34,7 +34,7 @@ inline auto _(char & _) {
 inline auto _(long & _) {
     char ch = getchar();
     bool bol = false;
-    while(ch == ' ' || ch == '\n' || ch == '\t')
+    while(ch == ' ' || ch == '\n' || ch == '	')
         ch = getchar();
     if(ch == '-') {
         bol = true;
@@ -49,7 +49,7 @@ inline auto _(long & _) {
 inline auto _(short & _) {
     char ch = getchar();
     bool bol = false;
-    while(ch == ' ' || ch == '\n' || ch == '\t')
+    while(ch == ' ' || ch == '\n' || ch == '	')
         ch = getchar();
     if(ch == '-') {
         bol = true;
@@ -108,7 +108,7 @@ inline auto _(double & _) {
 inline auto _(long long & _) {
     char ch = getchar();
     bool bol = false;
-    while(ch == ' ' || ch == '\n' || ch == '\t')
+    while(ch == ' ' || ch == '\n' || ch == '	')
         ch = getchar();
     if(ch == '-') {
         bol = true;
@@ -148,7 +148,7 @@ inline auto _(std::string & _) {
 }
 inline auto _(unsigned int & _) {
     char ch = getchar();
-    while(ch == ' ' || ch == '\n' || ch == '\t')
+    while(ch == ' ' || ch == '\n' || ch == '	')
         ch = getchar();
     for(_ = 0; '0' <= ch && ch <= '9'; ch = getchar())
         _ = _ * 10 + ch - 48;
@@ -159,7 +159,7 @@ inline auto _(unsigned char & _) {
 }
 inline auto _(unsigned long & _) {
     char ch = getchar();
-    while(ch == ' ' || ch == '\n' || ch == '\t')
+    while(ch == ' ' || ch == '\n' || ch == '	')
         ch = getchar();
     for(_ = 0; '0' <= ch && ch <= '9'; ch = getchar())
         _ = _ * 10 + ch - 48;
@@ -167,7 +167,7 @@ inline auto _(unsigned long & _) {
 }
 inline auto _(unsigned short & _) {
     char ch = getchar();
-    while(ch == ' ' || ch == '\n' || ch == '\t')
+    while(ch == ' ' || ch == '\n' || ch == '	')
         ch = getchar();
     for(_ = 0; '0' <= ch && ch <= '9'; ch = getchar())
         _ = _ * 10 + ch - 48;
@@ -175,7 +175,7 @@ inline auto _(unsigned short & _) {
 }
 inline auto _(unsigned long long & _) {
     char ch = getchar();
-    while(ch == ' ' || ch == '\n' || ch == '\t')
+    while(ch == ' ' || ch == '\n' || ch == '	')
         ch = getchar();
     for(_ = 0; '0' <= ch && ch <= '9'; ch = getchar())
         _ = _ * 10 + ch - 48;

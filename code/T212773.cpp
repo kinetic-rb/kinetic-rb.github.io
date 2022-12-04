@@ -1,30 +1,33 @@
+#include <algorithm>
 #include <iostream>
 
 using namespace std;
 
-int ac[100001];
-int n, t, Find;
+int f[1000005];
+int n;
 
-inline int brs() {
-    int l, r, m;
-    for(l = 1, r = n; l <= r; ) {
-        m = (l + r) / 2;
-        if(ac[m] == Find) {
-            return m;
-        }
-        (ac[m] < Find) ? l = m + 1 : r = m - 1;
+inline int fs(int val, int Max) {
+  int qloc = 0;
+  for (int pew = Max; pew; pew >>= 1) {
+    int loc = qloc + pew;
+    if (loc <= n) {
+      if (f[loc] == val)
+        return loc;
+      if (f[loc] < val)
+        qloc = loc;
     }
-    return 0;
+  }
+  return 0;
 }
 
 int main() {
-    cin >> n >> t;
-    for(int i = 1; i <= n; i++) {
-        cin >> ac[i];
-    }
-    for(int i = 1; i <= t; i++) {
-        cin >> Find;
-        cout << brs() << '\n';
-    }
-    return 0;
+  int m;
+  cin >> n;
+  cin >> m;
+  for (int i = 1; i <= n; i++)
+    cin >> f[i];
+  stable_sort(f + 1, f + n + 1);
+  for (int qs; m--; cout << fs(qs, 1 << 27) << '\n')
+    cin >> qs;
+  return 0;
 }

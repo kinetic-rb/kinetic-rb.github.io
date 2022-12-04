@@ -51,17 +51,17 @@ struct Rcomplex {
   Rcomplex& operator/=(const Rcomplex& item) { return *this = *this / item; }
 };
 
-enum DFT_or_IDFT { DFT, IDFT };
+enum class FFT_OR_DFT { FFT, DFT };
 
 Rcomplex x[Hat_N], y[Hat_N], sav[Hat_N];
 
-void FFT(Rcomplex* F, size_t size, DFT_or_IDFT type) {
+void FFT(Rcomplex* F, size_t size, FFT_OR_DFT type) {
   Rcomplex *FL = F, *FR = F + (size >> 1);
   Rcomplex c(cos(2 * Pi / size), sin(2 * Pi / size)), now(1, 0);
   if (size == 1) {
     return;
   }
-  if (type == IDFT) {
+  if (type == FFT_OR_DFT::DFT) {
     c.y = -c.y;
   }
   for (tp i = 0; i < size; ++i) {
@@ -95,12 +95,12 @@ signed __CORE__() {
   m += n;
   for (n = 1; n <= m; n <<= 1) {
   }
-  FFT(x, n, DFT);
-  FFT(y, n, DFT);
+  FFT(x, n, FFT_OR_DFT::FFT);
+  FFT(y, n, FFT_OR_DFT::FFT);
   for (tp i = 0; i < n; ++i) {
     x[i] *= y[i];
   }
-  FFT(x, n, IDFT);
+  FFT(x, n, FFT_OR_DFT::DFT);
   for (tp i = 0; i <= m; ++i) {
     cout << tp(x[i].x / n + 0.49) << ' ';
   }

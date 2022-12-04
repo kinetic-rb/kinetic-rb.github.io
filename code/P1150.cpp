@@ -6,11 +6,10 @@ int main() {
     int n, k, t, sum;
     cin >> n >> k;
     sum = n;
-    while(n >= k) {
+    for (sum = n; n >= k; sum += t) {
         t = n / k;
         n -= t * k;
         n += t;
-        sum += t;
     }
     cout << sum;
     return 0;

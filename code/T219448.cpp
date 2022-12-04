@@ -1,35 +1,35 @@
-#include<bits/stdc++.h>
+#include <iostream>
+#include <array>
 
 using namespace std;
-int main()
-{
-    bool e = true;
-    int n;
-    int pe[15], per[15] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
-    cin >> n;
-    for(int i = 0; i < n; i++)
-        cin >> pe[i];
-    for(int i = 0; i < n; i++)
-    {
-        if(pe[i] != ++i)
-            e = false;
+
+long long N, fac, ans;
+array <long long, 12> a, c;
+char * p;
+
+inline void read(register long long & x) {
+    while(!isdigit(*p))
+        p++;
+    while(isdigit(* p))
+        x = x * 10 + (* p & 15), ++p;
+}
+
+int main() {
+    scanf("%lld", &N);
+    fac = 1;
+    p = new char[11];
+    fread(p, 1, N * 8 + 100, stdin);
+    for (register long long i = N; i; --i)
+        read(a[i]);
+    for (register long long i = 1, s, j; i <= N; ++i) {
+        for (s = 0, j = a[i]; j; j -= j & -j)
+            s += c[j];
+        ans = (ans + 1 * fac * s) % 998244353;
+        fac = fac * i % 998244353;
+        for (j = a[i]; j <= N; j += j & -j)
+            c[j]++;
     }
-    if(e)
-    {
-        cout << 1;
-        return 0;
-    }
-    for(int i = 0; next_permutation(per, per + n); i++)
-    {
-        bool e = true;
-        for(int i = 0; i < n; i++)
-            if(pe[i] != per[i])
-                e = false;
-        if(e)
-        {
-            cout << i + 2;
-            return 0;
-        }
-    }
+    printf("%lld
+", ans + 1);
     return 0;
 }

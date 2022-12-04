@@ -1,21 +1,25 @@
-#include<stdio.h>
-int t,srx,sry,i,j;
-int lgx(int x)
-{
-    for(int i=2;i*i<=x;i++)//i*i\u6c38\u8fdc\u6bd4sqrt\u5feb
-    if(x%i==0)
-    return 0;
-    return 1;
+#include <iostream>
+
+using namespace std;
+
+inline bool IP(int x) {
+    if (x < 2)
+        return false;
+    for (int i = 2; i * i <= x; i++)
+        if (!(x % i))
+            return false;
+    return true;
 }
-int main() 
-{
-    scanf("%d",&t);//t\u7ec4\u6570\u636e
-    for(i=1;i<=t;i++)
-    {scanf("%d%d",&srx,&sry);//\u5de6\u53f3\u503c
-    for(j=srx;j<=sry;j++)
-    if(lgx(j)&&j!=1)//1\u5f53\u7136\u662f\u8981\u7279\u5224\u65ad\u7684
-    printf("%d
-",j);
-    printf("\n");}
+
+int main() {
+    int t;
+    for (cin >> t; t--; cout << '\n') {
+        int srx, sry;
+        cin >> srx >> sry;
+        for (int j = srx; j <= sry; j++)
+            if (IP(j))
+                printf("%d
+", j);
+    }
     return 0;
 }

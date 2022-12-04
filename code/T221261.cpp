@@ -15,6 +15,7 @@ inline static int qpew(int a, int n, int m) {
 }
 
 int main() {
+  ios_base::sync_with_stdio(false);
   int t, a, n, m;
   for (cin >> t; t--; cout << qpew(a, n, m) << '\n') {
     cin >> a >> n >> m;

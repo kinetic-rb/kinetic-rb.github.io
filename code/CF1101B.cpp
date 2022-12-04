@@ -1,45 +1,25 @@
 #include <iostream>
 #include <cstring>
-
+#include <cstdio>
 using namespace std;
-
-char s[500010];
-
-int main() {
-    cin>>s;
-    int fir = -1, las = -1, firr = -1, lass = -1, qaq = strlen(s); 
-    for (int i = 0; i < qaq; i++)
-        if (s[i] == '[') {
-            fir = i;
-            break;
-        }
-    for (int i = qaq - 1; i > -1; i--)
-        if (s[i] == ']') {
-            las = i;
-            break;
-        }
-    if (fir == -1 || las == -1) {
-        cout << -1;
-        return 0;
-    }
-    for (int i = 0; i < qaq; i++)
-        if (s[i] == ':' && i > fir) {
-            firr = i;
-            break;
-        }
-    for (int i = qaq - 1; i > -1; i--)
-        if (s[i] == ':' && i < las && i > firr) {
-            lass = i;
-            break;
-        }
-    if (firr == -1 || lass == -1) {
-        cout << -1;
-        return 0;
-    }
-    int ans = 4;
-    for (int i = firr + 1; i < lass; i++)
-        if (s[i] == '|')
-            ans++;
-    cout << ans;
-    return 0;
+int i,j,k,l,len,ans;
+char c[500010];
+int main(){
+  gets(c);
+  len=strlen(c);
+  for(i=0;c[i]!='['&&i<len;i++);
+  for(j=len-1;c[j]!=']'&&j>=0;j--);
+  for(k=i+1;c[k]!=':'&&k<len-1;k++);
+  for(l=j-1;c[l]!=':'&&l>k;l--);
+  if(i>=j||l<=k)
+    printf("-1
+");
+  else{
+    for(int x=k+1;x<l;x++)
+      if(c[x]=='|')ans++;
+            
+    printf("%d
+",ans+4);
+  }
+  return 0;
 }

@@ -1,45 +1,48 @@
 #include <algorithm>
 #include <iostream>
-#define fin cin
-#define fout cout
 
 using namespace std;
-using Pii = pair<int, int>;
+using tp = long long;
+constexpr tp Hat_N = 100'003;
 
-const int kMaxN = 1e5 + 1;
+struct Rs {
+  tp q, p;
 
-Pii e[kMaxN];                     // \u5546\u5e97\uff0c\u5355\u4ef7\u548c\u6536\u8d2d\u91cf
-int c[kMaxN], v[kMaxN], n, m, r;  // \u4ea7\u91cf\u3001\u79df\u4ef7
-long long x, y, ans;
+  Rs() = default;
+  bool operator<(const Rs& comp) const { return p < comp.p; }
+} k[Hat_N];
+tp ml[Hat_N], z[Hat_N];
 
-int main() {
-  fin >> n >> m >> r;
-  for (int i = 1; i <= n; i++) {
-    fin >> c[i];
+signed main() {
+  tp n, m, r, MAX = 0;
+  cin >> n >> m >> r;
+  for (tp i = 0; i != n; ++i) {
+    cin >> ml[i];
   }
-  for (int i = 1; i <= m; i++) {
-    fin >> e[i].second >> e[i].first;
+  for (tp i = 0; i != m; ++i) {
+    cin >> k[i].q >> k[i].p;
   }
-  for (int i = 1; i <= r; i++) {
-    fin >> v[i];
+  for (tp i = 0; i != r; ++i) {
+    cin >> z[i];
   }
-  sort(c + 1, c + 1 + n);                                              // \u6309\u4ea7\u91cf\u6392\u5e8f
-  sort(e + 1, e + 1 + m);                                              // \u6309\u5355\u4ef7\u6392\u5e8f
-  sort(v + 1, v + 1 + max(r, n), [](int i, int j) { return i > j; });  // \u6309\u79df\u4ef7\u9006\u5e8f\u6392\u5e8f
-
-  for (int i = 1; i <= n; i++) {  // \u8ba1\u7b97\u5168\u90e8\u79df\u51fa\u7684\u4ef7\u683c
-    y += v[i];
+  stable_sort(ml, ml + n);
+  stable_sort(k, k + m);
+  stable_sort(z, z + max(n, r));
+  reverse(z, z + max(n, r));
+  for (tp i = 0; i != n; ++i) {
+    MAX += z[i];
   }
-  ans = y;                                              // \u521d\u59cb\u5316\u7b54\u6848
-  for (int i = n, j = m; i; i--) {                      // \u679a\u4e3e\u79df\u51fa\u5976\u725b\u6570\u91cf
-    y -= v[i];                                          // \u51cf\u53bb\u79df\u4ef7
-    for (int a = c[i], b; a && j; j -= !e[j].second) {  // \u7531\u9ad8\u5230\u4f4e\u5bf9\u4ea7\u5976\u8fdb\u884c\u9500\u552e
-      b = min(a, e[j].second);                          // \u53ef\u552e\u51fa\u91cf
-      a -= b, e[j].second -= b;                         // \u51cf\u5c11\u91cf
-      x += 1LL * e[j].first * b;                        // \u589e\u52a0\u552e\u51fa\u4ef7\u683c
+  for (tp i = n - 1, j = m - 1; ~i; --i) {
+    static tp temp = 0, sum = MAX;
+    sum -= z[i];
+    for (tp q = ml[i]; q && ~j; j -= !k[j].q) {
+      tp p = min(q, k[j].q);
+      q -= p;
+      k[j].q -= p;
+      temp += p * k[j].p;
     }
-    ans = max(ans, x + y);  // \u66f4\u65b0\u7b54\u6848
+    MAX = max(MAX, sum + temp);
   }
-  fout << ans;
+  cout << MAX;
   return 0;
 }

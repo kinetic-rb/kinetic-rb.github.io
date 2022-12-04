@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#define merger stable_sort
 
 using namespace std;
 
@@ -11,7 +12,9 @@ int main() {
     for(auto i = 0; i < n; i++) {
         cin >> number[i];
     }
-    sort(number, number + n);
+    merger(number, number + n, [](int x, int y) {
+        return x < y;
+    });
     last = number[0];
     for(auto i = 1; i <= n; i++) {
         if(number[i] == last) {

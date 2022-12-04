@@ -2,8 +2,8 @@
 #include <iostream>
 
 using namespace std;
-using tp = long long;
-constexpr tp MAXN = 4e7 + 3, MOD = 114514'1;
+using tp = int;
+constexpr tp MAXN = 1e7 + 3, MOD = 114514'1;
 
 tp op(tp a, tp b) {
   return (a + b >= MOD) ? (a + b - MOD) : (a + b);
@@ -47,25 +47,23 @@ void Add(tp a, tp v) {
 
 signed main() {
   tp n, m;
-  scanf("%lld%lld", &n, &m);
+  scanf("%d%d", &n, &m);
   for (tp i = 1; i <= n; ++i) {
-    scanf("%lld", &w[i]);
+    scanf("%d", &w[i]);
     w[i] %= MOD;
     f[i] = i;
     Sz[i] = 1;
   }
   for (tp i = 1, t, a, b; i <= m; ++i) {
-    scanf("%lld%lld", &t, &a);
+    scanf("%d%d", &t, &a);
     if (t == 3) {
-      printf("%lld
+      printf("%d
 ", Ask(a));
-    }
-    if (t == 2) {
-      scanf("%lld", &b);
+    } else if (t == 2) {
+      scanf("%d", &b);
       Merge(a, b);
-    }
-    if (t == 1) {
-      scanf("%lld", &b);
+    } else {
+      scanf("%d", &b);
       b %= MOD;
       Add(a, b);
     }

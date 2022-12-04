@@ -10,7 +10,7 @@ int gloc(int n, int x, int y) {
     if (x == n)
         return 3 * n - 2 - y + 1;
     if (y == 1)
-        return (n << 2) - 4 - x + 2;
+        return (n - 1 << 2) - x + 2;
     return gloc(n - 2, x - 1, y - 1) + ((n - 1) << 2);
 }
 

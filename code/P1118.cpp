@@ -13,18 +13,12 @@ inline void gob(int n) {
       b[i][j] = b[i - 1][j - 1] + b[i - 1][j];
 }
 
-int SUM();
-inline int SUM() {
-  int sum = 0;
-  for (int i = 0; i < n; i++)
-    sum += cho[i] * b[n][i + 1];
-  return sum;
-}
-
-void dfs(int);
-inline void dfs(int idx) {
+void dfs(int, int);
+inline void dfs(int idx, int sum) {
+    if (sum > k)
+        return;
   if (idx == n) {
-    if (SUM() == k) {
+    if (sum == k) {
       for (int i = 0; i < n; i++)
           printf("%d ", cho[i]);
       exit(0);
@@ -35,7 +29,7 @@ inline void dfs(int idx) {
     if (!vis[i]) {
       vis[i] = 1;
       cho[idx] = i;
-      dfs(idx + 1);
+      dfs(idx + 1, sum + i * b[n][idx + 1]);
       vis[i] = 0;
     }
 }
@@ -43,6 +37,6 @@ inline void dfs(int idx) {
 signed main() {
     scanf("%d%d", &n, &k);
   gob(n);
-  dfs(0);
+  dfs(0, 0);
   return 0;
 }

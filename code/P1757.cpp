@@ -1,27 +1,40 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
+using tp = long long;
+constexpr tp Hat_N = 1003, Hat_T = 1003;
 
-struct CE {
-    int w, c;
-} b[1001];
+struct Rs {
+  tp w, c;
 
-int f[1001], c[1001][1001], cnt[1001];
+  Rs() = default;
+  Rs(tp w, tp c) : w(w), c(c) {}
+};
 
-int main() {
-    int n, m, cm;
-    cin >> m >> n;
-    for (int i = 0; i < n; i++) {
-        int s;
-        cin >> b[i].w >> b[i].c >> s;
-        cm = max(cm, s);
-        c[s][cnt[s]++] = i;
+vector<Rs> mt[Hat_T];
+tp f[Hat_N];
+
+signed main() {
+  tp m, n, t = 0;
+  cin >> m >> n;
+  for (tp i = 0; i < n; ++i) {
+    tp w, c, p;
+    cin >> w >> c >> p;
+    if (mt[p].emplace_back(w, c); p > t) {
+      t = p;
     }
-    for (int i = 1; i <= cm; i++)
-        for (int j = m; j > -1; j--)
-            for (int k = 0; k < cnt[i]; k++)
-                if (j >= b[c[i][k]].w)
-                    f[j] = max(f[j], f[j - b[c[i][k]].w] + b[c[i][k]].c);
-    cout << f[m];
-    return 0;
+  }
+  for (tp i = 1; i <= t; ++i) {
+    for (tp j = m; ~j; --j) {
+      for (auto&& [w, c] : mt[i]) {
+        if (w > j) {
+          continue;
+        }
+        f[j] = max(f[j], f[j - w] + c);
+      }
+    }
+  }
+  cout << f[m];
+  return 0;
 }

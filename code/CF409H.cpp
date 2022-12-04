@@ -5,6 +5,6 @@ using namespace std;
 int main() {
     int x, y;
     cin >> x >> y;
-    cout << x + y << endl;
-    exit(0);////
+    cout << x + y;
+    return 0;
 }

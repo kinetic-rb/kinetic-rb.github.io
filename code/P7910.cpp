@@ -1,121 +1,263 @@
+#include <deque>
 #include <iostream>
-
-template <typename Typex, unsigned _TSize>
-struct WBLT {
-  WBLT(const Typex& Val) : cnt(0), f(0) {
-    _Size = new unsigned[_TSize];
-    _Ln = new unsigned[_TSize];
-    _Rn = new unsigned[_TSize];
-    _Key = new Typex[_TSize];
-    newnode(root, Val);
-  }
-
-  void newnode(const Typex& v) { newnode(root, v); }
-  void insert(const Typex& x) { insert(root, x); }
-  void erase(const Typex& x) { erase(root, x); }
-  Typex find(const unsigned& x) { return find(root, x); }
-  unsigned rank(const Typex& x) { return rank(root, x); }
-
- protected:
-  unsigned cnt, f, root, *_Size, *_Ln, *_Rn;
-  Typex* _Key;
-
-  void newnode(unsigned& cur, const Typex& val) {
-    cur = ++cnt;
-    _Size[cur] = 1;
-    _Key[cur] = val;
-  }
-
-  void merge(const unsigned& l, const unsigned& r) {
-    _Size[++cnt] = _Size[l] + _Size[r];
-    _Key[cnt] = _Key[r];
-    _Ln[cnt] = l;
-    _Rn[cnt] = r;
-  }
-
-  void rotate(const unsigned& cur, const bool& r = false) {
-    if (r) {
-      merge(_Ln[cur], _Ln[_Rn[cur]]);
-      _Ln[cur] = cnt;
-      _Rn[cur] = _Rn[_Rn[cur]];
-    } else {
-      merge(_Rn[_Ln[cur]], _Rn[cur]);
-      _Rn[cur] = cnt;
-      _Ln[cur] = _Ln[_Ln[cur]];
-    }
-  }
-
-  void maintain(const unsigned& cur) {
-    if (_Size[_Ln[cur]] > _Size[_Rn[cur]] << 2)
-      rotate(cur);
-    else if (_Size[_Rn[cur]] > _Size[_Ln[cur]] << 2)
-      rotate(cur, true);
-    if (_Size[_Ln[cur]] > _Size[_Rn[cur]] << 2) {
-      rotate(_Ln[cur], true);
-      rotate(cur);
-    } else if (_Size[_Rn[cur]] > _Size[_Ln[cur]] << 2) {
-      rotate(_Rn[cur]);
-      rotate(cur, true);
-    }
-  }
-
-  void pushup(const unsigned& cur) {
-    if (!_Size[_Ln[cur]])
-      return;
-    _Size[cur] = _Size[_Ln[cur]] + _Size[_Rn[cur]];
-    _Key[cur] = _Key[_Rn[cur]];
-  }
-
-  void insert(const unsigned& cur, const Typex& x) {
-    if (_Size[cur] == 1) {
-      newnode(_Ln[cur], x < _Key[cur] ? x : _Key[cur]);
-      newnode(_Rn[cur], x < _Key[cur] ? _Key[cur] : x);
-      pushup(cur);
-      return;
-    }
-    maintain(cur);
-    insert(_Key[_Ln[cur]] < x ? _Rn[cur] : _Ln[cur], x);
-    pushup(cur);
-  }
-
-  void erase(unsigned cur, const Typex& x) {
-    if (_Size[cur] == 1) {
-      cur = _Ln[f] == cur ? _Rn[f] : _Ln[f];
-      _Size[f] = _Size[cur];
-      _Ln[f] = _Ln[cur];
-      _Rn[f] = _Rn[cur];
-      _Key[f] = _Key[cur];
-      return;
-    }
-    maintain(cur);
-    f = cur;
-    erase(_Key[_Ln[cur]] < x ? _Rn[cur] : _Ln[cur], x);
-    pushup(cur);
-  }
-
-  Typex find(const unsigned& cur, const unsigned& x) {
-    if (_Size[cur] == x)
-      return _Key[cur];
-    maintain(cur);
-    if (x > _Size[_Ln[cur]])
-      return find(_Rn[cur], x - _Size[_Ln[cur]]);
-    return find(_Ln[cur], x);
-  }
-
-  unsigned rank(const unsigned& cur, const Typex& x) {
-    if (_Size[cur] == 1)
-      return 1;
-    maintain(cur);
-    if (_Key[_Ln[cur]] < x)
-      return rank(_Rn[cur], x) + _Size[_Ln[cur]];
-    return rank(_Ln[cur], x);
-  }
-};
+#include <vector>
 
 using namespace std;
 
+template <typename Typex>
+class RBTree {
+  struct TNode {
+    TNode *P, *LC, *RC;
+    Typex value;
+    long count, size;
+    bool color;
+  } * root, *null, *memoryPool, *tail, **delNodes;
+  long delTop;
+
+  TNode* newNode(const Typex& _value, bool _color) {
+    TNode* current;
+    current = (delTop ? delNodes[--delTop] : tail++);
+    current->value = _value;
+    current->P = current->LC = current->RC = null;
+    current->size = current->count = 1;
+    current->color = _color;
+    return current;
+  }
+
+  void deleteNode(TNode* current) {
+    if (current == null)
+      return;
+    delNodes[delTop++] = current;
+  }
+
+  void maintain(TNode* current) {
+    if (current == null)
+      return;
+    current->size = current->count + current->LC->size + current->RC->size;
+  }
+
+  bool getType(TNode* current) { return current->P->RC == current; }
+
+  bool getType(TNode* P, const Typex& value) { return P->value < value; }
+
+  void connect(TNode* P, TNode* current, const bool& type) {
+    (type ? P->RC : P->LC) = current;
+    current->P = P;
+  }
+
+  void rotate(TNode* P, const bool& type) {
+    if (P == null)
+      return;
+    TNode* current = (type ? P->LC : P->RC);
+    if (current == null)
+      return;
+    TNode* grandParent = P->P;
+    bool parentType = getType(P);
+    connect(P, type ? current->RC : current->LC, !type);
+    connect(current, P, type);
+    if (P == root)
+      root = current;
+    connect(grandParent, current, parentType);
+    maintain(P);
+    maintain(current);
+  }
+
+  void updateSize(TNode* current) {
+    while (current != null) {
+      maintain(current);
+      current = current->P;
+    }
+  }
+
+  void InsertFixup(TNode* current) {
+    TNode* uncle;
+    bool parentType;
+    while (!current->P->color) {
+      parentType = getType(current->P);
+      uncle = current->P->P;
+      uncle = parentType ? uncle->LC : uncle->RC;
+      if (!uncle->color) {
+        current->P->color = uncle->color = true;
+        current->P->P->color = false;
+        current = current->P->P;
+      } else {
+        if (getType(current) != parentType) {
+          current = current->P;
+          rotate(current, parentType);
+        }
+        current->P->color = true;
+        current->P->P->color = false;
+        rotate(current->P->P, !parentType);
+      }
+    }
+    root->color = true;
+  }
+
+  void transplant(TNode* u, TNode* v) {
+    if (u == root)
+      root = v;
+    connect(u->P, v, getType(u));
+  }
+
+  TNode* minimum(TNode* current) {
+    while (current->LC != null)
+      current = current->LC;
+    return current;
+  }
+
+  void RemoveFixup(TNode* current) {
+    for (TNode* brother; current != root && current->color;) {
+      bool type = getType(current);
+      brother = current->P;
+      brother = type ? brother->LC : brother->RC;
+      if (!brother->color) {
+        brother->color = true;
+        current->P->color = false;
+        rotate(current->P, type);
+        brother = current->P;
+        brother = type ? brother->LC : brother->RC;
+      }
+      if (brother->LC->color && brother->RC->color) {
+        brother->color = false;
+        current = current->P;
+      } else {
+        if ((type ? brother->LC : brother->RC)->color) {
+          (type ? brother->RC : brother->LC)->color = true;
+          brother->color = false;
+          rotate(brother, !type);
+          brother = current->P;
+          brother = type ? brother->LC : brother->RC;
+        }
+        brother->color = current->P->color;
+        current->P->color = (type ? brother->LC : brother->RC)->color = true;
+        rotate(current->P, type);
+        current = root;
+      }
+    }
+    current->color = true;
+  }
+
+  TNode* find(const Typex& value) {
+    for (TNode* current = root; current != null;)
+      if (current->value < value)
+        current = current->RC;
+      else if (value < current->value)
+        current = current->LC;
+      else
+        return current;
+    return null;
+  }
+
+  TNode* _Order(long rank) {
+    for (TNode* current = root; current != null;) {
+      if (current->LC->size < rank) {
+        rank -= current->LC->size + current->count;
+        if (rank < 1)
+          return current;
+        current = current->RC;
+      } else
+        current = current->LC;
+    }
+    return null;
+  }
+
+ public:
+  RBTree(const long& _T_Size) : delTop(0) {
+    delNodes = new TNode*[_T_Size];
+    tail = memoryPool = new TNode[_T_Size];
+    null->P = null->LC = null->RC = null = newNode(Typex(), true);
+    null->count = null->size = 0;
+    root = null;
+  }
+
+  void insert(const Typex& value) {
+    if (root == null) {
+      root = newNode(value, true);
+      return;
+    }
+    TNode *current = root, *P = current->P;
+    while (current != null) {
+      current->size++;
+      if (current->value < value) {
+        P = current;
+        current = current->RC;
+      } else if (value < current->value) {
+        P = current;
+        current = current->LC;
+      } else {
+        current->count++;
+        return;
+      }
+    }
+    current = newNode(value, false);
+    connect(P, current, getType(P, value));
+    InsertFixup(current);
+  }
+
+  void remove(TNode* z) {
+    if (z == null)
+      return;
+    if (1 < z->count) {
+      z->count--;
+      updateSize(z);
+      return;
+    }
+    TNode *x, *y = z;
+    bool yOriginalColor = y->color;
+    if (z->LC == null) {
+      x = z->RC;
+      transplant(z, z->RC);
+    } else if (z->RC == null) {
+      x = z->LC;
+      transplant(z, z->LC);
+    } else {
+      y = minimum(z->RC);
+      yOriginalColor = y->color;
+      x = y->RC;
+      if (y->P == z)
+        x->P = y;
+      else {
+        transplant(y, y->RC);
+        connect(y, z->RC, true);
+      }
+      transplant(z, y);
+      connect(y, z->LC, false);
+      y->color = z->color;
+    }
+    updateSize(x->P);
+    if (yOriginalColor)
+      RemoveFixup(x);
+    deleteNode(z);
+  }
+
+  void remove(const Typex& Val) { remove(find(Val)); }
+
+  long rank(const Typex& value) {
+    long leftSize = 1;
+    for (TNode* current = root; current != null;)
+      if (value < current->value || !(current->value < value))
+        current = current->LC;
+      else {
+        leftSize += current->LC->size + current->count;
+        current = current->RC;
+      }
+    return leftSize;
+  }
+
+  const Typex* order(const long& rank) { return &_Order(rank)->value; }
+
+  const Typex* lower_bound(const Typex& Value) { return order(rank(Value)); }
+
+  const Typex* upper_bound(const Typex& Value) {
+    const Typex* lb = lower_bound(Value);
+    if (Value < *lb)
+      return lb;
+    return order(rank(Value) + 1);
+  }
+};
+
 int main() {
-  WBLT<pair<long, long>, 40000> tree(make_pair(0x7fffffff, 0x7fffffff));
+  RBTree<pair<long, long>> tree(40000);
   static long num[8005];
   long n, m;
   cin >> n >> m;
@@ -129,7 +271,7 @@ int main() {
     if (op == 1) {
       long x, v;
       cin >> x >> v;
-      tree.erase(make_pair(num[x], x));
+      tree.remove(make_pair(num[x], x));
       tree.insert(make_pair(v, x));
       num[x] = v;
     } else {

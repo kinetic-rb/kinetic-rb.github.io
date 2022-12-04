@@ -4,7 +4,7 @@
 
 using namespace std;
 
-array <int, 1000> a;
+array <int, 995> a;
 
 int main() {
     ios_base::sync_with_stdio(false);

@@ -1,14 +1,10 @@
-#include<bits/stdc++.h>
+#include <iostream>
+
 using namespace std;
+
 int main() {
-  int a,b,c;
-  cin>>a>>b>>c;
-  int mx=max(a,max(b,c));
-  int sum=a+b+c;
-  sum-=mx;
-  if(sum>mx)
-    {
-        cout<<1;
-    }
-  else cout<<0;
+    int a, b, c;
+    cin >> a >> b >> c;
+    cout << (a + b + c > max(a, max(b, c)) * 2);
+    return 0;
 }

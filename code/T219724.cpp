@@ -1,25 +1,26 @@
-#include<bits/stdc++.h>
+#include <iostream>
+#include <vector>
 
 using namespace std;
-//5
-//2 -1 2 -3 2
-int main()
-{
-    int n, L = 0, R = 0, sum = 0, macs = INT_MIN;
-    int a[1005];
+
+int main() {
+    int n, Max = 0;
     cin >> n;
-    for(int i = 0; i < n; i++)
-        cin >> a[i];
-    for(; L < n; L++)
-    {
-        for(sum = R = 0; R < n; R++)
-        {
-            for(int i = L; i <= R; i++)
-                sum += a[i];
-            macs = max(macs, sum);
-            sum = 0;
+    vector<int> ac;
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        ac.push_back(x);
+    }
+    for (int L = 0; L < n; L++) {
+        for (int R = L; R < n; R++) {
+            int sum = 0;
+            for (int i = L; i <= R; i++) {
+                sum += ac[i];
+            }
+            Max = max(Max, sum);
         }
     }
-    cout << macs;
+    cout << Max;
     return 0;
 }

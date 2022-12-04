@@ -2,24 +2,24 @@
 
 using namespace std;
 
-int choose[8];
+int choose[9];
 int n;
 
-inline bool IP(register int x) {
+inline bool IP(int x) {
     if (x < 2)
         return false;
-    for (register int i = 2; i * i <= x; i++)
+    for (int i = 2; i * i <= x; i++)
         if (!(x % i))
             return false;
     return true;
 }
 
-inline void dfs(register int idx) {
+inline void dfs(int idx) {
     if (idx > n) {
         cout << choose[n] << '\n';
         return;
     }
-    for (register int i = 1; i < 10; i++) {
+    for (int i = 1; i < 10; i++) {
         if (IP(choose[idx - 1] * 10 + i)) {
             choose[idx] = choose[idx - 1] * 10 + i;
             dfs(idx + 1);

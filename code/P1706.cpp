@@ -1,32 +1,30 @@
 #include <iostream>
-#include <iomanip>
+#include <functional>
 
 using namespace std;
 
-int n;
-int pe[10];
-
-bool ud[10];
-
-void per(int x) {
-    if(x == n + 1) {
-        for(int i = 0; i < n; cout << setw(5) << pe[++i]);
-        cout << "\n";
-        return;
-    }
-    for(int i = 1; i <= n; i++) {
-        if(!ud[i]) {
-            ud[i] = true;
-            pe[x] = i;
-            per(x + 1);
-            ud[i] = false;
-        }
-    }
-}
+int choose[15];
+bool vis[15];
 
 int main() {
-    ios_base :: sync_with_stdio(false);
-    cin >> n;
-    per(1);
-    return 0;
+  int n;
+  ios_base::sync_with_stdio(false);
+  cin >> n;
+  function<void(int)> dfs = [&](int idx) -> void {
+    if (idx == n) {
+      for (int i = 0; i < n; i++)
+        cout << "    " << choose[i];
+      cout << '\n';
+      return;
+    }
+    for (int i = 1; i <= n; i++)
+      if (!vis[i]) {
+        vis[i] = true;
+          choose[idx] = i;
+          dfs(idx + 1);
+          vis[i] = false;
+      }
+  };
+  dfs(0);
+  return 0;
 }

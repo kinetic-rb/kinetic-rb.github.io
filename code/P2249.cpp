@@ -1,35 +1,34 @@
-#include <iostream>
-
+#include <bits/stdc++.h>
 using namespace std;
-
-int * ac = new int [1000005];
-int n, t, x;
-
-template<typename Type_, typename _element_Type_>
-/// this is used to search X's location
-inline Type_ multiplication_search(const Type_ &find, const _element_Type_ *arr, int MAX, int MAX_ELEMENT) {
-    /// WARNING the array must start with 1 and end with __END__ -> [1, __END__]
-    int qloc = 0;
-    for(int i = MAX_ELEMENT; i > -1; i--) {
-        int loc = qloc + (1 << i);
-        if(loc <= MAX && arr[loc] < find) {
-            qloc = loc;
-        }
+int n,a[10000005],m;
+int read(){
+    char ch = getchar();
+    int x = 0;
+    while(ch < '0' || ch > '9') ch = getchar();
+    while(ch >= '0' && ch <= '9'){
+        x = x * 10 + ch - '0';
+        ch = getchar();
     }
-    return ++qloc;
+    return x;
 }
-
-int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
-    cin >> n >> t;
-    for(int i = 1; i <= n; i++) {
-        cin >> ac[i];
+int find(int x,int l,int r){
+  if(l == r && a[l] == x) return l;
+  if(l == r && a[l] != x) return -1;
+  int mid = (l+r)/2;
+  if(x <= a[mid]) return find(x,l,mid);
+  else return find(x,mid+1,r);
+}
+int main(){
+    n = read(),m = read();
+    for(int i = 1;i <= n;i ++) {
+        a[i] = read();
+        if(a[i] < 0) return 1;
     }
-    for(; t--; cout << (ac[multiplication_search(x, ac, n, 24)] == x ? multiplication_search(x, ac, n, 29) : -1) << ' ') {
-        cin >> x;
-    }
-    delete[] ac;
-    return 0;
+    for(int i = 1;i <= m;i ++) {
+        int x;
+    x = read();
+    if(x < 0) return 1;
+    cout << find(x,1,n) << " ";
+  }
+  return 0;
 }

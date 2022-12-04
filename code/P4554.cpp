@@ -25,14 +25,11 @@ inline void record(int x, int y, int step) {
 }
 
 inline void bfs(int x, int y) {
-    for (record(x, y, 0); !Q.empty(); ) {
-        auto u = Q.front();
-        Q.pop_front();
+    for (record(x, y, 0); !Q.empty(); Q.pop_front())
         for (auto i : dr) {
-            int dx = u.x + i[0], dy = i[1] + u.y;
-            record(dx, dy, d[u.x][u.y] + (mz[u.x][u.y] ^ mz[dx][dy]));
+            int dx = Q.front().x + i[0], dy = i[1] + Q.front().y;
+            record(dx, dy, d[Q.front().x][Q.front().y] + (mz[Q.front().x][Q.front().y] ^ mz[dx][dy]));
         }
-    }
 }
 
 int main() {

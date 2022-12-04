@@ -1,34 +1,31 @@
+#include <algorithm>
 #include <iostream>
-#define int long long
 
 using namespace std;
 
 int lg[100005];
-int n, k;
 
-inline bool small(int ml) {
-  int sum = 0;
-  for (int i = 0; i < n; i++)
-    sum += lg[i] / ml;
-  return sum >= k;
-}
-
-inline int search() {
+template <typename comp>
+inline int fs(int mi, comp cmp) {
   int qloc = 0;
-  for (int i = 25; i > -1; i--) {
-    int loc = qloc + (1 << i);
-    if (small(loc)) {
+  for (int pew = 1 << mi; pew; pew >>= 1) {
+    int loc = qloc + (pew);
+    if (cmp(loc))
       qloc = loc;
-    }
   }
   return qloc;
 }
 
-signed main() {
-  ios_base::sync_with_stdio(false);
+int main() {
+  int n, k;
   cin >> n >> k;
   for (int i = 0; i < n; i++)
     cin >> lg[i];
-  cout << search();
+  cout << fs(27, [&](int ml) {
+    int sum = 0;
+    for (int i = 0; i < n; i++)
+      sum += lg[i] / ml;
+    return sum >= k;
+  });
   return 0;
 }

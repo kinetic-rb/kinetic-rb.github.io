@@ -8,16 +8,16 @@ bool light[2000000];
 int main() {
     int n;
     cin >> n;
-    for(int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
         double x;
         int t;
         cin >> x >> t;
-        for(int j = 1; j <= t; j++) {
-            light[int(floor(x * j))]? light[int(floor(x * j))] = false : light[int(floor(x * j))] = true;
+        for (int j = 1; j <= t; j++) {
+            light[int(floor(x * j))] ? light[int(floor(x * j))] = false : light[int(floor(x * j))] = true;
         }
     }
-    for(int i = 0; i < 2000000; i++) {
-        if(light[i]) {
+    for (int i = 0; i < 2000000; i++) {
+        if (light[i]) {
             cout << i;
             return 0;
         }

@@ -12,9 +12,9 @@ signed main() {
       i = i - 'A' + 'a';         // \u5927\u5199\u53d8\u5c0f\u5199
     }
   }
-  for (int i = 0; i < x.size(); ++i) {  // \u904d\u5386
-    if (x[i] - 'a' < n) {              // \u5982\u679c\u6ee1\u8db3\u9898\u76ee\u7684\u8981\u6c42
-      x[i] = x[i] - 'a' + 'A';         // \u5c0f\u5199\u53d8\u5927\u5199
+  for (auto&& i : x) {  // \u904d\u5386
+    if (i - 'a' < n) {               // \u5982\u679c\u6ee1\u8db3\u9898\u76ee\u7684\u8981\u6c42
+      i = i - 'a' + 'A';          // \u5c0f\u5199\u53d8\u5927\u5199
     }
   }
   cout << x;

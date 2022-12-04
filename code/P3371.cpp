@@ -1,54 +1,87 @@
-#include "iostream"
-#include "queue"
+// Please submit with C++14! It's best to use C++20 or higher version.
+constexpr bool __MTCS__ = 0;  // Spectre
+#ifndef LOCAL                 // By rbtree (https://rbtree.dev)
+#pragma region HEAD
+#endif
+#include <algorithm>
+#include <array>
+#include <bitset>
+#include <cmath>
+#include <cstring>
+#include <functional>
+#include <iostream>
+#include <list>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <random>
+#include <set>
+#include <unordered_map>
+#include <utility>
+#include <vector>
+#ifdef ___RB_DEBUG___
+#include "rb_debug.h"
+#else
+#define dbg(...)
+#endif
+#define ra (scanf("%lld", &la), la)
+#define se(exp) exp.begin(), exp.end()
+#define fe(arr, exp) for_each(se(arr), exp)
+#define LIKELY(exp) __builtin_expect(bool(exp), 1)
+#define UNLIKELY(exp) __builtin_expect(bool(exp), 0)
 
+typedef long long tp;
 using namespace std;
+void __Cored__(tp);
+tp la;
 
-struct CE {
-  int to, dist, next;
-  CE() {}
-  CE(int to, int dist, int next) : to(to), dist(dist), next(next) {}
-} e[500005];
-
-bool vis[10001];
-int dist[10001], head[10001];
-int n;
-
-void add_edge(const int& u, const int& v, const int& dist) {
-  static int tot = 0;
-  e[++tot] = CE(v, dist, head[u]);
-  head[u] = tot;
+signed main(/* >_< */) {
+  for (static tp __TCS__ = __MTCS__ ? ra : 1, __NOW__ = 0; __NOW__ < __TCS__;
+       __Cored__(++__NOW__)) {
+  }
+  return 0;
 }
 
-void spfa(const int& s) {
-  queue<int> Q;
-  for (int i = 1; i <= n; i++)
-    dist[i] = 0x7fffffff;
+#ifndef LOCAL
+#pragma endregion HEAD
+#endif
+
+////////////////////////////////////////////////////////////////////////////////
+
+constexpr tp Hat_N = 1e5 + 3;
+
+bool inq[Hat_N];
+tp dist[Hat_N];
+vector<pair<tp, tp>> e[Hat_N];
+
+void spfa(tp s) {
+  list<tp> q;
+  memset(inq, 0, sizeof inq);
+  fill(dist, dist + Hat_N, (1ll << 31) - 1);
+  inq[s] = 1;
   dist[s] = 0;
-  vis[s] = true;
-  for (Q.push(s); Q.size(); Q.pop()) {
-    vis[Q.front()] = false;
-    for (int i = head[Q.front()]; i; i = e[i].next) {
-      if (dist[e[i].to] > dist[Q.front()] + e[i].dist) {
-        dist[e[i].to] = dist[Q.front()] + e[i].dist;
-        if (!vis[e[i].to]) {
-          vis[e[i].to] = true;
-          Q.push(e[i].to);
+  for (q.push_back(s); q.size(); q.pop_front()) {
+    inq[q.front()] = 0;
+    for (auto&& [i, j] : e[q.front()]) {
+      if (dist[i] > dist[q.front()] + j) {
+        dist[i] = dist[q.front()] + j;
+        if (!inq[i]) {
+          inq[i] = 1;
+          q.push_back(i);
         }
       }
     }
   }
 }
 
-int main() {
-  int m, s;
-  cin >> n >> m >> s;
-  for (int i = 0; i < m; i++) {
-    int u, v, dist;
-    cin >> u >> v >> dist;
-    add_edge(u, v, dist);
+void __Cored__([[maybe_unused]] tp __TID__) {
+  tp n = ra, m = ra, s = ra;
+  while (m--) {
+    tp u = ra, v = ra, w = ra;
+    e[u].emplace_back(v, w);
   }
   spfa(s);
-  for (int i = 1; i <= n; i++)
-    cout << dist[i] << ' ';
-  return 0;
+  for (tp i = 1; i <= n; ++i) {
+    printf("%lld ", dist[i]);
+  }
 }

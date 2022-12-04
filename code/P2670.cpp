@@ -1,43 +1,35 @@
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 
-char c[1001][1001];
+char map[105][105];
 
-int main()
-{
+int dx[] = {-1, -1, -1, 0, 0, 1, 1, 1}, dy[] = {-1, 0, 1, -1, 1, -1, 0, 1};
+
+int co(int cnt, int i, int j) {
+    for(int k = 0; k < 8; k++) {
+        if(map[i + dx[k]][j + dy[k]] == '*')
+            cnt++;
+    }
+    return cnt;
+}
+
+int main() {
+    memset(map, '#', sizeof(map));
     int n, m;
     cin >> n >> m;
-    for(int i = 0; i < n; i++)
-        for(int j = 0; j < m; j++)
-            cin >> c[i][j];
-    for(int i = 0; i < n; i++)
-    {
-        for(int j = 0; j < m; j++)
-        {
-            int sum = 0;
-            if(c[i][j] == '*')
+    for(int i = 1; i <= n; i++)
+        for(int j = 1; j <= m; j++)
+            cin >> map[i][j];
+    for(int i = 1; i <= n; i++) {
+        for(int j = 1; j <= m; j++) {
+            if(map[i][j] == '*') {
                 cout << "*";
-                    else
-                    {
-                        if(c[i - 1][j + 1] == '*')
-                            sum++;
-                        if(c[i][j + 1] == '*')
-                            sum++;
-                        if(c[i + 1][j + 1] == '*')
-                            sum++;
-                        if(c[i - 1][j] == '*')
-                            sum++;
-                        if(c[i + 1][j] == '*')
-                            sum++;
-                        if(c[i - 1][j - 1] == '*')
-                            sum++;
-                        if(c[i][j - 1] == '*')
-                            sum++;
-                        if(c[i + 1][j - 1] == '*')
-                            sum++;
-                        cout << sum;
-                    }
+                continue;
+            }
+            int cnt = 0;
+            cout << co(cnt, i, j);
         }
         cout << endl;
     }

@@ -12,8 +12,9 @@ int main() {
     for(int i = 0; i < n; i++) {
         scanf("%d", &l[i]);
     }
+    stable_sort(l, l + n);
     for(int i = 0; i < n - 1; sum += l[++i]) {
-        sort(l + i, l + n);
+        for (int j = i; j + 1 < n && l[j + 1] < l[j]; ++j) swap(l[j], l[j + 1]);
         l[i + 1] += l[i];
     }
     cout << sum;

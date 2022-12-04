@@ -1,35 +1,28 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <queue>
 
 using namespace std;
 
-struct place{
+struct place {
     int x, y;
 } Place;
 
-const int M = 32;
-int map1[M][M], visited[M][M], dx[4]={1, -1, 0, 0}, dy[4]={0, 0, -1, 1};
+int map1[32][32], visited[32][32], dr[][2] = { 0, 1, 0, -1, 1, 0, -1, 0 };
 int n;
 
-queue <place> q;
+queue<place> q;
 
-void bfs(int x,int y) {
-    visited[x][y] = 1;
-    Place.x = x;
-    Place.y = y;
-    for (q.push(Place); !q.empty(); ) {
-        place A = q.front();
+inline void bfs(int x, int y) {
+    visited[x][y] = true;
+    for (q.push({ x, y }); !q.empty();) {
+        auto u = q.front();
         q.pop();
-        for (int i = 0; i < 4; i++) {
-            int zx, zy;
-            zx = A.x + dx[i];
-            zy = A.y + dy[i];
-            if (zx < 0 || zx > n + 1 || zy < 0 || zy > n + 1 || visited[zx][zy])
+        for (auto i : dr) {
+            int dx = u.x + i[0], dy = i[1] + u.y;
+            if (dx < 0 || dx > n + 1 || dy < 0 || dy > n + 1 || visited[dx][dy])
                 continue;
-            visited[zx][zy] = 1;
-            struct place B;
-            B.x = zx;
-            B.y = zy;
-            q.push(B);
+            visited[dx][dy] = true;
+            q.push({dx, dy});
         }
     }
 }
@@ -39,17 +32,13 @@ int main() {
     for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= n; j++) {
             cin >> map1[i][j];
-            if (map1[i][j] == 0)
-                visited[i][j] = 0;
-            else
-                visited[i][j] = 1;
+            visited[i][j] = map1[i][j];
         }
     }
     bfs(0, 0);
     for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= n; j++) {
-            if (!visited[i][j]) cout << "2" << " ";
-            else cout << map1[i][j] << " ";;
+            visited[i][j] ? cout << map1[i][j] << ' ' : cout << "2 ";
         }
         cout << '\n';
     }

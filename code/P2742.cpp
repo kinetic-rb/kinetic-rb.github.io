@@ -1,6 +1,6 @@
 // Please submit with C++14! It's best to use C++20 or higher version.
-constexpr bool __MTCS__ = 0;  // Spectre (admin@rbtree.app)
-#ifndef LOCAL                 // By rbtree (https://rbtree.app)
+constexpr bool __MTCS__ = 0;  // Spectre (v@rbtr.ee)
+#ifndef LOCAL                 // By rbtree (https://rbtr.ee)
 #pragma region HEAD           // DO OR DIE
 #endif
 #if OPTIMIZE
@@ -50,9 +50,13 @@ char in[Size], out[Size], stk[45];
 char *s = in, *t = in, *S = out, *T = out + Size;
 std::size_t top;
 char getchar() {
+#ifdef FREAD
   if (s == t)
     if (in == (t = (s = in) + fread(in, 1, Size, stdin))) return 10;
   return *s++;
+#else
+  return ::getchar();
+#endif
 }
 void __Read_I() {
   bool f = 0;
@@ -81,14 +85,14 @@ void __Write(char c) {
 void __Write(string s) {
   for (std::size_t i = 0; i < s.size(); ++i) __Write(s[i]);
 }
-void __Write(const char* s) {
+void __Write(const char *s) {
   while (*s) __Write(*s++);
 }
 template <typename _Type>
 void __Write(_Type x) {
   if (!x) return __Write('0');
   if (x < 0) __Write('-');
-  for (x = abs(x); x; x /= 10) stk[++top] = x % 10;
+  for (x = x < 0 ? ~x + 1 : x; x; x /= 10) stk[++top] = x % 10;
   while (top) __Write(char(stk[top--] | 48));
 }
 template <typename _Type, typename... Other>
@@ -97,7 +101,7 @@ void __Write(_Type x, Other... y) {
 }
 struct QAQ {
   template <typename _Type>
-  QAQ& operator,(_Type x) {
+  QAQ &operator,(_Type x) {
     return __Write(x), *this;
   }
 } qaq;
@@ -115,52 +119,51 @@ signed main(/* >_< */) {
 #ifndef LOCAL
 #pragma endregion HEAD
 #endif
+#define FREAD 0;
 #define OPTIMIZE 0;
 
 ////////////////////////////////////////////////////////////////////////////////
 
-constexpr tp Hat_N = 1e5 + 3;
+constexpr tp Hat_N = 2e5 + 3;
 
-mt19937 rnd(20091001);
+struct QWQ {
+  double x, y;
 
-bool inq[Hat_N];
-tp dist[Hat_N], q[Hat_N];
-list<pair<tp, tp>> e[Hat_N];
+  QWQ() = default;
+} p[Hat_N];
 
-void spfa(tp s) {
-  tp l = 0, r = 0;
-  memset(dist, 0x3f, sizeof dist);
-  inq[s] = 1;
-  dist[s] = 0;
-  for (q[0] = s; l <= r;) {
-    tp f = q[l];
-    if (!(rnd() % ((r - l + 1 >> 4) + 1))) {
-      stable_sort(q + l, q + r + 1, [](tp x, tp y) { return dist[x] < dist[y]; });
-      f = q[l];
-    }
-    ++l;
-    inq[f] = 0;
-    for (auto&& t : e[f]) {
-      if (dist[t.first] > dist[f] + t.second) {
-        dist[t.first] = dist[f] + t.second;
-        if (!inq[t.first]) {
-          if (l) q[--l] = t.first;
-          if (!l) q[++r] = t.first;
-          inq[t.first] = 1;
-        }
-      }
-    }
-  }
+double rdeg(QWQ a1, QWQ a2, QWQ b1, QWQ b2) {
+  return (a2.x - a1.x) * (b2.y - b1.y) - (b2.x - b1.x) * (a2.y - a1.y);
+}
+
+double dist(QWQ x, QWQ y) {
+  return sqrt((y.y - x.y) * (y.y - x.y) + (y.x - x.x) * (y.x - x.x));
 }
 
 void __Cored__([[maybe_unused]] tp __TID__) {
-  tp n = ra, m = ra, s = ra;
-  while (m--) {
-    tp u = ra, v = ra, w = ra;
-    e[u].emplace_back(v, w);
+  tp n;
+  cin >> n;
+  double sum = 0;
+  vector<QWQ> q;
+  for (tp i = 1; i <= n; ++i) {
+    cin >> p[i].x >> p[i].y;
+    if (p[i].y < p[1].y || (p[i].y == p[1].y && p[i].x < p[1].x))
+      swap(p[i], p[1]);
   }
-  spfa(s);
-  for (tp i = 1; i <= n; ++i) wq dist[i], ' ';
+  stable_sort(p + 2, p + n + 1, [](QWQ x, QWQ y) {
+    return rdeg(p[1], x, p[1], y) > 0 ||
+           (!rdeg(p[1], x, p[1], y) && dist(QWQ(), x) < dist(QWQ(), y));
+  });
+  q.push_back(p[1]);
+  for (tp i = 2; i <= n; ++i) {
+    while (q.size() >= 2 &&
+           rdeg(q[q.size() - 2], q.back(), q.back(), p[i]) < 0)
+      q.pop_back();
+    q.push_back(p[i]);
+  }
+  q.push_back(p[1]);
+  for (tp i = 1; i < q.size(); ++i) sum += dist(q[i - 1], q[i]);
+  printf("%.2lf", sum);
 }
 
 //*/

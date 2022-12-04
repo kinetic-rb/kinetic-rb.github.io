@@ -1,21 +1,19 @@
-#include<bits/stdc++.h>
+#include <iostream>
+#define int long long
+
 using namespace std;
-int main(){
-  ios::sync_with_stdio(0);
-  cin.tie(0);
-  cout.tie(0);
-  bool f=0;
-  int r,l,ren,i;
-  cin>>ren>>l>>r;
-  int chu=r/ren;
-  for(i=1;i<ren;i++){
-    if(chu*ren-i>=l){
-      f=1;
-      break;
-    }
-    if(chu*ren+i>r) break;
+
+// \u5728 L ~ R \u4e2d\u9009\u4e00\u4e2a\u6570\uff0c\u4f7f\u5b83 % n \u7684\u4f59\u6570\u6700\u5927 
+
+signed main() {
+  int L, R, n, MAX = -1;
+  scanf("%lld%lld%lld", &n, &L, &R);
+  if (R - L >= n) {
+    printf("%lld", n - 1);
+    return 0;
   }
-  if(f) cout<<ren-i;
-  else cout<<i-1;
+  for (int i = L; i < R; i++)
+    MAX = max(MAX, i % n);
+  printf("%lld", max(MAX, R % n));
   return 0;
 }

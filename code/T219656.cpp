@@ -4,7 +4,7 @@
 inline int _(int & _) {
     char ch = getchar();
     bool bol = false;
-    while(ch == ' ' || ch == '\n' || ch == '\t')
+    while(ch == ' ' || ch == '\n' || ch == '	')
         ch = getchar();
     if(ch == '-') {
         bol = true;
@@ -29,7 +29,7 @@ inline char _(char & _) {
 inline long _(long & _) {
     char ch = getchar();
     bool bol = false;
-    while(ch == ' ' || ch == '\n' || ch == '\t')
+    while(ch == ' ' || ch == '\n' || ch == '	')
         ch = getchar();
     if(ch == '-') {
         bol = true;
@@ -44,7 +44,7 @@ inline long _(long & _) {
 inline short _(short & _) {
     char ch = getchar();
     bool bol = false;
-    while(ch == ' ' || ch == '\n' || ch == '\t')
+    while(ch == ' ' || ch == '\n' || ch == '	')
         ch = getchar();
     if(ch == '-') {
         bol = true;
@@ -103,7 +103,7 @@ inline double _(double & _) {
 inline long long _(long long & _) {
     char ch = getchar();
     bool bol = false;
-    while(ch == ' ' || ch == '\n' || ch == '\t')
+    while(ch == ' ' || ch == '\n' || ch == '	')
         ch = getchar();
     if(ch == '-') {
         bol = true;
@@ -143,7 +143,7 @@ inline std::string _(std::string & _) {
 }
 inline unsigned int _(unsigned int & _) {
     char ch = getchar();
-    while(ch == ' ' || ch == '\n' || ch == '\t')
+    while(ch == ' ' || ch == '\n' || ch == '	')
         ch = getchar();
     for(_ = 0; '0' <= ch && ch <= '9'; ch = getchar())
         _ = _ * 10 + ch - 48;
@@ -154,7 +154,7 @@ inline unsigned char _(unsigned char & _) {
 }
 inline unsigned long _(unsigned long & _) {
     char ch = getchar();
-    while(ch == ' ' || ch == '\n' || ch == '\t')
+    while(ch == ' ' || ch == '\n' || ch == '	')
         ch = getchar();
     for(_ = 0; '0' <= ch && ch <= '9'; ch = getchar())
         _ = _ * 10 + ch - 48;
@@ -162,7 +162,7 @@ inline unsigned long _(unsigned long & _) {
 }
 inline unsigned short _(unsigned short & _) {
     char ch = getchar();
-    while(ch == ' ' || ch == '\n' || ch == '\t')
+    while(ch == ' ' || ch == '\n' || ch == '	')
         ch = getchar();
     for(_ = 0; '0' <= ch && ch <= '9'; ch = getchar())
         _ = _ * 10 + ch - 48;
@@ -170,7 +170,7 @@ inline unsigned short _(unsigned short & _) {
 }
 inline unsigned long long _(unsigned long long & _) {
     char ch = getchar();
-    while(ch == ' ' || ch == '\n' || ch == '\t')
+    while(ch == ' ' || ch == '\n' || ch == '	')
         ch = getchar();
     for(_ = 0; '0' <= ch && ch <= '9'; ch = getchar())
         _ = _ * 10 + ch - 48;
@@ -184,35 +184,28 @@ inline _1 _(_1 & x, _2 & ... y) {
 
 using namespace std;
 
-int n, m;
+int n;
 
 struct AC {
-    int * mark = new int [10];
-} ac[100000];
-
-inline bool cmp(const AC & i, const AC & j) {
-    for(register int k = 0; k < m; k++) {
-        if(i.mark[k] != j.mark[k])
-            return i.mark[k] > j.mark[k];
+    int * mark = new int [3];
+    inline bool operator < (const AC & x) const {
+        if(x.mark[0] != mark[0])
+            return mark[0] > x.mark[0];
+        return mark[1] > x.mark[1];
     }
-    return false;
-}
+} ac[100000];
 
 int main() {
     ios_base::sync_with_stdio(false);
     cout.tie(nullptr);
     _(n);
-    m = 2;
     for(register int i = 0; i < n; i++) {
-        for(register int j = 0; j < m; j++)
-            _(ac[i].mark[j]);
+        _(ac[i].mark[0], ac[i].mark[1]);
     }
-    sort(ac, ac + n, cmp);
+    sort(ac, ac + n);
     reverse(ac, ac + n);
     for(register int i = 0; i < n; i++) {
-        for(register int j = 0; j < m; j++)
-            cout << ac[i].mark[j] << ' ';
-        cout << '\n';
+            cout << ac[i].mark[0] << ' ' << ac[i].mark[1] << '\n';
     }
     return 0;
 }

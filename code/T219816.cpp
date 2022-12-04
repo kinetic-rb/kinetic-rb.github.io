@@ -1,5 +1,6 @@
 #include <iostream>
 #include <functional>
+#include <queue>
 
 using namespace std;
 
@@ -7,24 +8,30 @@ int dr[][2] = {0, 1, 0, -1, 1, 0, -1, 0};
 char Map[101][101];
 
 int main() {
-    ios::sync_with_stdio(false);
   int n, m, cnt = 0;
   cin >> n >> m;
   for (int i = 0; i < n; i++)
-    for (int j = 0; j < m; j++) {
+    for (int j = 0; j < m; j++)
       cin >> Map[i][j];
-    }
-  function<void(int, int)> dfs = [&](int x, int y) -> void {
+  queue<pair<int, int>> Q;
+  function<void(int, int)> record = [&](int x, int y) -> void {
     if (min(x, y) > -1 && x < n && y < m && Map[x][y] == '.') {
-      cnt++;
       Map[x][y] = '#';
+      Q.push(make_pair(x, y));
+      cnt++;
+    }
+  };
+  function<void(int, int)> bfs = [&](int x, int y) -> void {
+    for (record(x, y); !Q.empty();) {
+      auto u = Q.front();
+      Q.pop();
       for (auto i : dr) {
-        int dx = x + i[0], dy = y + i[1];
-        dfs(dx, dy);
+        int dx = u.first + i[0], dy = u.second + i[1];
+        record(dx, dy);
       }
     }
   };
-  dfs(0, 0);
+  bfs(0, 0);
   cout << cnt;
   return 0;
 }

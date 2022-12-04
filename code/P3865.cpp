@@ -1,115 +1,54 @@
-#include <emmintrin.h>
-#include <immintrin.h>
-#include <mmintrin.h>
-#include <pmmintrin.h>
-#include <xmmintrin.h>
-#include <algorithm>
-#include <cstdint>
-#include <cstring>
+#pragma region HEAD
+#include <algorithm>  // By rbtree (https://rbtree.archi)
+#include <array>      // Please submit with C++14!
+#include <bitset>
+#include <cmath>
+#include <complex>
+#include <functional>
 #include <iostream>
-#define cin ERROR
-#pragma GCC target( \
-    "mmx,sse,sse2,sse3,ssse3,sse4.1,sse4.2,avx,avx2,avx512f,popcnt,tune=native")
+#include <list>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <random>
+#include <set>
+#include <unordered_map>
+#include <utility>
+#include <vector>
+#ifdef ___RB_DEBUG___
+#include "rb_debug.h"
+#else
+#define dbg(...)
+#define ddo  //
+#endif
+#define ra (scanf("%lld", &__TEMP_READ_VALUE), __TEMP_READ_VALUE)
 
-namespace Anonymous {
-constexpr size_t __Buf_Size__ = 32767;
-bool State = 1;
-char *__buf = (char*)malloc(__Buf_Size__), *__s = nullptr, *__e = nullptr;
-
-template <typename Typex>
-void re(Typex&&);
-template <typename Typex, typename... Typey>
-void re(Typex&&, Typey&&...);
-}  // namespace Anonymous
-using Anonymous::re;
+typedef long long tp;
+tp __TEMP_READ_VALUE;
 using namespace std;
-using tp = long long;
-using igt = __m256i;
-using qgt = __m512i;
-constexpr bool __TEST_CASES__ = 0;
-constexpr tp Hat_N = 1e5 + 3, Log_Hat_N = 20;
+#pragma endregion HEAD
 
-tp log_table[Hat_N], v[Hat_N][Log_Hat_N];
+////////////////////////////////////////////////////////////////////////////////
+constexpr tp Hat_N = 1e5 + 3;
 
-signed __PRE__() {
-  return 0;
-}
+tp ST[Hat_N][__lg(Hat_N) + 3 - (__lg(Hat_N) & 1)];
 
-signed __CORE__() {
-  tp n, m;
-  re(n, m);
-  for (tp i = 2; i <= n; ++i) {
-    log_table[i] = log_table[i >> 1] + 1;
-  }
+signed main() {
+  tp n = ra, m = ra;
   for (tp i = 1; i <= n; ++i) {
-    re(v[i][0]);
+    ST[i][0] = ra;
   }
-  for (tp i = 1; i <= log_table[n]; ++i) {
+  for (tp i = 1; i <= __lg(n); ++i) {
     for (tp j = 1, endj = n - (1ll << i) + 1; j <= endj; ++j) {
-      v[j][i] = max(v[j][i - 1], v[j + (1ll << i - 1)][i - 1]);
+      ST[j][i] = max(ST[j][i - 1], ST[j + (1ll << i - 1)][i - 1]);
     }
   }
   while (m--) {
-    tp l, r, loc;
-    re(l, r);
-    loc = log_table[r - l + 1];
-    cout << max(v[l][loc], v[r - (1ll << loc) + 1][loc]) << '\n';
+    tp l = ra, r = ra, loc = __lg(r - l + 1);
+    printf("%lld
+", max(ST[l][loc], ST[r - (1ll << loc) + 1][loc]));
   }
   return 0;
 }
 
-signed main() {
-  static bool __NOT_READED__ = 1;
-  static tp __TEST_COUNT__ = 1;
-  if (__NOT_READED__) {
-    if (__PRE__()) {
-      return -1;
-    }
-    if (__TEST_CASES__) {
-      re(__TEST_COUNT__);
-    }
-    __NOT_READED__ = 0;
-  }
-  if (__TEST_COUNT__-- && (main() || __CORE__())) {
-    return -1;
-  }
-  return 0;
-}
-
-namespace Anonymous {
-template <typename Typex>
-void re(Typex&& __v) {
-  bool f = 0;
-  char __ch;
-  auto __fetch = [&__ch]() {
-    if (__s == __e) {
-      __s = __buf;
-      __e = __s + fread(__buf, 1, __Buf_Size__, stdin);
-      if (__s == __e) {
-        State = 0;
-        __ch = -1;
-      }
-    }
-    __ch = *__s++;
-  };
-  for (__fetch(); __ch < 48 || __ch > 57; __fetch()) {
-    f |= __ch == 45;
-  }
-  __v = __ch & 15;
-  for (__fetch(); __ch > 47 && __ch < 58; __fetch()) {
-    __v += __v << 2;
-    __v += __v + (__ch & 15);
-  }
-  if (f) {
-    __v = (~__v) + 1;
-  }
-}
-
-template <typename Typex, typename... Typey>
-void re(Typex&& __v, Typey&&... __V) {
-  re(__v);
-  if (State) {
-    re(__V...);
-  }
-}
-}  // namespace Anonymous
+////////////////////////////////////////////////////////////////////////////////

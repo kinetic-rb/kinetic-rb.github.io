@@ -1,67 +1,66 @@
 #include <algorithm>
 #include <iostream>
-#include <ctime>
 
-void insertionSort(int * arr, int left, int right) {
-    for (int i = left + 1; i <= right; i++) {
-        int temp = arr[i];
-        int j = i - 1;
-        while (arr[j] > temp && j >= left) {
-            arr[j + 1] = arr[j];
-            j--;
+using namespace std;
+using vt = int;
+constexpr vt Hat_N = 100003;
+
+template <typename Typex>
+void _Merge(Typex _S, Typex _E, Typex _A) {
+  if (_E - _S < 64) {
+    for (auto _D = _E - _S; _D; _D >>= 1) {
+      for (auto td = 0ll; td < _D; ++td) {
+        Typex N_S = _S + td;
+        for (Typex td = N_S + _D; td < _E; td += _D) {
+          for (Typex j = td, jmd = td - _D; j > N_S; j -= _D, jmd -= _D) {
+            if (*j < *jmd) {
+              auto temp = *j;
+              *j = *jmd;
+              *jmd = temp;
+            } else {
+              break;
+            }
+          }
         }
-        arr[j + 1] = temp;
+      }
     }
+    return;
+  }
+  Typex _M = _S + (_E - _S >> 1), _P1 = _S, _P2 = _M, _Ptr = _A;
+  _Merge(_S, _M, _A);
+  _Merge(_M, _E, _A);
+  while (_P1 != _M && _P2 != _E) {
+    *_Ptr++ = (*_P2 < *_P1 ? *_P2++ : *_P1++);
+  }
+  while (_P1 != _M) {
+    *_Ptr++ = *_P1++;
+  }
+  while (_P2 != _E) {
+    *_Ptr++ = *_P2++;
+  }
+  for (Typex i = _A; _S != _E; ++i) {
+    *_S++ = *i;
+  }
 }
 
-int left[2000000], right[2000000];
-inline void merge(int * arr, int l, int m, int r) {
-    int len1 = m - l + 1, len2 = r - m;
-    for (int i = 0; i < len1; i++)
-        left[i] = arr[l + i];
-    for (int i = 0; i < len2; i++)
-        right[i] = arr[m + 1 + i];
-    int i = 0, j = 0, k = l;
-    while (i < len1 && j < len2) {
-        if (left[i] <= right[j]) {
-            arr[k] = left[i];
-            i++;
-        } else {
-            arr[k] = right[j];
-            j++;
-        }
-        k++;
-    }
-    while (i < len1) {
-        arr[k++] = left[i++];
-    }
-    while (j < len2) {
-        arr[k++] = right[j++];
-    }
+template <typename Typex>
+void merge(Typex* _S, Typex* _E) {
+  Typex* _A = new Typex[_E - _S];
+  _Merge(_S, _E, _A);
+  delete[] _A;
 }
 
-template <typename _element_type, typename _Need_Sort_type>
-inline void timSort(_element_type * arr, _Need_Sort_type n) {
-    for (_Need_Sort_type i = 0; i < n; i += 32)
-        insertionSort(arr, i, std::min((i + 31), (n - 1)));
-    for (_Need_Sort_type size = 32; size < n; size = size << 1) {
-        for (_Need_Sort_type Left = 0; Left < n; Left += size << 1) {
-            merge(arr, Left, Left + size - 1, std::min((Left + (size << 1) - 1), (n - 1)));
-        }
-    }
-}
+vt num[Hat_N];
 
-// Driver program to test above function
-
-int arr[2110000];
-
-int main() {
-    int n;
-    std::cin >> n;
-    for(int i = 0; i < n; i++)
-        std::cin >> arr[i];
-    timSort(arr, n);
-    for(int i = 0; i < n; i++)
-        std::cout << arr[i] << ' ';
-    return 0;
+signed main() {
+  vt n;
+  cin >> n;
+  for (vt i = 0; i < n; ++i) {
+    cin >> num[i];
+  }
+  merge(num, num + n);
+  for (vt i = 0; i < n; ++i) {
+    cout << num[i] << ' ';
+  }
+  return 0;
 }

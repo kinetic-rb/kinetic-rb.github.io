@@ -31,8 +31,7 @@ int main() {
         if (a[i] > s[tot]) {
             s[++tot] = a[i];
         } else {
-            tmp = lower_bound(s + 1, s + tot + 1, a[i]) - s;
-            s[tmp] = a[i];
+            *lower_bound(s + 1, s + tot + 1, a[i]) = a[i];
         }
     }
     cout << tot;

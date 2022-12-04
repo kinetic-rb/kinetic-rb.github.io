@@ -3,14 +3,15 @@
 using namespace std;
 
 int main() {
-    int n, MAX = -0x7fffffff, a = 0;
-    cin >> n;
-    for (int i = 0; i < n; i++) {
-        int num;
-        cin >> num;
-        a = max(0, a) + num;
-        MAX = max(MAX, a);
-    }
-    cout << MAX;
-    return 0;
+  int n, sum = 0, MAX = -0x7fffffff;
+  cin >> n;
+  for (int i = 0; i < n; i++) {
+    int x;
+    cin >> x;
+    sum += x;
+    MAX = max(MAX, sum);
+    sum = max(sum, 0);
+  }
+  cout << MAX;
+  return 0;
 }

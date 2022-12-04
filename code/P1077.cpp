@@ -1,62 +1,60 @@
+// By rbtree (https://rbtree.asia) :\
+// Please submit with C++14!
+#include <algorithm>
+#include <array>
+#include <cmath>
+#include <functional>
 #include <iostream>
-#include <ranges>
+#include <list>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <random>
+#include <set>
+#include <unordered_map>
+#include <utility>
 #include <vector>
-#define sv std::ranges::views::
+#define ra __Read()
 
+using tp = long long;
+tp __Read();
 using namespace std;
-using tp = long long int;
-constexpr tp _MOD_ = 1e6 + 7;
+constexpr tp Hat_N = 1e5 + 3, Mod = 1e6 + 7;
 
 signed main() {
-  tp n, m;
-  scanf("%lld%lld", &n, &m);
-  vector<tp> a(n + 1), f(m + 1, 0);
-  for (auto&& i : a | sv drop(1)) {
-    scanf("%lld", &i);
+  tp n = ra, m = ra;
+  array<tp, Hat_N> a, f, ps;
+  for (tp i = 1; i <= n; ++i) {
+    a[i] = ra;
   }
+  f.fill(0);
+  ps.fill(1);
   f[0] = 1;
   for (tp i = 1; i <= n; ++i) {
-    vector tf(m + 1, tp(0));
     for (tp j = 0; j <= m; ++j) {
-      for (tp k = 0; k <= min(j, a[i]); ++k) {
-        tf[j] = (tf[j] + f[j - k]) % _MOD_;
-      }
+      f[j] = ps[j] - (j > a[i] ? ps[j - a[i] - 1] : 0);
+      f[j] = (f[j] + Mod) % Mod;
     }
-    f = tf;
+    ps[0] = f[0];
+    for (tp j = 1; j <= m; ++j) {
+      ps[j] = (ps[j - 1] + f[j]) % Mod;
+    }
   }
-  cout << f[m] << '\n';
-  return EXIT_SUCCESS;
+  printf("%lld
+", f[m]);
+  return 0;
 }
 
-struct __Initer_t__ {
-  __Initer_t__() {
-    ios_base::sync_with_stdio(0);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
+tp __Read() {
+  bool __Negitive = 0;
+  char __Char = getchar();
+  tp __Value;
+  for (; __Char < 48 || __Char > 57; __Char = getchar()) {
+    __Negitive = __Char == 45;
   }
-} __Initer__;
-
-/*
- */
-
-/*#################################################################
-#.................................................................#
-#............................This.Code.Was.Created.By.RBTree......#
-#.............#......#...............Limiting-Factor..............#
-#............#.#....#.#.................Soul-Code.................#
-#.............########............................................#
-#............#........#..##############################...........#
-#...........#..V....V......#..#........................#..#...#...#
-#............#........#....#..........###..###..........#..#.#.#..#
-#............#..X##X..#..#............#....#.#...........#..#...#.#
-#...........#...N##N...#..#...........###..###..........#.........#
-#.......MOE..#..@.....#....#.#.#.#...................#.#..........#
-#.............########.....#.#.#.##############.#.#..#.#..........#
-#..........................#.#.#.#.............#.#.#.#.#..........#
-#......#########...........#.#.#.#.................#.#.#..........#
-#.....#.........#..........#.#.#.#.................#.#.#..........#
-#.#.#.#G#R#A#S#S#.#.#......#.#.#.#.................#.#.#..........#
-#.###################......#.#.#.#.................#.#.#..........#
-#...........................#.#.#...................#.#...........#
-#.................................................................#
-#################################################################*/
+  __Value = __Char & 15;
+  for (__Char = getchar(); __Char > 47 && __Char < 58; __Char = getchar()) {
+    __Value = __Value * 10 + (__Char & 15);
+  }
+  return __Negitive ? ~__Value + 1 : __Value;
+}

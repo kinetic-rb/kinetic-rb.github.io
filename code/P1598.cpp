@@ -1,41 +1,32 @@
-#include<iostream>
-#include<cstdio>
-#include<cstring>
+#include <iostream>
+#include <string>
+
 using namespace std;
-char arc[80];int list[26];
-int main(){
-    int i,j,k,l,maxn=0,m,n,z,f;
-    for(i=1;i<=4;++i)
-    {
-        gets(arc);
-        l=strlen(arc);
-        for(j=0;j<l;++j)
-        {            
-            if(arc[j]>='A'&&arc[j]<='Z')
-            list[arc[j]-'A']++;            
+
+int num[26];
+
+int main() {
+    int maxn = 0;
+    string str;
+    for (int i = 0; i < 4; i++) {
+        getline(cin, str);
+        for (int j = 0; j < str.size(); j++) {
+            if (isupper(str[j])) {
+                num[str[j] - 'A']++;
+            }
         }
     }
-    for(k=0;k<26;++k){
-        if(list[k]>maxn) 
-        maxn=list[k];
+    for (int i = 0; i < 26; i++) {
+        maxn = max(maxn, num[i]);
     }
-    for (;maxn;maxn--)
-    {
-        for(f='Z';f>='A';f--){
-            if(f!=' ') break;}
-        for (k='A';k<='Z';k++){
-        if(maxn<=list[k-65]) cout<<"* ";
-        else cout<<"	";
+    for (int i = maxn; i > 0; i--) {
+        for (int j = 0; j < 26; j++) {
+            num[j] >= i ? j == 25 ? cout << '*' : cout << "* " : j == 25 ? cout << ' ' : cout << "	";
         }
-        cout<<endl;
+        cout << '\n';
     }
-    for (k='A';k<='Z';k++) cout<<char(k)<<' ';//\u8f93\u51fa
-    for    (;maxn;maxn--){
-        k='A';
-        while(k>='Z'){
-            if(k>=f) getchar();
-            ++k;
-        }
+    for (int i = 0; i < 26; i++) {
+        cout << (char)(i + 'A') << " ";
     }
     return 0;
 }
